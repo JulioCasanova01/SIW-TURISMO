@@ -12,12 +12,12 @@ if (!isset($_SESSION['id_cliente'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Página Principal JYS</title>
-  <link href="../../bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../libs/bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="icon" href="../../IMAGENES/Logotipo_sinsombrapng_Mesa de trabajo 1-02.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quintessential&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../bootstrap-icons-1.11.3/a/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="../../libs/bootstrap-icons-1.11.3/a/bootstrap-icons.min.css">
   <link rel="stylesheet" href="style.css">
 
   <!-- http://localhost\SIW-TURISMO\vista\general\PaginaPrincipal.php -->
@@ -179,7 +179,7 @@ if (!isset($_SESSION['id_cliente'])) {
   <?php include('footer.php'); ?>
 
 
-  <script src="../../bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

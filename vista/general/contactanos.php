@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CONTÁCTANOS</title>
-    <link rel="stylesheet" href="../../bootstrap-5.3.3-dist/css/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="../../bootstrap-icons-1.11.3/a/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../../boxicons-2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="../../libs/bootstrap-5.3.3-dist/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../../libs/bootstrap-icons-1.11.3/a/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../../libs/boxicons-2.1.4/css/boxicons.min.css">
     <link rel="icon" href="../../IMAGENES/Logotipo_sinsombrapng_Mesa de trabajo 1-02.png">
-    <link rel="stylesheet" href="../../flag-icons-main/css/flag-icons.min.css">
+    <link rel="stylesheet" href="../../libs/flag-icons-main/css/flag-icons.min.css">
 </head>
 <body>
    
@@ -153,7 +153,7 @@
   
   
 
-  <script src="../../bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

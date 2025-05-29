@@ -16,10 +16,10 @@ if (!isset($_SESSION['id_cliente'])) {
   <link rel="icon" href="../../IMAGENES/Logotipo_sinsombrapng_Mesa de trabajo 1-02.png">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="../../bootstrap-5.3.3-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../libs/bootstrap-5.3.3-dist/css/bootstrap.min.css">
 
   <!-- Font Awesome (local) -->
-  <link rel="stylesheet" href="../../fontawesome-free-6.7.2-web/css/all.min.css">
+  <link rel="stylesheet" href="../../libs/fontawesome-free-6.7.2-web/css/all.min.css">
 
   <style>
     body {
@@ -162,7 +162,7 @@ if (!isset($_SESSION['id_cliente'])) {
   <?php include('footer.php'); ?>
 
   <!-- Bootstrap JS -->
-  <script src="../../bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

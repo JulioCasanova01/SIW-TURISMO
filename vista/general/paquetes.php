@@ -13,8 +13,8 @@ if (!isset($_SESSION['id_cliente'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paquetes Turísticos - JYS</title>
     <link rel="icon" href="../../IMAGENES/Logotipo_sinsombrapng_Mesa de trabajo 1-02.png">
-    <link rel="stylesheet" href="../../bootstrap-5.3.3-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../bootstrap-icons-1.11.3/a/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../../libs/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../libs/bootstrap-icons-1.11.3/a/bootstrap-icons.min.css">
     <style>
         body {
             background: linear-gradient(to right, #1CB5E0, #000046);
@@ -296,7 +296,7 @@ if (!isset($_SESSION['id_cliente'])) {
             </div>
         </div>
     </footer>
-    <script src="../../bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

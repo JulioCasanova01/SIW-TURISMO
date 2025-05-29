@@ -3,10 +3,10 @@
 	<title>Ingresar-JYS</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, maximum-scale=1.0">
-	<link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css">
+	<link rel="stylesheet" href="../libs/fontawesome-free-6.7.2-web/css/all.min.css">
     <link rel="icon" href="../IMAGENES/Logotipo_sinsombrapng_Mesa de trabajo 1-02.png">
-    <link rel="stylesheet" href="../bootstrap-5.3.3-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../bootstrap-icons-1.11.3/a/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../libs/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../libs/bootstrap-icons-1.11.3/a/bootstrap-icons.min.css">
     
 	<style>
 		body {
@@ -168,7 +168,7 @@
 	</form>
 	<a class="" href="http://localhost/SIW-TURISMO/vista/admin/login_admin.php" ><button class="btn btn-primary mt-1 mb-3"><li class="fas fa-user-shield"></li></button></a>
 
-	<script src="../bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+	<script src="../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 	
 </body>
 </html>

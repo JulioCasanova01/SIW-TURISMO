@@ -15,12 +15,12 @@ if (!isset($_SESSION['id_cliente'])) {
     <link rel="icon" href="../../IMAGENES/Logotipo_sinsombrapng_Mesa de trabajo 1-02.png">
 
     <!-- Bootstrap CSS -->
-    <link href="../../bootstrap-5.3.3-dist/css/bootstrap-grid.min.css" rel="stylesheet">
+    <link href="../../libs/bootstrap-5.3.3-dist/css/bootstrap-grid.min.css" rel="stylesheet">
 
     <!-- Bootstrap Icons -->
-    <link href="../../bootstrap-icons-1.11.3/a/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../../libs/bootstrap-icons-1.11.3/a/bootstrap-icons.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../fontawesome-free-6.7.2-web/css/all.min.css">
+    <link rel="stylesheet" href="../../libs/fontawesome-free-6.7.2-web/css/all.min.css">
 
     <style>
         body {
@@ -272,7 +272,7 @@ if (!isset($_SESSION['id_cliente'])) {
     </footer>
 
     <!-- Bootstrap JS -->
-    <script src="../../bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

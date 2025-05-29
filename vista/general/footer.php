@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Footer</title>
-    <link rel="stylesheet" href="../../bootstrap-5.3.3-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../bootstrap-icons-1.11.3/a/bootstrap-icons.css">
-    <link rel="stylesheet" href="../../fontawesome-free-6.7.2-web/css/all.min.css">
+    <link rel="stylesheet" href="../../libs/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../libs/bootstrap-icons-1.11.3/a/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../libs/fontawesome-free-6.7.2-web/css/all.min.css">
 </head>
 <body>
     <footer class="bg-dark text-light pt-4 mt-5">
@@ -64,6 +64,6 @@
         </div>
       </footer>
 
-    <script src="../../bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
