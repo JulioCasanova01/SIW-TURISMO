@@ -12,8 +12,8 @@ if (!isset($_SESSION['id_usuario'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrador | JYS</title>
-    <link rel="stylesheet" href="../../bootstrap-5.3.3-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../fontawesome-free-6.7.2-web/css/all.min.css">
+    <link rel="stylesheet" href="../../libs/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../libs/fontawesome-free-6.7.2-web/css/all.min.css">
     <link rel="icon" href="../../IMAGENES/Logotipo_sinsombrapng_Mesa de trabajo 1-02.png">
     <link rel="stylesheet" href="css/style_index.css">
 

@@ -7,10 +7,10 @@
     <title>sidebar</title>
     <!-- Font Awesome CDN para que funcionen los iconos -->
     <link
-      href="../../bootstrap-5.3.3-dist/css/bootstrap.min.css"
+      href="../../libs/bootstrap-5.3.3-dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link href="../../fontawesome-free-6.7.2-web/css/all.min.css" />
+    <link href="../../libs/fontawesome-free-6.7.2-web/css/all.min.css" />
     <!-- Aquí puedes agregar tus estilos CSS o enlaces a Bootstrap si usas -->
      <style>
     /* .sidebar {

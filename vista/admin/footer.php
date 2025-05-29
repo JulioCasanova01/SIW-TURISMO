@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Footer Responsivo</title>
-    <link rel="stylesheet" href="../../bootstrap-5.3.3-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../bootstrap-icons-1.11.3/a/bootstrap-icons.css">
-    <link rel="stylesheet" href="../../fontawesome-free-6.7.2-web/css/all.min.css">
+    <link rel="stylesheet" href="../../libs/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../libs/bootstrap-icons-1.11.3/a/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../libs/fontawesome-free-6.7.2-web/css/all.min.css">
     <style>
         footer a:hover {
             color: #f77f00;
@@ -55,6 +55,6 @@
         document.getElementById("year").textContent = new Date().getFullYear();
     </script>
 
-    <script src="../../bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

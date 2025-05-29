@@ -6,8 +6,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Login Administrador</title>
-  <link rel="stylesheet" href="../../bootstrap-5.3.3-dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../fontawesome-free-6.7.2-web/css/all.min.css">
+  <link rel="stylesheet" href="../../libs/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../libs/fontawesome-free-6.7.2-web/css/all.min.css">
   <link rel="icon" href="../../IMAGENES\Logotipo_sinsombrapng_Mesa de trabajo 1-02.png">
   <style>
     body {
@@ -63,4 +63,5 @@
       </div>
   </div>
 </body>
+<script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </html>
