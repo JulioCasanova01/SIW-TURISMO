@@ -52,7 +52,6 @@
                 <td><?= $usuario['id'] ?></td>
                 <td><?= $usuario['nombre'] ?></td>
                 <td><?= $usuario['correo'] ?></td>
-                <td><?= $usuario['rol'] ?></td>
                 <td><?= $usuario['contacto_1'] ?></td>
                 <td><?= $usuario['contacto_2'] ?></td>
                 <td>
@@ -99,22 +98,12 @@
                       </div>
 
                       <div class="mb-3">
-                        <label for="rolviajero" class="form-label">Rol</label>
-                        <select class="form-select" name="rolviajero" id="rolviajero">
-                          <option value="ADMIN" <?= $viajero['rol'] == "ADMIN" ? 'selected' : '' ?>>Administrador</option>
-                          <option value="Agente" <?= $viajero['rol'] == "Agente" ? 'selected' : '' ?>>Agente</option>
-                          <option value="Atencion_cliente" <?= $viajero['rol'] == "Atencion_cliente" ? 'selected' : '' ?>>Atención al Cliente</option>
-                        </select>
-                      </div>
-
-
-                      <div class="mb-3">
                         <label for="contacto1viajero" class="form-label">Contacto_1</label>
-                        <input type="number" class="form-control" name="contacto1" id="contacto1viajero" value="<?= $viajero'contacto_1'] ?>" />
+                        <input type="number" class="form-control" name="contacto1" id="contacto1viajero" value="<?= $viajero['contacto_1'] ?>" />
                       </div>
                       <div class="mb-3">
                         <label for="contacto2viajero" class="form-label">Contacto_2</label>
-                        <input type="number" class="form-control" name="contacto2" id="contacto2viajero" value="<?= $viajero'contacto_2'] ?>" />
+                        <input type="number" class="form-control" name="contacto2" id="contacto2viajero" value="<?= $viajero['contacto_2'] ?>" />
                       </div>
                       <!-- <div class="mb-3">
                         <label for="estadoviajero" class="form-label">Estado</label>
@@ -155,7 +144,7 @@
       <div class="modal-content">
         <div class="modal-header bg-primary text-white">
           <h5 class="modal-title" id="modalviajero
-          Label">Nuevo Usuario</h5>
+          Label">Nuevo VIAJERO</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
         <div class="modal-body">
