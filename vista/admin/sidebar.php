@@ -42,11 +42,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="http://localhost/SIW-TURISMO/vista/admin/paquetes.php" class="nav-link i-paquetes text-white">
-                        <i class="fas fa-suitcase-rolling me-2"></i>Paquetes Turísticos
+                    <a href="http://localhost/SIW-TURISMO/vista/admin/productos.php" class="nav-link i-productos text-white">
+                        <i class="fas fa-suitcase-rolling me-2"></i>PRODUCTOS
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="http://localhost/SIW-TURISMO/vista/admin/planes.php" class="nav-link i-planes text-white">
                         <i class="fas fa-user me-2"></i>Planes Individuales
                     </a>
@@ -55,7 +55,7 @@
                     <a href="http://localhost/SIW-TURISMO/vista/admin/tours.php" class="nav-link i-tours text-white">
                         <i class="fas fa-map-marked-alt me-2"></i>Tours
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a href="http://localhost/SIW-TURISMO/vista/admin/usuarios.php" class="nav-link i-usuarios text-white">
                         <i class="fas fa-users-cog me-2"></i>Usuarios
