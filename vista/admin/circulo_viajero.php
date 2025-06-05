@@ -99,11 +99,7 @@
                 <td><?= $viajero['fecha_nacimiento'] ?></td>
                 <td><?= $viajero['contacto_1'] ?></td>
                 <td><?= $viajero['contacto_2'] ?></td>
-                <td>
-                  <div class="overflow-auto" style="max-height: 100px; max-width: 100%; white-space: pre-wrap;">
-                    <?= $viajero['direccion'] ?>
-                  </div>
-                </td>
+                <td><?= $viajero['direccion'] ?></td>
                 <td>
                   <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
                     data-bs-target="#modalEditar<?= $viajero['id'] ?>">

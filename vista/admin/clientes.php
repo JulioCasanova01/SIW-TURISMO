@@ -101,11 +101,8 @@
                 <td><?= $cliente['correo'] ?></td>
                 <td><?= $cliente['contacto_1'] ?></td>
                 <td><?= $cliente['contacto_2'] ?></td>
-                <td>
-                  <div class="overflow-auto" style="max-height: 100px; max-width: 100%; white-space: pre-wrap;">
-                    <?= $cliente['direccion'] ?>
-                  </div>
-                </td>
+                <td><?= $cliente['direccion'] ?></td>
+                
                 <td>
                   <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
                     data-bs-target="#modalEditar<?= $cliente['id'] ?>">
