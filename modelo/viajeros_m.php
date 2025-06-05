@@ -1,43 +1,4 @@
 <?php
-function login($conn, $data) {
-    session_start();
-    $correo=$data['email'];
-    $clave=$data['clave'];
-    $nombre=$data['nombre'];
-    $stmt=$conn->prepare("SELECT * FROM clientes WHERE correo = ?");
-    $stmt->bind_param("s", $correo);
-    $stmt->execute();
-    $resultado=$stmt->get_result();
-
-    if($resultado->num_rows===1){
-        $row=$resultado->fetch_assoc();
-        
-        if(password_verify($clave, $row['clave'])){
-            $_SESSION['id_cliente']=$row['id'];
-            $_SESSION['nombre']=$row['nombre'];
-            $_SESSION['correo']=$row['correo'];
-            echo "<script>
-            alert('Bienvenido " . addslashes($_SESSION["nombre"]) . "');
-            window.location.href = 'http://localhost/SIW-TURISMO/vista/general/PaginaPrincipal.php';
-            </script>";
-
-            // header("Location: ../vista/general/PaginaPrincipal.php");
-            exit();
-        }else{
-            echo "<script>
-        alert('¡Clave Incorrecta!');
-        window.location.href = 'http://localhost/SIW-TURISMO/vista/login.php';
-        </script>";
-        }
-    }else{
-        echo "<script>
-        alert('¡Cliente No Encontrado!');
-        window.location.href = 'http://localhost/SIW-TURISMO/vista/login.php';
-        </script>";
-        // header("Location: ../vista/login.php");
-        exit();
-    }
-}
 
 function salir(){
     session_start();
@@ -47,96 +8,32 @@ function salir(){
     exit();
 }
 
-
 function registrar($conn, $data) {
-    date_default_timezone_set('America/Bogota');
     $fecha_registro = date('Y-m-d H:i:s');
-    $clave_cifrada = password_hash($data['clave'], PASSWORD_DEFAULT);
+    $sql= "INSERT INTO viajeros VALUES (NULL, '{$data['nombre']}', '{$data['tipo_documento']}', '{$data['numero_documento']}','$fecha_registro','{$data['fecha_nacimiento']}','{$data['contacto1']}', '{$data['contacto2']}', '{$data['direccion']}')";
+    mysqli_query($conn, $sql);
+    $_SESSION['nombre'] = $data['nombre'];
+    $_SESSION['rol'] = $data['numero_documento'];
 
-    $sql = "INSERT INTO clientes 
-    VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-    $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        die("Error al preparar la consulta: " . $conn->error);
-    }
-
-    $stmt->bind_param(
-        "ssssssiiss", 
-        $data['nombre'], 
-        $data['tipo_documento'], 
-        $data['numero_documento'], 
-        $fecha_registro, 
-        $data['fecha_nacimiento'], 
-        $data['email'], 
-        $data['contacto1'], 
-        $data['contacto2'], 
-        $clave_cifrada, 
-        $data['direccion']
-    );
-
-    try {
-    if ($stmt->execute()) {
-        // Registro exitoso, guardamos en sesión
-        $_SESSION['nombre'] = $data['nombre'];
-        $_SESSION['tipo_documento'] = $data['tipo_documento'];
-        $_SESSION['numero_documento'] = $data['numero_documento'];
-        $_SESSION['fecha_nacimiento'] = $data['fecha_nacimiento'];
-        $_SESSION['correo'] = $data['email'];
-        $_SESSION['contacto_1'] = $data['contacto1'];
-        $_SESSION['contacto_2'] = $data['contacto2'];
-        $_SESSION['direccion'] = $data['direccion'];
-         echo "<script>
-                    alert('Cliente registrado exitosamente.'); 
-                     window.location.href = '../vista/login.php';
-                </script>";
-        // header("Location: ../vista/login.php");
-        exit();
-    }
-    } catch (mysqli_sql_exception $e) {
-        // Verificamos si es error por duplicado
-        if ($e->getCode() === 1062) {
-            // die("Error: Ya existe un registro con este número de documento o correo electrónico.");
-            echo "<script>
-                        alert('El Correo o el Número de Documento ya está registrado. Por favor, verifica los datos ingresados.'); 
-                        window.location.href = '../vista/general/crear_cuenta.php';
-                    </script>";
-        } else {
-            die("Error al registrar cliente: " . $e->getMessage());
-        }
-        }
-
-
-    $stmt->close();
+    header("Location: ../vista/admin/circulo_viajero.php");
 }
 
-
-function obtenerClientes($conn) {
-    $result = mysqli_query($conn, "SELECT * FROM clientes");
+function obtenerViajeros($conn) {
+    $result = mysqli_query($conn, "SELECT * FROM viajeros");
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
 function eliminar($conn, $id) {
    
-    mysqli_query($conn, "DELETE FROM clientes WHERE id=$id");
-    header("Location: ../vista/admin/clientes.php");
+    mysqli_query($conn, "DELETE FROM viajeros WHERE id=$id");
+    header("Location: ../vista/admin/circulo_viajero.php");
 }
 
 function actualizar($conn, $data) {
-    $sql = "UPDATE clientes SET 
-        nombre = '{$data['nombre']}',
-        tipo_documento = '{$data['tipo_documento']}',
-        numero_documento = '{$data['numero_documento']}',
-        fecha_nacimiento = '{$data['fecha_nacimiento']}',
-        correo = '{$data['correo']}',
-        contacto_1 = '{$data['contacto1']}',
-        contacto_2 = '{$data['contacto2']}',
-        direccion = '{$data['direccion']}'
-        WHERE id = {$data['id']}";
-
+    $sql = "UPDATE viajeros SET nombre='{$data['nombre']}', tipo_de_documento='{$data['tipo_documento']}', numero_de_documento='{$data['numero_documento']}', contacto_1='{$data['contacto1']}', contacto_2='{$data['contacto2']}', direccion='{$data['direccion']}'  WHERE id={$data['id']}";
     mysqli_query($conn, $sql);
-    header("Location: ../vista/admin/clientes.php");
+    header("Location: ../vista/admin/circulo_viajero.php");
 }
 
-
 ?>
+

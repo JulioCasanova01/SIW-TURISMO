@@ -1,11 +1,9 @@
 <?php
 include '../conexion.php';
-include '../modelo/clientes_m.php';
+include '../modelo/viajeros_m.php';
 $accion = isset($_GET['accion']) ? $_GET['accion'] : '';
-if ($accion == 'ingresar') {
-    login($conn, $_POST);
-}
-elseif ($accion=='salir') {
+
+if ($accion=='salir') {
     salir();
 }
 elseif ($accion=='registrar') {
