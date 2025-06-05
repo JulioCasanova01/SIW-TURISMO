@@ -49,8 +49,16 @@
                 <td><?= $usuario['nombre'] ?></td>
                 <td><?= $usuario['correo'] ?></td>
                 <td><?= $usuario['rol'] ?></td>
-                <td><?= $usuario['contacto_1'] ?></td>
-                <td><?= $usuario['contacto_2'] ?></td>
+                <td>
+                  <a href="https://wa.me/57<?= preg_replace('/\D/', '', $usuario['contacto_1']) ?>" target="_blank">
+                    <?= $usuario['contacto_1'] ?>
+                  </a>
+                </td>
+                <td>
+                  <a href="https://wa.me/57<?= preg_replace('/\D/', '', $usuario['contacto_2']) ?>" target="_blank">
+                    <?= $usuario['contacto_2'] ?>
+                  </a>
+                </td>
                 <td>
                   <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
                     data-bs-target="#modalEditar<?= $usuario['id'] ?>"><i class="fas fa-edit"></i></button>

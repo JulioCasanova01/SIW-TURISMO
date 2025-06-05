@@ -99,8 +99,16 @@
                 <td><?= $cliente['fecha_nacimiento'] ?></td>
                 <td><?= $cliente['fecha_registro'] ?></td>
                 <td><?= $cliente['correo'] ?></td>
-                <td><?= $cliente['contacto_1'] ?></td>
-                <td><?= $cliente['contacto_2'] ?></td>
+                <td>
+                  <a href="https://wa.me/57<?= preg_replace('/\D/', '', $cliente['contacto_1']) ?>" target="_blank">
+                    <?= $cliente['contacto_1'] ?>
+                  </a>
+                </td>
+                <td>
+                  <a href="https://wa.me/57<?= preg_replace('/\D/', '', $cliente['contacto_2']) ?>" target="_blank">
+                    <?= $cliente['contacto_2'] ?>
+                  </a>
+                </td>
                 <td><?= $cliente['direccion'] ?></td>
                 
                 <td>

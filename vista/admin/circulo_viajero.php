@@ -97,8 +97,16 @@
                 <td><?= $viajero['numero_de_documento'] ?></td>
                 <td><?= $viajero['fecha_registro'] ?></td>
                 <td><?= $viajero['fecha_nacimiento'] ?></td>
-                <td><?= $viajero['contacto_1'] ?></td>
-                <td><?= $viajero['contacto_2'] ?></td>
+                <td>
+                  <a href="https://wa.me/57<?= preg_replace('/\D/', '', $viajero['contacto_1']) ?>" target="_blank">
+                    <?= $viajero['contacto_1'] ?>
+                  </a>
+                </td>
+                <td>
+                  <a href="https://wa.me/57<?= preg_replace('/\D/', '', $viajero['contacto_2']) ?>" target="_blank">
+                    <?= $viajero['contacto_2'] ?>
+                  </a>
+                </td>
                 <td><?= $viajero['direccion'] ?></td>
                 <td>
                   <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
