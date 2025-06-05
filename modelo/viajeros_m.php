@@ -9,11 +9,12 @@ function salir(){
 }
 
 function registrar($conn, $data) {
+    date_default_timezone_set('America/Bogota');
     $fecha_registro = date('Y-m-d H:i:s');
     $sql= "INSERT INTO viajeros VALUES (NULL, '{$data['nombre']}', '{$data['tipo_documento']}', '{$data['numero_documento']}','$fecha_registro','{$data['fecha_nacimiento']}','{$data['contacto1']}', '{$data['contacto2']}', '{$data['direccion']}')";
     mysqli_query($conn, $sql);
     $_SESSION['nombre'] = $data['nombre'];
-    $_SESSION['rol'] = $data['numero_documento'];
+    
 
     header("Location: ../vista/admin/circulo_viajero.php");
 }

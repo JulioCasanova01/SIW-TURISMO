@@ -1,9 +1,50 @@
 <?php 
     include('header.php');
 ?>
-<body>
+<style>
+    .table-responsive {
+    overflow-x: auto;
+    max-width: 100%;
+  }
 
-    <div class="d-flex">
+  .main-content {
+    padding: 1rem;
+  }
+
+  th, td {
+    word-break: break-word;
+    min-width: 120px; /* Evita que las columnas se aplasten demasiado en pantallas pequeñas */
+  }
+
+  @media (max-width: 576px) {
+    .main-content h2 {
+      font-size: 1.4rem;
+    }
+
+    .table-responsive {
+      font-size: 0.9rem;
+    }
+
+    .btn {
+      font-size: 0.85rem;
+    }
+  }
+
+  .descripcion-scroll {
+  max-height: 80px;       /* Alto máximo antes de hacer scroll vertical */
+  max-width: 250px;       /* Ancho máximo antes de hacer scroll horizontal */
+  overflow: auto;
+  white-space: pre-wrap;  /* Mantiene saltos de línea */
+    }
+</style>
+<body>
+    <?php 
+        include '../../conexion.php';
+        include '../../modelo/atenciones_m.php';
+        $atenciones = obtenerAtenciones($conn);
+    ?>
+
+    <div class="d-flex flex-column flex-lg-row">
 
         <?php include ('sidebar.php'); ?>
 
@@ -20,9 +61,7 @@
             <div class="main-content">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2 class="mb-0 mt-4">Atención</h2>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAtencion">
-                        <i class="fas fa-plus me-2"></i> Nueva Atencion
-                    </button>
+                   
                 </div>
 
                 <!-- Tabla -->
@@ -35,60 +74,76 @@
                                 <th class="text-center"><i class="fas fa-envelope"></i> Correro</th>
                                 <th class="text-center"><i class="fas fa-mobile-alt"></i> Telefono</th>
                                 <th class="text-center"><i class="fas fa-comment-alt"></i> Mensaje</th>
-
+                                <th class="text-center"><i class="fas fa-calendar-alt"></i> Fecha</th>
                                 <th class="text-center"><i class="fas fa-hourglass-half"></i> Estado</th>
                                 <th class="text-center"><i class="fas fa-cogs"></i> Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
+                            <?php foreach ($atenciones as $atencion): ?>
+                                <tr>
+                                    <td><?= $atencion['id'] ?></td>
+                                    <td><?= $atencion['nombre'] ?></td>
+                                    <td><?= $atencion['correo'] ?></td>
+                                    <td>
+                                    <a href="https://wa.me/57<?= preg_replace('/\D/', '', $atencion['telefono']) ?>" target="_blank">
+                                        <?= $atencion['telefono'] ?>
+                                    </a>
+                                    </td>
 
-                            <tr>
-                                <td>1</td>
-                                <td>Camila Velásquez</td>
-                                <td>camila@siw-turismo.com</td>
-                                <td>1234567899</td>
-                                <td>Hola. khejhvdjoggvoeajbvoushjyvbsuryoebey vbhfvbjdfhbvehfbvjhfbfru eyhbrvhsbeur ybeuyvhbyrbhdbvshddubeyvr</td>
-                                <td>Activo</td>
-
-                                <td>
+                                    <td>
+                                        <div class="overflow-auto" style="max-height: 100px; max-width: 100%; white-space: pre-wrap;">
+                                            <?= $atencion['mensaje'] ?>
+                                        </div>
+                                    </td>
+                                    <td><?= $atencion['fecha'] ?></td>
+                                    <td><?= $atencion['estado'] ?></td>
+                                    
+                                    <td>
                                     <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
-                                        data-bs-target="#modalEditar"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-outline-danger"><i
-                                            class="fas fa-trash-alt"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Camila Velásquez</td>
-                                <td>camila@siw-turismo.com</td>
-                                <td>1234567899</td>
-                                <td>Hola. khejhvdjoggvoeajbvoushjyvbsuryoebeyvbhf vbjdfhbvehfbvjhfb frueyhbrvhsbeuryb euyvhbyrbhdbvshddubeyvr</td>
-                                <td>Activo</td>
-
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
-                                        data-bs-target="#modalEditar"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-outline-danger"><i
-                                            class="fas fa-trash-alt"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Camila Velásquez</td>
-                                <td>camila@siw-turismo.com</td>
-                                <td>1234567899</td>
-                                <td>Hola. khejhvdjoggvoeajbvoushj yvbsuryoebeyvbhfvbjdfhbv ehfbvjhfbfrueyh brvhsbeurybeuyvhbyrbhdbvshddubeyvr</td>
-                                <td>Activo</td>
-
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
-                                        data-bs-target="#modalEditar"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-outline-danger"><i
-                                            class="fas fa-trash-alt"></i></button>
-                                </td>
-                            </tr>
-                            <!-- Más Atencion aquí -->
-
+                                        data-bs-target="#modalEditar<?= $atencion['id'] ?>">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <a href="../../controlador/atenciones_c.php?accion=eliminar&id=<?= $atencion['id'] ?>"
+                                        class="btn btn-sm btn-outline-danger"
+                                        onclick="return confirm('¿Estás seguro de que deseas eliminar esta atencion?');">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                    </td>
+                                </tr>
+                                
+                                <!--Modal editar Atencion -->
+                                <div class="modal fade" id="modalEditar<?= $atencion['id'] ?>" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-primary text-white">
+                                            <h5 class="modal-title">Editar Atención</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="../../controlador/atenciones_c.php?accion=actualizar" method="POST">
+                                                    <input type="hidden" name="id" value="<?= $atencion['id'] ?>" />
+                                                    
+                                                    <div class="mb-3">
+                                                    <label class="form-label">Estado</label>
+                                                    <select class="form-select" name="estado">
+                                                        <option value="PE" <?= $atencion['estado'] == 'PE' ? 'selected' : '' ?>>PENDIENTE</option>
+                                                        <option value="RE" <?= $atencion['estado'] == 'RE' ? 'selected' : '' ?>>RESUELTA</option>
+                                                        
+                                                    </select>
+                                                    </div>
+                                                
+                                                    <div class="modal-footer">
+                                                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -96,131 +151,6 @@
         </div>
     </div>
 
-    <!-- Modal de EDITAR Atencion -->
-    <div class="modal fade" id="modalAtencion" tabindex="-1" aria-labelledby="modalAtencionLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="modalAtencionLabel">Editar Atencion</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <!-- <div class="mb-3">
-                        <label for="contacto1Atencion" class="form-label">Imagen</label>
-                         <input type="file" id="imagen" name="imagen" accept="image/*" class="form-control" />
-                         </div> -->
-                        <div class="mb-3">
-                            <label for="nombreAtencion" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombreAtencion" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="tipo_documento_Atencion" class="form-label">ESTADO</label>
-                            <select class="form-select" id="tipo_documento_Atencion">
-                                <option value="PE">PENDIENTE</option>
-                                <option value="RE">RESUELTA</option>
-                                <!-- <option value="RC">Registro Civil de Nacimiento</option>
-                                <option value="PASAPORTE">PASAPORTE</option>
-                                <option value="CE">Cédula de Extranjería</option> -->
-                            </select>
-                        </div>
-                        <!-- <div class="mb-3">
-                            <label for="numero_documento_Atencion" class="form-label">Número de Documento</label>
-                            <input type="number" class="form-control" id="numero_documento_Atencion" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="fecha_N_Atencion" class="form-label">Fecha de Nacimiento</label>
-                            <input type="date" class="form-control" id="fecha_N_Atencion" />
-                        </div> -->
-                        <div class="mb-3">
-                            <label for="correoAtencion" class="form-label">Correo</label>
-                            <input type="email" class="form-control" id="correoAtencion" />
-                        </div>
-                        <!-- <div class="mb-3">
-                            <label for="contacto1Atencion" class="form-label">Contacto_1</label>
-                            <input type="number" class="form-control" id="contacto1Atencion" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="contacto2Atencion" class="form-label">Contacto_2</label>
-                            <input type="number" class="form-control" id="contacto2Atencion" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="Direccion_R_Atencion" class="form-label">Dirección de Residencia</label>
-                            <input type="text" class="form-control" id="Direccion_R_Atencion" />
-                        </div> -->
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button class="btn btn-primary">Guardar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Modal editar Atencion -->
-    <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="modalEditarLabel">Editar Atencion</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body">
-                <form>
-                        <!-- <div class="mb-3">
-                        <label for="contacto1Atencion" class="form-label">Imagen</label>
-                         <input type="file" id="imagen" name="imagen" accept="image/*" class="form-control" />
-                         </div> -->
-                        <div class="mb-3">
-                            <label for="nombreAtencion" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombreAtencion" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="tipo_documento_Atencion" class="form-label">ESTADO</label>
-                            <select class="form-select" id="tipo_documento_Atencion">
-                                <option value="PE">PENDIENTE</option>
-                                <option value="RE">RESUELTA</option>
-                                <!-- <option value="RC">Registro Civil de Nacimiento</option>
-                                <option value="PASAPORTE">PASAPORTE</option>
-                                <option value="CE">Cédula de Extranjería</option> -->
-                            </select>
-                        </div>
-                        <!-- <div class="mb-3">
-                            <label for="numero_documento_Atencion" class="form-label">Número de Documento</label>
-                            <input type="number" class="form-control" id="numero_documento_Atencion" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="fecha_N_Atencion" class="form-label">Fecha de Nacimiento</label>
-                            <input type="date" class="form-control" id="fecha_N_Atencion" />
-                        </div> -->
-                        <div class="mb-3">
-                            <label for="correoAtencion" class="form-label">Correo</label>
-                            <input type="email" class="form-control" id="correoAtencion" />
-                        </div>
-                        <!-- <div class="mb-3">
-                            <label for="contacto1Atencion" class="form-label">Contacto_1</label>
-                            <input type="number" class="form-control" id="contacto1Atencion" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="contacto2Atencion" class="form-label">Contacto_2</label>
-                            <input type="number" class="form-control" id="contacto2Atencion" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="Direccion_R_Atencion" class="form-label">Dirección de Residencia</label>
-                            <input type="text" class="form-control" id="Direccion_R_Atencion" />
-                        </div> -->
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button class="btn btn-primary">Guardar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <?php include ('footer.php'); ?>
 

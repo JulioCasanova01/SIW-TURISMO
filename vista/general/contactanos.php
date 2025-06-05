@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CONTÁCTANOS</title>
-    <link rel="stylesheet" href="../../libs/bootstrap-5.3.3-dist/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../../libs/bootstrap-5.3.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../libs/bootstrap-icons-1.11.3/a/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../../libs/boxicons-2.1.4/css/boxicons.min.css">
     <link rel="icon" href="../../IMAGENES/Logotipo_sinsombrapng_Mesa de trabajo 1-02.png">
@@ -59,7 +59,7 @@
      <!-- Botón flotante para regresar -->
      <button onclick="window.history.back()" 
         style="
-            position: fixed;
+        position: fixed;
         bottom: 20px;
         left: 20px;
         z-index: 9999;
@@ -105,22 +105,22 @@
         <!-- Formulario -->
         <div class="col-md-6 mb-4">
           <div class="card p-4 shadow-sm border-0">
-            <form>
+            <form action="../../controlador/atenciones_c.php?accion=registrar" method="POST" autocomplete="on">
               <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre completo</label>
-                <input type="text" class="form-control" id="nombre" placeholder="Tu nombre completo" required>
+                <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Tu nombre completo" required>
               </div>
               <div class="mb-3">
                 <label for="correo" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control" id="correo" placeholder="tunombre@correo.com" required>
+                <input type="email" name="correo" class="form-control" id="correo" placeholder="tunombre@correo.com" required>
               </div>
               <div class="mb-3">
                 <label for="telefono" class="form-label">Teléfono</label>
-                <input type="tel" class="form-control" id="telefono" placeholder="3XX XXX XXXX" required>
+                <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="3XX XXX XXXX" required>
               </div>
               <div class="mb-3">
                 <label for="mensaje" class="form-label">Mensaje</label>
-                <textarea class="form-control" id="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                <textarea class="form-control" name="mensaje" id="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..." required></textarea>
               </div>
               <div class="text-center">
                 <button type="submit" class="btn btn-primary px-4">Enviar mensaje</button>

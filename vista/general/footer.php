@@ -27,8 +27,8 @@
               <ul class="list-unstyled">
                 <li><a href="http://localhost/SIW-TURISMO/vista/general/PaginaPrincipal.php" class="text-light text-decoration-none">Inicio</a></li>
                 <li><a href="http://localhost/SIW-TURISMO/vista/general/productos.php" class="text-light text-decoration-none">Planes turísticos</a></li>
-                <li><a href="http://localhost/SIW-TURISMO/vista/general/quienes_somos.html" class="text-light text-decoration-none">Quiénes somos</a></li>
-                <li><a href="http://localhost/SIW-TURISMO/vista/general/contactanos.html" class="text-light text-decoration-none">Contáctanos</a></li>
+                <li><a href="http://localhost/SIW-TURISMO/vista/general/quienes_somos.php" class="text-light text-decoration-none">Quiénes somos</a></li>
+                <li><a href="http://localhost/SIW-TURISMO/vista/general/contactanos.php" class="text-light text-decoration-none">Contáctanos</a></li>
               </ul>
             </div>
     
