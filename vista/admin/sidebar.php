@@ -90,7 +90,7 @@
                 <hr />
 
                 <li class="nav-item">
-                    <a href="../../controlador/usuarios_c.php?accion=salir" class="nav-link i10 text-white" onclick="return confirmarSalida();">
+                    <a href="../../controlador/usuarios_c.php?accion=salir" class="nav-link i10 text-white" onclick="salir();">
                         <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
                     </a>
                 </li>
@@ -99,11 +99,20 @@
     </div>
     
 
+
     <script>
-        function confirmarSalida() {
-            return confirm('¿Estás seguro de que deseas cerrar sesión?');
+        async function salir() {
+        event.preventDefault();
+        const confirmarSalida = await confirmar('¿Estás seguro de que deseas cerrar sesión?','Si, Salir', 'No, cancelar', 'question');
+        if (confirmarSalida) {
+            window.location.href =  '../../controlador/clientes_c.php?accion=salir';
         }
-    </script>
+        }
+
+  </script>
+    <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../libs/SweetAlert2/sweetalert2.all.min.js"></script>
+    <script src="../alertas/funcionesalert.js"></script>
 </body>
 
 </html>

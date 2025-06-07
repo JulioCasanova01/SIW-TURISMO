@@ -1,10 +1,55 @@
 <?php include ('header.php');
  ?>
+<style>
+  .main-content {
+    padding: 1rem;
+  }
+
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  table {
+    min-width: 100%; 
+  }
+
+  th, td {
+        overflow-wrap: break-word;
+        min-width: 100px;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+  @media (max-width: 768px) {
+    .table {
+      font-size: 0.85rem;
+    }
+
+    .btn {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+    }
+  }
+   @media (min-width: 768px) {
+    .table {
+      font-size: 0.85rem;
+    }
+
+    .btn {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+    }
+  }
+ 
+
+</style>
 <body>
   <?php include '../../conexion.php';
   include '../../modelo/usuarios_m.php'; 
   $usuarios = obtenerUsuarios($conn);?>
-  <div class="d-flex">
+  <div class="d-flex flex-column flex-lg-row">
 
     <?php include ('sidebar.php'); ?>
 
@@ -26,7 +71,7 @@
         </div>
 
         <!-- Tabla -->
-        <div class="table-responsive">
+        <div class="table-container">
           <table class="table table-striped table-hover align-middle">
             <thead class="table-dark">
               <tr>
@@ -63,11 +108,12 @@
                   <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
                     data-bs-target="#modalEditar<?= $usuario['id'] ?>"><i class="fas fa-edit"></i></button>
                   <!-- <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></button> -->
-                  <a href="../../controlador/usuarios_c.php?accion=eliminar&id=<?= $usuario['id'] ?>" 
-                    class="btn btn-sm btn-outline-danger" 
-                    onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
-                    <i class="fas fa-trash-alt"></i>
-                  </a>
+                  
+                  <button class="btn btn-sm btn-outline-danger" 
+                    onclick="eliminar(event, <?= $usuario['id'] ?>)"><i class="fas fa-trash-alt"></i>
+                  </button>
+                    
+                  
 
                 </td>
               </tr>
@@ -94,17 +140,17 @@
                       </div> -->
                       <div class="mb-3">
                         <label for="nombreusuarios" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" id="nombreusuarios" value="<?= $usuario['nombre'] ?>" />
+                        <input type="text" class="form-control" name="nombre"  value="<?= $usuario['nombre'] ?>" />
                       </div>
 
                       <div class="mb-3">
                         <label for="correousuarios" class="form-label">Correo</label>
-                        <input type="email" class="form-control" name="UserEmail" id="correousuarios" value="<?= $usuario['correo'] ?>" />
+                        <input type="email" class="form-control" name="UserEmail"  value="<?= $usuario['correo'] ?>" />
                       </div>
 
                       <div class="mb-3">
-                        <label for="rolusuarios" class="form-label">Rol</label>
-                        <select class="form-select" name="rolUsuario" id="rolusuarios">
+                        <label for="rolusuario<?= $usuario['id'] ?>" class="form-label">Rol</label>
+                        <select class="form-select" name="rolUsuario" id="rolusuario<?= $usuario['id'] ?>">
                           <option value="ADMIN" <?= $usuario['rol'] == "ADMIN" ? 'selected' : '' ?>>Administrador</option>
                           <option value="Agente" <?= $usuario['rol'] == "Agente" ? 'selected' : '' ?>>Agente</option>
                           <option value="Atencion_cliente" <?= $usuario['rol'] == "Atencion_cliente" ? 'selected' : '' ?>>Atención al Cliente</option>
@@ -114,11 +160,11 @@
 
                       <div class="mb-3">
                         <label for="contacto1usuarios" class="form-label">Contacto_1</label>
-                        <input type="number" class="form-control" name="contacto1" id="contacto1usuarios" value="<?= $usuario['contacto_1'] ?>" />
+                        <input type="number" class="form-control" name="contacto1"  value="<?= $usuario['contacto_1'] ?>" />
                       </div>
                       <div class="mb-3">
                         <label for="contacto2usuarios" class="form-label">Contacto_2</label>
-                        <input type="number" class="form-control" name="contacto2" id="contacto2usuarios" value="<?= $usuario['contacto_2'] ?>" />
+                        <input type="number" class="form-control" name="contacto2"  value="<?= $usuario['contacto_2'] ?>" />
                       </div>
                       <!-- <div class="mb-3">
                         <label for="estadousuarios" class="form-label">Estado</label>
@@ -206,6 +252,20 @@
   </div>
 
   <?php include ('footer.php'); ?>
+  <script>
+        async function eliminar(event, id) {
+            event.preventDefault();
+            const confirmarSalida = await confirmar(
+                '¿Estás seguro de que deseas eliminar a este USUARIO?',
+                'SÍ', 'No', 'warning'
+            );
+
+            if (confirmarSalida) {
+                window.location.href = `../../controlador/usuarios_c.php?accion=eliminar&id=${id}`;
+            }
+        }
+    </script>
+
 
   <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>

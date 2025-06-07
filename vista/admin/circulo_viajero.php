@@ -113,11 +113,9 @@
                     data-bs-target="#modalEditar<?= $viajero['id'] ?>">
                     <i class="fas fa-edit"></i>
                   </button>
-                  <a href="../../controlador/viajeros_c.php?accion=eliminar&id=<?= $viajero['id'] ?>"
-                     class="btn btn-sm btn-outline-danger"
-                     onclick="return confirm('¿Estás seguro de que deseas eliminar este viajero?');">
-                    <i class="fas fa-trash-alt"></i>
-                  </a>
+                  <button class="btn btn-sm btn-outline-danger" 
+                    onclick="eliminar(event, <?= $viajero['id'] ?>)"><i class="fas fa-trash-alt"></i>
+                  </button>
                 </td>
               </tr>
 
@@ -248,7 +246,20 @@
     </div>
   </div>
 
-<?php include('footer.php'); ?>
-<script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+  <?php include('footer.php'); ?>
+  <script>
+    async function eliminar(event, id) {
+        event.preventDefault();
+        const confirmarSalida = await confirmar(
+            '¿Estás seguro de que deseas eliminar a este VIAJERO?',
+            'SÍ', 'No', 'warning'
+        );
+
+        if (confirmarSalida) {
+            window.location.href = `../../controlador/viajeros_c.php?accion=eliminar&id=${id}`;
+        }
+    }
+  </script>
+  <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

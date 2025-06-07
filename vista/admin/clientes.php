@@ -15,9 +15,11 @@
   }
 
   th, td {
-    white-space: nowrap;
-    vertical-align: middle;
-  }
+        overflow-wrap: break-word;
+        min-width: 100px;
+        text-align: center;
+        vertical-align: middle;
+    }
 
   @media (max-width: 768px) {
     .table {
@@ -116,11 +118,9 @@
                     data-bs-target="#modalEditar<?= $cliente['id'] ?>">
                     <i class="fas fa-edit"></i>
                   </button>
-                  <a href="../../controlador/clientes_c.php?accion=eliminar&id=<?= $cliente['id'] ?>"
-                     class="btn btn-sm btn-outline-danger"
-                     onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?');">
-                    <i class="fas fa-trash-alt"></i>
-                  </a>
+                  <button class="btn btn-sm btn-outline-danger" 
+                    onclick="eliminar(event, <?= $cliente['id'] ?>)"><i class="fas fa-trash-alt"></i>
+                  </button>
                 </td>
               </tr>
 
@@ -193,6 +193,22 @@
 </div>
 
 <?php include('footer.php'); ?>
+<script>
+        async function eliminar(event, id) {
+            event.preventDefault();
+            const confirmarSalida = await confirmar(
+                '¿Estás seguro de que deseas eliminar a este CLIENTE?',
+                'SÍ', 'No', 'warning'
+            );
+
+            if (confirmarSalida) {
+                window.location.href = `../../controlador/clientes_c.php?accion=eliminar&id=${id}`;
+            }
+        }
+    </script>
+
+
+
 <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

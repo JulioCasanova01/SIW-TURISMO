@@ -1,13 +1,17 @@
 <?php 
     include('header.php');
 ?>
-
+<style>
+    .main-content {
+    padding: 1rem;
+  }
+</style>
 <body>
     
     <?php 
     include '../../conexion.php';
   include '../../modelo/usuarios_m.php'; ?>
-    <div class="d-flex">
+    <div class="d-flex flex-column flex-lg-row">
 
         <?php 
             include('sidebar.php');
@@ -40,11 +44,11 @@
                     </div>
 
                     <div class="col-md-4">
-                        <a href="http://localhost/SIW-TURISMO/vista/admin/paquetes.php">
+                        <a href="http://localhost/SIW-TURISMO/vista/admin/productos.php">
                         <div class="card shadow border-0">
                             <div class="card-body text-center">
                                 <i class="fas fa-suitcase fa-2x text-success"></i>
-                                <h5 class="mt-2">Paquetes</h5>
+                                <h5 class="mt-2">Productos</h5>
                                 <p class="mb-0"><!--135--> disponibles</p>
                             </div>
                         </div>

@@ -1,38 +1,4 @@
 <?php
-// function login($conn, $data) {
-//     session_start();
-//     $nombre = $data['nombre'];
-//     $stmt = $conn->prepare("SELECT * FROM categorias WHERE nombre = ?");
-//     $stmt->bind_param("s", $nombre);
-//     $stmt->execute();
-//     $resultado = $stmt->get_result();
-
-//     if ($resultado->num_rows === 1) {
-//         $row = $resultado->fetch_assoc();
-
-//         $_SESSION['id_categoria'] = $row['id'];
-//         $_SESSION['nombre'] = $row['nombre'];
-//         echo "<script>
-//         alert('Bienvenido " . addslashes($_SESSION["nombre"]) . "');
-//         window.location.href = 'http://localhost/SIW-TURISMO/vista/general/PaginaPrincipal.php';
-//         </script>";
-//         exit();
-//     } else {
-//         echo "<script>
-//         alert('¡Categoría No Encontrada!');
-//         window.location.href = 'http://localhost/SIW-TURISMO/vista/login.php';
-//         </script>";
-//         exit();
-//     }
-// }
-
-function salir() {
-    session_start();
-    session_unset();
-    session_destroy();
-    header("Location: ../vista/login.php");
-    exit();
-}
 
 function registrar($conn, $data) {
     $sql = "INSERT INTO categorias (nombre, descripcion) VALUES (?, ?)";

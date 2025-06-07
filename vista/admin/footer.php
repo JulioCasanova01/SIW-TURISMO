@@ -54,7 +54,9 @@
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
     </script>
-
+    <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../libs/SweetAlert2/sweetalert2.all.min.js"></script>
+    <script src="../alertas/funcionesalert.js"></script>
     <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -10,9 +10,11 @@
   }
 
   th, td {
-    word-break: break-word;
-    min-width: 120px; /* Evita que las columnas se aplasten demasiado en pantallas pequeñas */
-  }
+        overflow-wrap: break-word;
+        min-width: 100px;
+        text-align: left;
+        vertical-align: middle;
+    }
 
   @media (max-width: 576px) {
     .main-content h2 {
@@ -87,17 +89,20 @@
                                 <td><?= $producto['nombre'] ?></td>
                                 <td><?= $producto['id_categoria'] ?></td>
                                 <td>$<?= number_format($producto['precio'], 0, ',', '.') ?></td>
-                                <td><div class="overflow-auto" style="max-height: 100px; max-width: 100%; white-space: pre-wrap;"><?= $producto['descripcion'] ?></div></td>
+                                <td><div class="overflow-auto" style="max-height: 100px; max-width: 100%; text-align: left; overflow-wrap: break-word;"><?= $producto['descripcion'] ?></div></td>
                                 
                                 <td>
                                     <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
                                         data-bs-target="#modalEditar<?= $producto['id'] ?>"><i class="fas fa-edit"></i>
                                     </button>
-                                   <a href="../../controlador/productos_c.php?accion=eliminar&id=<?= $producto['id'] ?>" 
-                                        class="btn btn-sm btn-outline-danger" 
-                                        onclick="return confirm('¿Estás seguro de que deseas eliminar este Producto?');">
+                                   
+                                        
+                                        
+                                        
+                                    <button class="btn btn-sm btn-outline-danger" onclick="eliminar(event, <?= $producto['id'] ?>)" >
                                         <i class="fas fa-trash-alt"></i>
-                                    </a>
+                                    </button>
+                                    
                                 </td>
                             </tr>
                         
@@ -226,6 +231,19 @@
     </div>
     
     <?php include ('footer.php'); ?>
+    <script>
+        async function eliminar(event, id) {
+            event.preventDefault();
+            const confirmarSalida = await confirmar(
+                '¿Estás seguro de que deseas eliminar este PRODUCTO?',
+                'SÍ', 'No', 'warning'
+            );
+
+            if (confirmarSalida) {
+                window.location.href = `../../controlador/productos_c.php?accion=eliminar&id=${id}`;
+            }
+        }
+    </script>
 
     <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>

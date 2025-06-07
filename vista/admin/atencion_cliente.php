@@ -11,10 +11,13 @@
     padding: 1rem;
   }
 
-  th, td {
-    word-break: break-word;
-    min-width: 120px; /* Evita que las columnas se aplasten demasiado en pantallas pequeñas */
-  }
+    th, td {
+        overflow-wrap: break-word;
+        min-width: 120px;
+        text-align: left;
+        vertical-align: middle;
+    }
+
 
   @media (max-width: 576px) {
     .main-content h2 {
@@ -31,11 +34,13 @@
   }
 
   .descripcion-scroll {
-  max-height: 80px;       /* Alto máximo antes de hacer scroll vertical */
-  max-width: 250px;       /* Ancho máximo antes de hacer scroll horizontal */
-  overflow: auto;
-  white-space: pre-wrap;  /* Mantiene saltos de línea */
+        max-height: 80px;       /* Alto máximo antes de hacer scroll vertical */
+        max-width: 250px;       /* Ancho máximo antes de hacer scroll horizontal */
+        overflow: auto;
+        white-space: pre-wrap;  /* Mantiene saltos de línea */
     }
+    
+
 </style>
 <body>
     <?php 
@@ -53,7 +58,7 @@
             <nav class="navbar navbar-dark">
                 <div class="container-fluid">
                     
-                    <span class="navbar-brand">Gestión de Atencion Al Cliente</span>
+                    <span class="navbar-brand">Gestión de Atención Al Cliente</span>
                     <!-- <a href="#" class="btn btn-outline-light"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a> -->
                 </div>
             </nav>
@@ -91,24 +96,28 @@
                                     </a>
                                     </td>
 
-                                    <td>
-                                        <div class="overflow-auto" style="max-height: 100px; max-width: 100%; white-space: pre-wrap;">
-                                            <?= $atencion['mensaje'] ?>
+                                   <td>
+                                        <div class="overflow-auto" style="max-height: 100px; max-width: 100%; text-align: left; overflow-wrap: break-word;">
+                                            <?= htmlspecialchars($atencion['mensaje']) ?>
                                         </div>
                                     </td>
+
                                     <td><?= $atencion['fecha'] ?></td>
-                                    <td><?= $atencion['estado'] ?></td>
+
+                                    <td style="<?= $atencion['estado']=='RE' ? 'background-color:#28a745;color:#fff;padding:5px;border-radius:4px;text-align:center;' : ($atencion['estado']=='PE' ? 'background-color:#dc3545;color:#fff;padding:5px;border-radius:4px;text-align:center;' : '') ?>">
+                                        <?= htmlspecialchars($atencion['estado']) ?>
+                                    </td>
+
+
                                     
                                     <td>
                                     <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
                                         data-bs-target="#modalEditar<?= $atencion['id'] ?>">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <a href="../../controlador/atenciones_c.php?accion=eliminar&id=<?= $atencion['id'] ?>"
-                                        class="btn btn-sm btn-outline-danger"
-                                        onclick="return confirm('¿Estás seguro de que deseas eliminar esta atencion?');">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
+                                    <button class="btn btn-sm btn-outline-danger" 
+                                        onclick="eliminar(event, <?= $atencion['id'] ?>)"><i class="fas fa-trash-alt"></i>
+                                    </button>
                                     </td>
                                 </tr>
                                 
@@ -153,6 +162,19 @@
 
 
     <?php include ('footer.php'); ?>
+    <script>
+        async function eliminar(event, id) {
+            event.preventDefault();
+            const confirmarSalida = await confirmar(
+                '¿Estás seguro de que deseas eliminar esta ATENCIÓN?',
+                'SÍ', 'No', 'warning'
+            );
+
+            if (confirmarSalida) {
+                window.location.href = `../../controlador/atenciones_c.php?accion=eliminar&id=${id}`;
+            }
+        }
+    </script>
 
     <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>

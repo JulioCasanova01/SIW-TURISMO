@@ -81,7 +81,7 @@
                   <td><?= $categoria['id'] ?></td>
                   <td><?= $categoria['nombre'] ?></td>
                   <td>
-                    <div class="overflow-auto" style="max-height: 100px; max-width: 100%; white-space: pre-wrap;">
+                    <div class="overflow-auto" style="max-height: 100px; max-width: 100%; text-align: left; overflow-wrap: break-word;"">
                       <?= $categoria['descripcion'] ?>
                     </div>
                   </td>
@@ -91,11 +91,9 @@
                       data-bs-target="#modalEditar<?= $categoria['id'] ?>">
                       <i class="fas fa-edit"></i>
                     </button>
-                    <a href="../../controlador/categorias_c.php?accion=eliminar&id=<?= $categoria['id'] ?>"
-                      class="btn btn-sm btn-outline-danger"
-                      onclick="return confirm('¿Estás seguro de que deseas eliminar esta categoría?');">
-                      <i class="fas fa-trash-alt"></i>
-                    </a>
+                    <button class="btn btn-sm btn-outline-danger" 
+                      onclick="eliminar(event, <?= $categoria['id'] ?>)"><i class="fas fa-trash-alt"></i>
+                    </button>
                   </td>
                 </tr>
 
@@ -175,6 +173,20 @@
 
 
   <?php include('footer.php'); ?>
+  <script>
+        async function eliminar(event, id) {
+            event.preventDefault();
+            const confirmarSalida = await confirmar(
+                '¿Estás seguro de que deseas eliminar esta CATEGORÍA?',
+                'SÍ', 'No', 'warning'
+            );
+
+            if (confirmarSalida) {
+                window.location.href = `../../controlador/categorias_c.php?accion=eliminar&id=${id}`;
+            }
+        }
+    </script>
+
   <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

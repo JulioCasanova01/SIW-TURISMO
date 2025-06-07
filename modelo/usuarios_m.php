@@ -1,50 +1,60 @@
 <?php
 function login($conn, $data) {
     session_start();
-    $correo=$data['correo'];
-    $clave=$data['clave'];
-    $nombre=$data['nombre'];
-    $rol=$data['rolUsuario'];
-    $stmt=$conn->prepare("SELECT * FROM usuarios WHERE correo = ?");
+    $correo = $data['correo'];
+    $clave = $data['clave'];
+
+    $stmt = $conn->prepare("SELECT * FROM usuarios WHERE correo = ?");
     $stmt->bind_param("s", $correo);
     $stmt->execute();
-    $resultado=$stmt->get_result();
+    $resultado = $stmt->get_result();
 
-    if($resultado->num_rows===1){
-        $row=$resultado->fetch_assoc();
-        
-        if(password_verify($clave, $row['clave'])){
-            $_SESSION['id_usuario']=$row['id'];
-            $_SESSION['nombre']=$row['nombre'];
-            $_SESSION['correo']=$row['correo'];
-            $_SESSION['rol']=$row['rol'];
-            
-            header("Location: ../vista/admin/vista_general.php");
+    if ($resultado->num_rows === 1) {
+        $row = $resultado->fetch_assoc();
+
+        if (password_verify($clave, $row['clave'])) {
+            $_SESSION['id_usuario'] = $row['id'];
+            $_SESSION['nombre'] = $row['nombre'];
+            $_SESSION['correo'] = $row['correo'];
+            $_SESSION['rol'] = $row['rol'];
+
+            $nombre = addslashes($_SESSION["nombre"]);
+            $rol = addslashes($_SESSION["rol"]);
+            $mensaje = "Bienvenido $nombre ($rol)";
+
+            echo "
+                <script src='../libs/SweetAlert2/sweetalert2.all.min.js'></script>
+                <script src='../vista/alertas/funcionesalert.js'></script>
+                <body>
+                    <script>
+                        informar('$mensaje', 'ACEPTAR', 'http://localhost/SIW-TURISMO/vista/admin/vista_general.php', 'success');
+                    </script>
+                </body>";
             exit();
-        }else{
-    
-        echo "
+        } else {
+            echo "
                 <script src='../libs/SweetAlert2/sweetalert2.all.min.js'></script>
                 <script src='../vista/alertas/funcionesalert.js'></script>
                 <body>
-                        <script>
-                            informar('Bienvenido " . addslashes($_SESSION["nombre"] . $_SESSION['rol']) . "','ACEPTAR', 'http://localhost/SIW-TURISMO/vista/admin/vista_general.php', 'success');
-                        </script>
-            </body>";
+                    <script>
+                        informar('CLAVE INCORRECTA, Por favor, verifica tu contraseña.', 'REINTENTAR', 'http://localhost/SIW-TURISMO/vista/admin/login_admin.php', 'warning');
+                    </script>
+                </body>";
+            exit();
         }
-    }else{
-        
-         echo "
-                <script src='../libs/SweetAlert2/sweetalert2.all.min.js'></script>
-                <script src='../vista/alertas/funcionesalert.js'></script>
+    } else {
+        echo "
+            <script src='../libs/SweetAlert2/sweetalert2.all.min.js'></script>
+            <script src='../vista/alertas/funcionesalert.js'></script>
                 <body>
-                        <script>
-                            informar('CLIENTE NO ENCONTRADO','REINTENTAR', 'http://localhost/SIW-TURISMO/vista/admin/login_admin.php', 'error');
-                        </script>
-            </body>";
+                    <script>
+                        informar('USUARIO NO ENCONTRADO', 'REINTENTAR', 'http://localhost/SIW-TURISMO/vista/admin/login_admin.php', 'error');
+                    </script>
+                </body>";
         exit();
     }
 }
+
 function salir(){
     session_start();
     session_unset();

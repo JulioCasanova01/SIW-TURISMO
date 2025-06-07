@@ -1,13 +1,5 @@
 <?php
 
-function salir(){
-    session_start();
-    session_unset();
-    session_destroy();
-    header("Location: ../vista/login.php");
-    exit();
-}
-
 function registrar($conn, $data) {
     
     $sql= "INSERT INTO productos VALUES (NULL, '{$data['id_categoria']}', '{$data['nombre']}', '{$data['imagen']}','{$data['descripcion']}','{$data['precio']}')";

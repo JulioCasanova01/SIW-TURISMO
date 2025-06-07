@@ -1,13 +1,5 @@
 <?php
 
-function salir(){
-    session_start();
-    session_unset();
-    session_destroy();
-    header("Location: ../vista/login.php");
-    exit();
-}
-
 function registrar($conn, $data) {
     date_default_timezone_set('America/Bogota');
     $fecha_registro = date('Y-m-d H:i:s');
