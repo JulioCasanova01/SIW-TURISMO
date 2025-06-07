@@ -133,8 +133,8 @@ if (!isset($_SESSION['id_cliente'])) {
               <p>⚙️ Configuración</p>
             </a> -->
             
-            <a class="a" href="../../controlador/clientes_c.php?accion=salir"
-              onclick="return confirm('¿Estás seguro de que deseas cerrar sesión?');">
+            <a class="a" href=""
+              onclick="salir(); ">
               <p>⏏️ Salir</p>
             </a>
           </div>
@@ -178,7 +178,16 @@ if (!isset($_SESSION['id_cliente'])) {
 
   <?php include('footer.php'); ?>
 
+  <script>
+    async function salir() {
+      event.preventDefault();
+      const confirmarSalida = await confirmar('¿Estás seguro de que deseas cerrar sesión?','Si, Salir', 'No, cancelar', 'question');
+      if (confirmarSalida) {
+        window.location.href =  '../../controlador/clientes_c.php?accion=salir';
+      }
+    }
 
+  </script>
   <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

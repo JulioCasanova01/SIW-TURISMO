@@ -22,17 +22,26 @@ function login($conn, $data) {
             header("Location: ../vista/admin/vista_general.php");
             exit();
         }else{
-            echo "<script>
-        alert('¡Clave Incorrecta!');
-        window.location.href = 'http://localhost/SIW-TURISMO/vista/admin/login_admin.php';
-        </script>";
+    
+        echo "
+                <script src='../libs/SweetAlert2/sweetalert2.all.min.js'></script>
+                <script src='../vista/alertas/funcionesalert.js'></script>
+                <body>
+                        <script>
+                            informar('Bienvenido " . addslashes($_SESSION["nombre"] . $_SESSION['rol']) . "','ACEPTAR', 'http://localhost/SIW-TURISMO/vista/admin/vista_general.php', 'success');
+                        </script>
+            </body>";
         }
     }else{
-        echo "<script>
-        alert('¡Usuario No Encontrado!');
-        window.location.href = 'http://localhost/SIW-TURISMO/vista/admin/login_admin.php';
-        </script>";
-        // header("Location: ../vista/admin/login_admin.php");
+        
+         echo "
+                <script src='../libs/SweetAlert2/sweetalert2.all.min.js'></script>
+                <script src='../vista/alertas/funcionesalert.js'></script>
+                <body>
+                        <script>
+                            informar('CLIENTE NO ENCONTRADO','REINTENTAR', 'http://localhost/SIW-TURISMO/vista/admin/login_admin.php', 'error');
+                        </script>
+            </body>";
         exit();
     }
 }

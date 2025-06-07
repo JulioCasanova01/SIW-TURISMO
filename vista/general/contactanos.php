@@ -30,7 +30,7 @@
     }
 
     .form-label {
-      color: #fff;
+      color: black;
     }
 
     .form-control,
@@ -56,8 +56,11 @@
 </head>
 
 <body>
+    <script src="../../libs/SweetAlert2/sweetalert2.all.min.js"></script>
+    <script src="../alertas/funcionesalert.js"></script>
+
      <!-- Botón flotante para regresar -->
-     <button onclick="window.history.back()" 
+     <button onclick="window.location.href='index.php'"
         style="
         position: fixed;
         bottom: 20px;
@@ -123,7 +126,7 @@
                 <textarea class="form-control" name="mensaje" id="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..." required></textarea>
               </div>
               <div class="text-center">
-                <button type="submit" class="btn btn-primary px-4">Enviar mensaje</button>
+                <button type="submit" class="btn btn-primary px-4" >Enviar mensaje</button>
               </div>
             </form>
           </div>
@@ -152,7 +155,7 @@
   </section>
   
   
-
+ 
   <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

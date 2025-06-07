@@ -28,7 +28,7 @@
                 <li><a href="http://localhost/SIW-TURISMO/vista/general/PaginaPrincipal.php" class="text-light text-decoration-none">Inicio</a></li>
                 <li><a href="http://localhost/SIW-TURISMO/vista/general/productos.php" class="text-light text-decoration-none">Planes turísticos</a></li>
                 <li><a href="http://localhost/SIW-TURISMO/vista/general/quienes_somos.php" class="text-light text-decoration-none">Quiénes somos</a></li>
-                <li><a href="http://localhost/SIW-TURISMO/vista/general/contactanos.php" class="text-light text-decoration-none">Contáctanos</a></li>
+                <!-- <li><a href="http://localhost/SIW-TURISMO/vista/general/contactanos.php" class="text-light text-decoration-none">Contáctanos</a></li> -->
               </ul>
             </div>
     
@@ -65,5 +65,7 @@
       </footer>
 
     <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../libs/SweetAlert2/sweetalert2.all.min.js"></script>
+    <script src="../alertas/funcionesalert.js"></script>
 </body>
 </html>

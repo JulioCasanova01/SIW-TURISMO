@@ -280,7 +280,7 @@ if (!isset($_SESSION['id_cliente'])) {
                         <li><a href="http://localhost\SIW-TURISMO/vista/general/PaginaPrincipal.php">Inicio</a></li>
                         <li><a href="http://localhost/SIW-TURISMO/vista/general/productos.php">Planes turísticos</a></li>
                         <li><a href="http://localhost/SIW-TURISMO/vista/general/quienes_somos.php">Quiénes somos</a></li>
-                        <li><a href="http://localhost/SIW-TURISMO/vista/general/contactanos.php">Contáctanos</a></li>
+                        <!-- <li><a href="http://localhost/SIW-TURISMO/vista/general/contactanos.php">Contáctanos</a></li> -->
                     </ul>
                 </div>
 

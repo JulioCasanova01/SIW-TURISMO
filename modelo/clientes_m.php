@@ -3,7 +3,7 @@ function login($conn, $data) {
     session_start();
     $correo=$data['email'];
     $clave=$data['clave'];
-    $nombre=$data['nombre'];
+    
     $stmt=$conn->prepare("SELECT * FROM clientes WHERE correo = ?");
     $stmt->bind_param("s", $correo);
     $stmt->execute();
@@ -16,25 +16,37 @@ function login($conn, $data) {
             $_SESSION['id_cliente']=$row['id'];
             $_SESSION['nombre']=$row['nombre'];
             $_SESSION['correo']=$row['correo'];
-            echo "<script>
-            alert('Bienvenido " . addslashes($_SESSION["nombre"]) . "');
-            window.location.href = 'http://localhost/SIW-TURISMO/vista/general/PaginaPrincipal.php';
-            </script>";
+            
+            echo "
+                <script src='../libs/SweetAlert2/sweetalert2.all.min.js'></script>
+                <script src='../vista/alertas/funcionesalert.js'></script>
+                <body>
+                        <script>
+                            informar('Bienvenido " . addslashes($_SESSION["nombre"]) . "','ACEPTAR', 'http://localhost/SIW-TURISMO/vista/general/PaginaPrincipal.php', 'success');
+                        </script>
+            </body>";
 
             // header("Location: ../vista/general/PaginaPrincipal.php");
             exit();
         }else{
-            echo "<script>
-        alert('¡Clave Incorrecta!');
-        window.location.href = 'http://localhost/SIW-TURISMO/vista/login.php';
-        </script>";
+         echo "
+                <script src='../libs/SweetAlert2/sweetalert2.all.min.js'></script>
+                <script src='../vista/alertas/funcionesalert.js'></script>
+                <body>
+                        <script>
+                            informar('CLAVE INCORRECTA','REINTENTAR', 'http://localhost/SIW-TURISMO/vista/login.php', 'error');
+                        </script>
+            </body>";
         }
     }else{
-        echo "<script>
-        alert('¡Cliente No Encontrado!');
-        window.location.href = 'http://localhost/SIW-TURISMO/vista/login.php';
-        </script>";
-        // header("Location: ../vista/login.php");
+        echo "
+                <script src='../libs/SweetAlert2/sweetalert2.all.min.js'></script>
+                <script src='../vista/alertas/funcionesalert.js'></script>
+                <body>
+                        <script>
+                            informar('CLIENTE NO ENCONTRADO','REINTENTAR', 'http://localhost/SIW-TURISMO/vista/login.php', 'warning');
+                        </script>
+            </body>";
         exit();
     }
 }
@@ -86,21 +98,31 @@ function registrar($conn, $data) {
         $_SESSION['contacto_1'] = $data['contacto1'];
         $_SESSION['contacto_2'] = $data['contacto2'];
         $_SESSION['direccion'] = $data['direccion'];
-         echo "<script>
-                    alert('Cliente registrado exitosamente.'); 
-                     window.location.href = '../vista/login.php';
-                </script>";
-        // header("Location: ../vista/login.php");
+        
+        echo "
+        <script src='../libs/SweetAlert2/sweetalert2.all.min.js'></script>
+        <script src='../vista/alertas/funcionesalert.js'></script>
+        <body>
+                <script>
+                    informar('CLIENTE REGISTRADO EXITÓSAMENTE.','Ok.', '../vista/login.php', 'success');
+                </script>
+        </body>";
+        
         exit();
     }
     } catch (mysqli_sql_exception $e) {
         // Verificamos si es error por duplicado
         if ($e->getCode() === 1062) {
             // die("Error: Ya existe un registro con este número de documento o correo electrónico.");
-            echo "<script>
-                        alert('El Correo o el Número de Documento ya está registrado. Por favor, verifica los datos ingresados.'); 
-                        window.location.href = '../vista/general/crear_cuenta.php';
-                    </script>";
+            
+            echo "
+                <script src='../libs/SweetAlert2/sweetalert2.all.min.js'></script>
+                <script src='../vista/alertas/funcionesalert.js'></script>
+                <body>
+                        <script>
+                            informar('El Correo o el Número de Documento ya está registrado. Por favor, verifica los datos ingresados.','Ok.', '../vista/crear_cuenta.php', 'error');
+                        </script>
+                </body>";
         } else {
             die("Error al registrar cliente: " . $e->getMessage());
         }

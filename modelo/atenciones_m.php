@@ -1,5 +1,5 @@
 <?php
-
+   
 function salir(){
     session_start();
     session_unset();
@@ -15,10 +15,14 @@ function registrar($conn, $data) {
     $sql= "INSERT INTO atencion_clientes VALUES (NULL, '{$data['nombre']}', '{$data['mensaje']}','$fecha','$estado', '{$data['correo']}','{$data['telefono']}'  )";
     mysqli_query($conn, $sql);
     $_SESSION['nombre'] = $data['nombre'];
-        echo "<script>
-                    alert('Atención registrada exitosamente.'); 
-                    window.location.href = '../vista/general/contactanos.php';
-                </script>";
+        echo "
+        <script src='../libs/SweetAlert2/sweetalert2.all.min.js'></script>
+        <script src='../vista/alertas/funcionesalert.js'></script>
+        <body>
+                <script>
+                    informar('Se envió correctamente tu mensaje, pronto nos pondremos en contacto contigo.','Ok, Muchas Gracias.', '../vista/general/contactanos.php', 'success');
+                </script>
+        </body>";
 }
 
 function obtenerAtenciones($conn) {
@@ -39,4 +43,5 @@ function actualizar($conn, $data) {
 }
 
 ?>
+
 
