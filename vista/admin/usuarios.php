@@ -17,7 +17,7 @@
 
   th, td {
         overflow-wrap: break-word;
-        min-width: 100px;
+        min-width: 120px;
         text-align: left;
         vertical-align: middle;
     }

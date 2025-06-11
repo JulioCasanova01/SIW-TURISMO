@@ -29,11 +29,11 @@
   }
 
   .descripcion-scroll {
-  max-height: 80px;       /* Alto máximo antes de hacer scroll vertical */
-  max-width: 250px;       /* Ancho máximo antes de hacer scroll horizontal */
-  overflow: auto;
-  white-space: pre-wrap;  /* Mantiene saltos de línea */
-}
+    max-height: 80px;       /* Alto máximo antes de hacer scroll vertical */
+    max-width: 250px;       /* Ancho máximo antes de hacer scroll horizontal */
+    overflow: auto;
+    white-space: pre-wrap;  /* Mantiene saltos de línea */
+  }
 
 </style>
 

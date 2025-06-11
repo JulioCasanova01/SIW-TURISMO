@@ -14,6 +14,10 @@ function obtenerProductos($conn) {
     $result = mysqli_query($conn, "SELECT * FROM productos");
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+function obtenerCategorias($conn) {
+    $result = mysqli_query($conn, "SELECT * FROM categorias");
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
 
 function eliminar($conn, $id) {
    
@@ -22,11 +26,24 @@ function eliminar($conn, $id) {
 }
 
 function actualizar($conn, $data) {
-    /*id_categoria='{$data['id_categoria']}', */
-    $sql = "UPDATE productos SET  nombre='{$data['nombre']}', imagen='{$data['imagen']}', descripcion='{$data['descripcion']}', precio='{$data['precio']}'  WHERE id={$data['id']}";
-    mysqli_query($conn, $sql);
+
+    // is_array($data['id_categoria']) ? $data['id_categoria'][0] :
+    $id_categoria =  $data['id_categoria'];
+
+    $sql = "UPDATE productos 
+            SET 
+                id_categoria = '$id_categoria', 
+                nombre = '{$data['nombre']}', 
+                imagen = '{$data['imagen']}', 
+                descripcion = '{$data['descripcion']}', 
+                precio = '{$data['precio']}'
+            WHERE id = {$data['id']}";
+
+    mysqli_query($conn, $sql) or die(mysqli_error($conn));
     header("Location: ../vista/admin/productos.php");
 }
+
+
 
 ?>
 

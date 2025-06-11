@@ -12,13 +12,7 @@
     />
     <link href="../../libs/fontawesome-free-6.7.2-web/css/all.min.css" />
     <!-- Aquí puedes agregar tus estilos CSS o enlaces a Bootstrap si usas -->
-     <style>
-    /* .sidebar {
-        height: 100vh; 
-        overflow-y: auto; 
-        background-color: #00354D; 
-    } */
-</style>
+    
 
 </head>
 

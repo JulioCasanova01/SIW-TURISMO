@@ -14,18 +14,28 @@ function registrar($conn, $data) {
         if ($stmt->execute()) {
             $_SESSION['nombre'] = $data['nombre'];
             $_SESSION['descripcion'] = $data['descripcion'];
-            echo "<script>
-                    alert('Categoría registrada exitosamente.');
-                    window.location.href = '../vista/admin/categorias.php';
-                </script>";
-            exit();
+            
+            echo "
+                <script src='../libs/SweetAlert2/sweetalert2.all.min.js'></script>
+                <script src='../vista/alertas/funcionesalert.js'></script>
+                <body>
+                        <script>
+                            informar('CATEGORÍA REGISTRADA EXITÓSAMENTE.','Ok.', '../vista/admin/categorias.php', 'success');
+                        </script>
+                </body>";
+                exit();
         }
     } catch (mysqli_sql_exception $e) {
         if ($e->getCode() === 1062) {
-            echo "<script>
-                    alert('El nombre de la categoría ya está registrado.');
-                    window.location.href = '../vista/admin/categorias.php';
-                </script>";
+                echo "
+                <script src='../libs/SweetAlert2/sweetalert2.all.min.js'></script>
+                <script src='../vista/alertas/funcionesalert.js'></script>
+                <body>
+                        <script>
+                            informar('El nombre de la categoría ya está registrado.','Reintentar.', '../vista/admin/categorias.php', 'error');
+                        </script>
+                </body>";
+                exit();
         } else {
             die("Error al registrar categoría: " . $e->getMessage());
         }

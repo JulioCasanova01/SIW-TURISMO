@@ -14,11 +14,11 @@
     min-width: 100%; 
   }
 
-  th, td {
-        overflow-wrap: break-word;
-        min-width: 100px;
-        text-align: center;
-        vertical-align: middle;
+    th, td {
+      overflow-wrap: break-word;
+      min-width: 100px;
+      text-align: center;
+      vertical-align: middle;
     }
 
   @media (max-width: 768px) {

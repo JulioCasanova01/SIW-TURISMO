@@ -12,7 +12,7 @@
   th, td {
         overflow-wrap: break-word;
         min-width: 100px;
-        text-align: left;
+        text-align: center;
         vertical-align: middle;
     }
 
@@ -43,6 +43,7 @@
         include '../../conexion.php';
         include '../../modelo/productos_m.php'; 
         $productos = obtenerProductos($conn);
+        $categorias = obtenerCategorias($conn);
     ?>
     <div class="d-flex flex-column flex-lg-row">
 
@@ -136,19 +137,18 @@
                                                         name="imagen" accept="image/*" class="form-control" />
                                                 </div>
 
-                                                <!--Arreglas categoria que es una llave foranea-->
 
-                                                <?php /*
                                                 <div class="mb-3">
-                                                    <label for="categoriaproducto <?= $producto['id'] ?>" class="form-label">Categoría</label>
-                                                    <select class="form-select" id="categoriaproducto<?= $producto['id'] ?>">
-                                                        <option value="activo" <?= ($producto['estado'] == 'activo') ? 'selected' : '' ?>>Activo</option>
-                                                        <option value="inactivo" <?= ($producto['estado'] == 'inactivo') ? 'selected' : '' ?>>Inactivo</option>
+                                                    <label for="categoriaProducto<?= $producto['id'] ?>" class="form-label">Categoría del Producto</label>
+                                                    <select class="form-select" name="id_categoria" id="categoriaProducto<?= $producto['id'] ?>">
+                                                        <?php foreach ($categorias as $categoria): ?>
+                                                            <option value="<?= $categoria['id'] ?>" <?= ($producto['id_categoria'] == $categoria['id']) ? 'selected' : '' ?>>
+                                                                <?= htmlspecialchars($categoria['nombre']) ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
                                                     </select>
                                                 </div>
-                                                */ ?>
 
-                                                
                                                 <div class="mb-3">
                                                     <label for="precioproducto<?= $producto['id'] ?>"
                                                         class="form-label">Precio</label>
@@ -165,9 +165,10 @@
                                                 </div>
                                                 
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <button class="btn btn-primary">Guardar</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" class="btn btn-primary">Guardar</button>
                                                 </div>
+
                                             </form>
                                         </div>
                                         
@@ -219,9 +220,10 @@
                             </select>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary">Guardar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
+
                     
                     </form>
                 </div>
