@@ -150,7 +150,7 @@
 			<p class="text-center text-muted text-uppercase">Inicia sesión con tu cuenta</p>
 			<div class="form-group label-floating">
 				<label class="control-label" for="UserEmail">Usuario</label>
-				<input class="form-control" id="UserEmail" name="email" type="text" placeholder="example@gmail.com" required>
+				<input class="form-control" id="UserEmail" name="email" type="email" placeholder="example@gmail.com" required>
 			</div>
 			<div class="form-group label-floating">
 				<label class="control-label" for="UserPass">Contraseña</label>

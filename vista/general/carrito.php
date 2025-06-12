@@ -78,38 +78,43 @@ if (!isset($_SESSION['id_cliente'])) {
               </tr>
             </thead>
             <tbody>
-              <!-- Producto 1 -->
-              <!-- <tr>
-                <td>
-                  <strong>Tour a San Andrés</strong><br>
-                  <small>5 días, todo incluido</small>
-                </td>
-                <td>$1.200.000</td>
-                <td><input type="number" class="form-control w-50" value="1" min="1"></td>
-                <td>$1.200.000</td>
-                <td>
-                  <button class="btn btn-danger btn-sm">
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                </td>
-              </tr> -->
-
-              <!-- Producto 2 -->
-              <!-- <tr>
-                <td>
-                  <strong>Eje Cafetero VIP</strong><br>
-                  <small>3 días, transporte incluido</small>
-                </td>
-                <td>$800.000</td>
-                <td><input type="number" class="form-control w-50" value="2" min="1"></td>
-                <td>$1.600.000</td>
-                <td>
-                  <button class="btn btn-danger btn-sm">
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                </td>
-              </tr> -->
+              <?php
+              $total = 0;
+              if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
+                  foreach ($_SESSION['carrito'] as $index => $item) {
+                      $subtotal = $item['precio'] * $item['cantidad'];
+                      $total += $subtotal;
+                      echo "<tr>
+                              <td><strong>{$item['nombre']}</strong></td>
+                              <td>$" . number_format($item['precio'], 0, ',', '.') . "</td>
+                              <td>
+                                  <form method='POST' action='actualizar_carrito.php' class='d-inline'>
+                                      <input type='hidden' name='index' value='{$index}'>
+                                      <input type='number' name='cantidad' class='form-control w-50 d-inline' value='{$item['cantidad']}' min='1'>
+                                      <button type='submit' class='btn btn-sm btn-success ms-1'><i class='fas fa-sync-alt'></i></button>
+                                  </form>
+                              </td>
+                              <td>$" . number_format($subtotal, 0, ',', '.') . "</td>
+                              <td>
+                                  <form method='POST' action='eliminar_carrito.php'>
+                                      <input type='hidden' name='index' value='{$index}'>
+                                      <button type='submit' class='btn btn-danger btn-sm'><i class='fas fa-trash-alt'></i></button>
+                                  </form>
+                              </td>
+                            </tr>";
+                  }
+              } else {
+                  echo "<tr><td colspan='5' class='text-center'>Tu carrito está vacío</td></tr>";
+              }
+              ?>
             </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                <td colspan="2"><strong>$<?php echo number_format($total, 0, ',', '.'); ?></strong></td>
+              </tr>
+            </tfoot>    
+
           </table>
         </div>
       </div>
@@ -117,25 +122,31 @@ if (!isset($_SESSION['id_cliente'])) {
       <!-- Resumen de compra -->
       <div class="col-lg-4">
         <div class="resumen">
-          <h4 class="mb-3">Resumen</h4>
-          <ul class="list-unstyled">
-            <li class="d-flex justify-content-between">
-              <span>Subtotal:</span>
-              <strong><!--$2.800.000--></strong>
-            </li>
-            <li class="d-flex justify-content-between">
-              <span><!--Impuestos (IVA)-->:</span>
-              <strong><!--$532.000--></strong>
-            </li>
-            <li class="d-flex justify-content-between">
-              <span>Total:</span>
-              <strong><!--$3.332.000--></strong>
-            </li>
-          </ul>
-          <hr>
-          <button class="btn btn-primary w-100">
-            <i class="fas fa-credit-card me-2"></i>Finalizar compra
-          </button>
+          <?php
+            $iva = $total * 0.19;
+            $totalFinal = $total + $iva;
+            ?>
+            <h4 class="mb-3">Resumen</h4>
+            <ul class="list-unstyled">
+                <li class="d-flex justify-content-between">
+                    <span>Subtotal:</span>
+                    <strong>$<?php echo number_format($total, 0, ',', '.'); ?></strong>
+                </li>
+                <li class="d-flex justify-content-between">
+                    <span>IVA (19%):</span>
+                    <strong>$<?php echo number_format($iva, 0, ',', '.'); ?></strong>
+                </li>
+                <li class="d-flex justify-content-between">
+                    <span>Total:</span>
+                    <strong>$<?php echo number_format($totalFinal, 0, ',', '.'); ?></strong>
+                </li>
+            </ul>
+            <hr>
+            <form method="POST" action="finalizar_compra.php">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-credit-card me-2"></i>Finalizar compra
+                </button>
+            </form>
         </div>
       </div>
     </div>

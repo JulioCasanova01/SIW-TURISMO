@@ -43,6 +43,34 @@ function actualizar($conn, $data) {
     header("Location: ../vista/admin/productos.php");
 }
 
+function obtenerProductosConCategorias($conn) {
+    $query = "
+        SELECT p.*, c.nombre AS nombre_categoria
+        FROM productos p
+        JOIN categorias c ON p.id_categoria = c.id
+    ";
+    $result = mysqli_query($conn, $query);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
+function obtenerProductosFiltrados($conn, $categoria = '', $precio = '') {
+    $sql = "SELECT p.*, c.nombre AS nombre_categoria 
+            FROM productos p 
+            JOIN categorias c ON p.id_categoria = c.id 
+            WHERE 1";
+
+    if ($categoria != '') {
+        $sql .= " AND p.id_categoria = " . intval($categoria);
+    }
+
+    if ($precio != '') {
+        $sql .= " AND p.precio <= " . floatval($precio);
+    }
+
+    $resultado = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+}
+
 
 
 ?>
