@@ -28,6 +28,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Productos | SIW-TURISMO</title>
+  <link rel="icon" href="../../IMAGENES/Logotipo_sinsombrapng_Mesa de trabajo 1-02.png">
   <link href="../../libs/bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../libs/fontawesome-free-6.7.2-web/css/all.min.css" rel="stylesheet">
   <style>
@@ -179,7 +180,7 @@
             <?php foreach ($productos as $producto): ?>
                 <div class="col">
                     <div class="card h-100 d-flex flex-column">
-                        <img src="<?php echo htmlspecialchars($producto['imagen']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
+                        <img src="../../img/productos/<?php echo htmlspecialchars($producto['imagen']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
                         <div class="card-body flex-grow-1">
                             <h5  class="card-title "><?php echo htmlspecialchars($producto['nombre']); ?></h5>
                             <p class="card-text"><?php echo htmlspecialchars($producto['descripcion']); ?></p>
