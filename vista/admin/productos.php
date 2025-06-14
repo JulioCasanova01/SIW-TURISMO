@@ -130,11 +130,30 @@
                                                        name="nombre" id="nombreproducto<?= $producto['id'] ?>"
                                                         value="<?= $producto['nombre'] ?>" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <!-- <div class="mb-3">
                                                     <label for="imagenproducto<?= $producto['id'] ?>"
                                                         class="form-label">Imagen</label>
-                                                    <input type="file" id="imagenproducto<?= $producto['id'] ?>"
+                                                    <input type="file" id="imagenproducto<?=htmlspecialchars($producto['imagen']); ?>"
                                                         name="imagen" accept="image/*" class="form-control" />
+                                                </div> -->
+                                                <div class="mb-3">
+                                                    <label for="imagenproducto<?= $producto['id'] ?>" class="form-label">Imagen</label>
+                                                    <input type="file"
+                                                        id="imagenproducto<?= $producto['id'] ?>"
+                                                        name="imagen"
+                                                        accept="image/*"
+                                                        class="form-control"
+                                                        onchange="mostrarNombreArchivo(this)" />
+                                                    
+                                                    <!-- Mostrar el nombre del archivo actual -->
+                                                    <?php if (!empty($producto['imagen'])): ?>
+                                                        <div class="form-text text-success mt-1">
+                                                            Archivo actual: <?= htmlspecialchars($producto['imagen']) ?>
+                                                        </div>
+                                                    <?php endif; ?>
+
+                                                    <!-- Aquí se mostrará el nuevo archivo seleccionado -->
+                                                    <div id="nombreArchivo<?= $producto['id'] ?>" class="form-text mt-1 text-primary"></div>
                                                 </div>
 
 
@@ -254,6 +273,13 @@
             if (confirmarSalida) {
                 window.location.href = `../../controlador/productos_c.php?accion=eliminar&id=${id}`;
             }
+        }
+    </script>
+    <script>
+    function mostrarNombreArchivo(input) {
+        const nombreArchivo = input.files[0]?.name || 'Ningún archivo seleccionado';
+        const id = input.id.replace('imagenproducto', 'nombreArchivo');
+        document.getElementById(id).textContent = 'Seleccionado: ' + nombreArchivo;
         }
     </script>
 

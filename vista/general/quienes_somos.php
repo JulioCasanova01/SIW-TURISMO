@@ -203,8 +203,7 @@
           <div class="redes-sociales">
             <a href="https://wa.me/573143144506" target="_blank"><i class="bi bi-whatsapp"></i></a>
             <a href="https://www.facebook.com/share/1aEM7MnAdN/" target="_blank"><i class="bi bi-facebook"></i></a>
-            <a href="#" target="_blank"><i class="bi bi-instagram"></i></a>
-            <a href="#" target="_blank"><i class="bi bi-youtube"></i></a>
+            
           </div>
         </div>
 

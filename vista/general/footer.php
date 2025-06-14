@@ -41,12 +41,12 @@
               <a href="https://www.facebook.com/share/1aEM7MnAdN/" target="_blank" class="text-light me-3">
                 <i class="bi bi-facebook" style="font-size: 1.5rem;"></i>
               </a>
-              <a href="#" target="_blank" class="text-light me-3">
+              <!-- <a href="#" target="_blank" class="text-light me-3">
                 <i class="bi bi-instagram" style="font-size: 1.5rem;"></i>
               </a>
               <a href="#" target="_blank" class="text-light">
                 <i class="bi bi-youtube" style="font-size: 1.5rem;"></i>
-              </a>
+              </a> -->
             </div>
     
           </div>

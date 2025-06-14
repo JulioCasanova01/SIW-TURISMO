@@ -21,6 +21,8 @@
         $productos = obtenerProductosConCategorias($conn);
     }
 
+    $categorias = obtenerCategorias($conn);
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -146,6 +148,27 @@
 
   <!-- Productos -->
     <div class="container my-5">
+
+        <div class="text-center mb-4">
+            <h1 class="fw-bold">Bienvenido, <?php echo htmlspecialchars($nombreCliente); ?>!</h1>
+            <p class="lead">Explora nuestros productos y servicios turísticos.</p>
+        </div>
+        <h2 class="mb-4 text-center">Nuestras Categorías</h2>
+        <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
+            <?php foreach ($categorias as $categoria): ?>
+                <span
+                    tabindex="0"
+                    class="badge bg-info text-dark"
+                    data-bs-toggle="popover"
+                    data-bs-trigger="hover"
+                    title="Descripción"
+                    style="cursor: pointer;"
+                    data-bs-content="<?= htmlspecialchars($categoria['descripcion']) ?>">
+                    <?= htmlspecialchars($categoria['nombre']) ?>
+                </span>
+            <?php endforeach; ?>
+        </div>
+
         <h2 class="mb-4 text-center">Nuestros Productos</h2>
             <form method="GET" class="mb-4">
                 <div class="row g-3 align-items-end">
@@ -154,7 +177,7 @@
                         <select name="categoria" id="categoria" class="form-select">
                             <option value="">Todas Las Categorias</option>
                             <?php
-                            $categorias = obtenerCategorias($conn);
+                            
                             foreach ($categorias as $cat) {
                                 $selected = ($filtroCategoria == $cat['id']) ? 'selected' : '';
                                 echo "<option value='{$cat['id']}' $selected>{$cat['nombre']}</option>";
@@ -260,6 +283,13 @@
         // Actualizar el año en el footer
         document.getElementById("year").textContent = new Date().getFullYear();
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+            const popoverList = [...popoverTriggerList].map(el => new bootstrap.Popover(el));
+        });
+    </script>
+
 
 
   <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
