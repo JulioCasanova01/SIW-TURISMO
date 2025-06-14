@@ -211,6 +211,16 @@
                             <label for="precioproducto" class="form-label">Precio</label>
                             <input type="number" class="form-control" name="precio" id="precioproducto" />
                         </div>
+                        <div class="mb-3">
+                            <label for="categoriaProducto" class="form-label">Categoría del Producto</label>
+                            <select class="form-select" name="id_categoria" id="categoriaProducto">
+                                <?php foreach ($categorias as $categoria): ?>
+                                    <option value="<?= $categoria['id'] ?>">
+                                        <?= htmlspecialchars($categoria['nombre']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                         
                         <div class="mb-3">
                             <label for="categoriaproducto" class="form-label">ID Categoría</label>
