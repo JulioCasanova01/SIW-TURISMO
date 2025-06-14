@@ -9,7 +9,14 @@ function registrar($conn, $data) {
 
     header("Location: ../vista/admin/productos.php");
 }
-
+function obtenerProductoPorID($conn, $id) {
+    $result = mysqli_query($conn, "SELECT * FROM productos wHERE id = $id");
+    if ($result) {
+        return mysqli_fetch_assoc($result);
+    } else {
+        return null; // O manejar el error de otra manera
+    }
+}
 function obtenerProductos($conn) {
     $result = mysqli_query($conn, "SELECT * FROM productos");
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -47,7 +54,7 @@ function obtenerProductosConCategorias($conn) {
     $query = "
         SELECT p.*, c.nombre AS nombre_categoria
         FROM productos p
-        JOIN categorias c ON p.id_categoria = c.id
+        LEFT JOIN categorias c ON p.id_categoria = c.id
     ";
     $result = mysqli_query($conn, $query);
     return mysqli_fetch_all($result, MYSQLI_ASSOC);

@@ -121,7 +121,7 @@
                                                 aria-label="Cerrar"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="../../controlador/productos_c.php?accion=actualizar" method="POST">
+                                            <form action="../../controlador/productos_c.php?accion=actualizar" enctype="multipart/form-data" method="POST">
                                                 <input type="hidden" name="id" value="<?= $producto['id'] ?>" />
                                                 <div class="mb-3">
                                                     <label for="nombreproducto<?= $producto['id'] ?>"
