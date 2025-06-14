@@ -79,34 +79,41 @@ if (!isset($_SESSION['id_cliente'])) {
             </thead>
             <tbody>
               <?php
-              $total = 0;
-              if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
-                  foreach ($_SESSION['carrito'] as $index => $item) {
-                      $subtotal = $item['precio'] * $item['cantidad'];
-                      $total += $subtotal;
-                      echo "<tr>
-                              <td><strong>{$item['nombre']}</strong></td>
-                              <td>$" . number_format($item['precio'], 0, ',', '.') . "</td>
-                              <td>
-                                  <form method='POST' action='actualizar_carrito.php' class='d-inline'>
-                                      <input type='hidden' name='index' value='{$index}'>
-                                      <input type='number' name='cantidad' class='form-control w-50 d-inline' value='{$item['cantidad']}' min='1'>
-                                      <button type='submit' class='btn btn-sm btn-success ms-1'><i class='fas fa-sync-alt'></i></button>
-                                  </form>
-                              </td>
-                              <td>$" . number_format($subtotal, 0, ',', '.') . "</td>
-                              <td>
-                                  <form method='POST' action='eliminar_carrito.php'>
-                                      <input type='hidden' name='index' value='{$index}'>
-                                      <button type='submit' class='btn btn-danger btn-sm'><i class='fas fa-trash-alt'></i></button>
-                                  </form>
-                              </td>
-                            </tr>";
-                  }
-              } else {
-                  echo "<tr><td colspan='5' class='text-center'>Tu carrito está vacío</td></tr>";
-              }
+                $total = 0;
+                if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
+                    foreach ($_SESSION['carrito'] as $index => $item) {
+                        $subtotal = $item['precio'] * $item['cantidad'];
+                        $total += $subtotal;
+                        ?>
+                        <tr>
+                            <td><strong><?php echo $item['nombre']; ?></strong></td>
+                            <td>$<?php echo number_format($item['precio'], 0, ',', '.'); ?></td>
+                            <td>
+                                <form method='POST' action='../../controlador/carrito_c.php?accion=actualizar' class='d-inline'>
+                                    <input type='hidden' name='index' value='<?php echo $index; ?>'>
+                                    <input type='number' name='cantidad' class='form-control w-50 d-inline' value='<?php echo $item['cantidad']; ?>' min='1'>
+                                    <button type='submit' class='btn btn-sm btn-success ms-1'>
+                                        <i class='fas fa-sync-alt'></i>
+                                    </button>
+                                </form>
+                            </td>
+                            <td>$<?php echo number_format($subtotal, 0, ',', '.'); ?></td>
+                            <td>
+                                <button 
+                                    type='button' 
+                                    class='btn btn-danger btn-sm' 
+                                    onclick='confirmarEliminacion(<?php echo $index; ?>)'>
+                                    <i class='fas fa-trash-alt'></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                } else {
+                    echo "<tr><td colspan='5' class='text-center'>Tu carrito está vacío</td></tr>";
+                }
               ?>
+
             </tbody>
             <tfoot>
               <tr>
@@ -142,7 +149,7 @@ if (!isset($_SESSION['id_cliente'])) {
                 </li>
             </ul>
             <hr>
-            <form method="POST" action="finalizar_compra.php">
+            <form method="POST" action="../../controlador/carrito_c.php?accion=finalizar">
                 <button type="submit" class="btn btn-primary w-100">
                     <i class="fas fa-credit-card me-2"></i>Finalizar compra
                 </button>
@@ -152,7 +159,7 @@ if (!isset($_SESSION['id_cliente'])) {
     </div>
   </div>
   <!-- Botón flotante para regresar -->
-  <button onclick="window.history.back()" 
+  <button onclick="window.location.href='productos.php';" 
         style="
             position: fixed;
         bottom: 20px;
@@ -174,6 +181,32 @@ if (!isset($_SESSION['id_cliente'])) {
 
   <!-- Bootstrap JS -->
   <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../libs/SweetAlert2/sweetalert2.all.min.js"></script>
+  <script src="../../vista/alertas/funcionesalert.js"></script>
+
+  <script>
+    function confirmarEliminacion(index) {
+      confirmar('¿Estás seguro de eliminar este producto del carrito?', 'Sí, eliminar', 'Cancelar', 'warning')
+        .then((confirmado) => {
+          if (confirmado) {
+            // Crear y enviar el formulario manualmente
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '../../controlador/carrito_c.php?accion=eliminar';
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'index';
+            input.value = index;
+
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+          }
+        });
+    }
+</script>
+
 </body>
 
 </html>

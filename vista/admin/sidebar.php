@@ -71,8 +71,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="http://localhost/SIW-TURISMO/vista/admin/productos_vendidos.php" class="nav-link i-productos_vendidos text-white">
-                        <i class="fas fa-file-invoice-dollar me-2"></i>Productos Vendidos
+                    <a href="http://localhost/SIW-TURISMO/vista/admin/pedidos.php" class="nav-link i-pedidos text-white">
+                        <i class="fas fa-file-invoice-dollar me-2"></i>Pedidos Online
                     </a>
                 </li>
                 <li class="nav-item">

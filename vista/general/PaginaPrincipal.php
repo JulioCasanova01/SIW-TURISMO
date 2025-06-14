@@ -284,11 +284,7 @@ if (!isset($_SESSION['id_cliente'])) {
                         <i class="fas fa-home"></i> Inicio
                       </a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="http://localhost/SIW-TURISMO/vista/general/carrito.php">
-                        <i class="fas fa-shopping-cart"></i> Carrito
-                      </a>
-                    </li>
+                    
                 </ul>
             </div>
         </div>

@@ -11,14 +11,14 @@
     <div class="flex-grow-1">
       <nav class="navbar navbar-dark">
         <div class="container-fluid">
-          <span class="navbar-brand">Gestión de Productos Vendidos</span>
+          <span class="navbar-brand">Gestión de Pedidos</span>
           <!-- <a href="#" class="btn btn-outline-light"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a> -->
         </div>
       </nav>
 
       <div class="main-content">
         <div class="d-flex justify-content-between align-items-center mb-4">
-          <h2 class="mb-0 mt-4">Productos Vendidos</h2>
+          <h2 class="mb-0 mt-4">PEDIDOS ONLINE</h2>
           <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPVendidos">
             <i class="fas fa-plus me-2"></i>Nuevo Producto Vendido
           </button>
@@ -31,8 +31,6 @@
               <tr>
               <th><i class="fas fa-id-badge"></i> ID</th>
               <th><i class="fas fa-user"></i> Cliente</th>
-              <th><i class="fas fa-box-open"></i> Categoría de Producto</th>
-              <th><i class="fas fa-tag"></i> Producto Vendido</th>
               <th><i class="fas fa-calendar-alt"></i> Fecha</th>
               <th><i class="fas fa-dollar-sign"></i> Total</th>
               <th><i class="fas fa-store"></i> Tipo de Venta</th>
@@ -45,8 +43,6 @@
               <tr>
                 <td>1</td>
                 <td>3</td>
-                <td>3</td>
-                <td>3</td>
                 <td>02/05/2025</td>
                 <td>3'500.000</td>
                 <td>Local</td>
@@ -58,38 +54,7 @@
                   <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
                 </td>
               </tr>
-              <tr>
-                <td>2</td>
-                <td>2</td>
-                <td>3</td>
-                <td>3</td>
-                <td>02/05/2025</td>
-                <td>3'500.000</td>
-                <td>Online</td>
-                <td>Atendido</td>
-                
-                <td>
-                  <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
-                    data-bs-target="#modalEditar"><i class="fas fa-edit"></i></button>
-                  <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>1</td>
-                <td>3</td>
-                <td>3</td>
-                <td>02/05/2025</td>
-                <td>3'500.000</td>
-                <td>Local</td>
-                <td>Atendido</td>
-               
-                <td>
-                  <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
-                    data-bs-target="#modalEditar"><i class="fas fa-edit"></i></button>
-                  <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
-                </td>
-              </tr>
+              
               <!-- Más PVendidos aquí -->
 
             </tbody>

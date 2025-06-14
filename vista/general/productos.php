@@ -205,21 +205,31 @@
                     <div class="card h-100 d-flex flex-column">
                         <img src="../../img/productos/<?php echo htmlspecialchars($producto['imagen']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
                         <div class="card-body flex-grow-1">
-                            <h5  class="card-title "><?php echo htmlspecialchars($producto['nombre']); ?></h5>
+                            <h5 class="card-title"><?php echo htmlspecialchars($producto['nombre']); ?></h5>
                             <p class="card-text"><?php echo htmlspecialchars($producto['descripcion']); ?></p>
-                            
                         </div>
-                        
+
                         <div class="card-footer mt-auto">
-                                <p class="card-text"><strong>Precio:</strong> $<?php echo number_format($producto['precio'], 0, ',', '.'); ?></p>
-                                <p class="card-text"><strong>Categoría:</strong> <?php echo htmlspecialchars($producto['nombre_categoria']); ?></p>
-                                <button class="btn btn-carrito w-100 mt-2">
+                            <p class="card-text"><strong>Precio:</strong> $<?php echo number_format($producto['precio'], 0, ',', '.'); ?></p>
+                            <p class="card-text"><strong>Categoría:</strong> <?php echo htmlspecialchars($producto['nombre_categoria']); ?></p>
+
+                            <!-- Formulario para agregar al carrito -->
+                           <form class="form-agregar-carrito" action="../../controlador/carrito_c.php?accion=agregar" method="POST">
+                                <input type="hidden" name="id_producto" value="<?php echo $producto['id']; ?>">
+                                <input type="hidden" name="nombre" value="<?php echo $producto['nombre']; ?>">
+                                <input type="hidden" name="precio" value="<?php echo $producto['precio']; ?>">
+                                <input type="hidden" name="cantidad" value="1">
+                                <button type="button" class="btn btn-carrito w-100 mt-2" onclick="confirmarAgregar(this)">
                                     <i class="fas fa-cart-plus"></i> Añadir al carrito
                                 </button>
-                            </div>
+                            </form>
+
+
+                        </div>
                     </div>
                 </div>
             <?php endforeach; ?>
+
         
 
         </div>
@@ -289,9 +299,39 @@
             const popoverList = [...popoverTriggerList].map(el => new bootstrap.Popover(el));
         });
     </script>
+    <script src="../../libs/SweetAlert2/sweetalert2.all.min.js"></script>
+    <script src="../../vista/alertas/funcionesalert.js"></script>
+
+    <script>
+        async function confirmarAgregar(boton) {
+            const confirmado = await confirmar(
+                '¿Estás seguro de que deseas añadir este producto al carrito?',
+                'Sí, añadir',
+                'Cancelar',
+                'question'
+            );
+
+            if (confirmado) {
+                localStorage.setItem('scrollPos', window.scrollY); // Guardamos posición
+                boton.closest('form').submit();
+            }
+        }
+    </script>
 
 
 
-  <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            const pos = localStorage.getItem('scrollPos');
+            if (pos) {
+            window.scrollTo(0, parseInt(pos));
+            localStorage.removeItem('scrollPos');
+            }
+        });
+    </script>
+
 </body>
 </html>
