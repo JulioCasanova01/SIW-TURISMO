@@ -130,18 +130,14 @@ if (!isset($_SESSION['id_cliente'])) {
       <div class="col-lg-4">
         <div class="resumen">
           <?php
-            $iva = $total * 0.19;
-            $totalFinal = $total + $iva;
+            
+            $totalFinal = $total;
             ?>
             <h4 class="mb-3">Resumen</h4>
             <ul class="list-unstyled">
                 <li class="d-flex justify-content-between">
                     <span>Subtotal:</span>
                     <strong>$<?php echo number_format($total, 0, ',', '.'); ?></strong>
-                </li>
-                <li class="d-flex justify-content-between">
-                    <span>IVA (19%):</span>
-                    <strong>$<?php echo number_format($iva, 0, ',', '.'); ?></strong>
                 </li>
                 <li class="d-flex justify-content-between">
                     <span>Total:</span>
@@ -151,9 +147,13 @@ if (!isset($_SESSION['id_cliente'])) {
             <hr>
             <form method="POST" action="../../controlador/carrito_c.php?accion=finalizar">
                 <button type="submit" class="btn btn-primary w-100">
-                    <i class="fas fa-credit-card me-2"></i>Finalizar compra
+                    <i class="fas fa-credit-card me-2"></i>Finalizar Solicitud de Compra
                 </button>
             </form>
+            <!-- <a href="generar_resumen.php" class="btn btn-outline-secondary w-100 mt-3" target="_blank">
+              <i class="fas fa-file-pdf me-2"></i>Descargar resumen en PDF
+            </a> -->
+
         </div>
       </div>
     </div>

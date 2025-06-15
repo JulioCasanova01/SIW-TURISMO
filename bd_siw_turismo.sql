@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-06-2025 a las 18:08:34
+-- Tiempo de generación: 15-06-2025 a las 01:55:40
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -145,8 +145,7 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `rol`, `contacto_1`, `contacto_2`, `clave`) VALUES
 (3, 'Juan Cerquera', 'juan@gmail.com', 'ADMIN', '312345662', '3213456789', '$2y$10$nIrnWA4SllFnKRyr3.umNOlgGpEDvh/hjrKHajt58ZgObhfb/OW/q'),
 (5, 'Julio Andrés ', 'julio@gmail.com', 'ADMIN', '320658535', '3125849964', '$2y$10$xIXKjfc7u.vNDtJ2N5z1NeRH2TFCs1VbkgQakNtUrpcm.0h.4PViW'),
-(6, 'Vrenda Galindo', 'vrenda@gmail.com', 'ATENCION_CLIENTE', '3125854562', '31023447895', '$2y$10$AdUSxJ8uqI5D76Lc2zfdk.atjehfJkv9kvHGN5OT/QNQj1NKAenjC'),
-(14, '', '', 'ADMIN', '', '', '$2y$10$MjCsz1eZXPgXRPcewKnNluShN4dJXUgRYRuSKOzzSw3exuaQJ9qYW');
+(6, 'Vrenda Galindo', 'vrenda@gmail.com', 'ATENCION_CLIENTE', '3125854562', '31023447895', '$2y$10$AdUSxJ8uqI5D76Lc2zfdk.atjehfJkv9kvHGN5OT/QNQj1NKAenjC');
 
 -- --------------------------------------------------------
 
@@ -158,23 +157,25 @@ CREATE TABLE `ventas` (
   `id` int(11) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `total` int(11) NOT NULL,
-  `codigo` text NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `estado_orden` enum('solicitado','atendido','entregado','rechazado') DEFAULT NULL,
-  `tipo_venta` enum('local','online') DEFAULT NULL
+  `id_cliente` int(11) NOT NULL,
+  `estado` enum('solicitado','atendido','rechazado') DEFAULT NULL,
+  `detalles` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `ventas_productos`
+-- Volcado de datos para la tabla `ventas`
 --
 
-CREATE TABLE `ventas_productos` (
-  `id` int(11) NOT NULL,
-  `id_producto` int(11) NOT NULL,
-  `id_venta` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `ventas` (`id`, `fecha`, `total`, `id_cliente`, `estado`, `detalles`) VALUES
+(1, '2025-06-15 05:53:56', 60000000, 15, 'solicitado', 'CARTAGENA (x4) - $60.000.000\n'),
+(2, '2025-06-14 23:02:55', 23800011, 15, 'solicitado', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
+(3, '2025-06-14 23:06:47', 35700011, 15, 'solicitado', 'nuevo (x1) - $9\nCARTAGENA (x2) - $30.000.000\n'),
+(4, '2025-06-14 23:16:47', 53550000, 15, 'solicitado', 'CARTAGENA (x3) - $45.000.000\n'),
+(5, '2025-06-14 23:25:17', 23800000, 15, 'solicitado', 'Santa Marta (x4) - $20.000.000\n'),
+(6, '2025-06-14 23:39:10', 35000009, 15, 'solicitado', 'CARTAGENA (x2) - $30.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
+(7, '2025-06-14 23:42:31', 306, 15, 'solicitado', 'nuevo (x34) - $306\n'),
+(8, '2025-06-14 23:44:38', 20000009, 15, 'solicitado', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
+(9, '2025-06-14 23:50:37', 20000000, 15, 'solicitado', 'Santa Marta (x4) - $20.000.000\n');
 
 -- --------------------------------------------------------
 
@@ -244,15 +245,7 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `ventas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_usuario` (`id_usuario`);
-
---
--- Indices de la tabla `ventas_productos`
---
-ALTER TABLE `ventas_productos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_producto` (`id_producto`,`id_venta`),
-  ADD KEY `id_venta` (`id_venta`);
+  ADD KEY `id_usuario` (`id_cliente`);
 
 --
 -- Indices de la tabla `viajeros`
@@ -274,7 +267,7 @@ ALTER TABLE `atencion_clientes`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
@@ -298,13 +291,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `ventas_productos`
---
-ALTER TABLE `ventas_productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `viajeros`
@@ -326,14 +313,7 @@ ALTER TABLE `productos`
 -- Filtros para la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `clientes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `ventas_productos`
---
-ALTER TABLE `ventas_productos`
-  ADD CONSTRAINT `ventas_productos_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ventas_productos_ibfk_2` FOREIGN KEY (`id_venta`) REFERENCES `ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

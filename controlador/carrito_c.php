@@ -1,6 +1,6 @@
 <?php
 include '../modelo/carrito_m.php';
-
+include '../conexion.php';
 $accion = isset($_GET['accion']) ? $_GET['accion'] : '';
 
 if ($accion == 'agregar') {
