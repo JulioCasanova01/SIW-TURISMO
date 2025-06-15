@@ -60,10 +60,14 @@ function eliminarDelCarrito($index) {
 
 function finalizar() {
     global $conn;
-    require '../vendor/autoload.php';
 
     if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
         echo "<script>alert('El carrito está vacío.');window.location.href='../vista/general/Productos.php';</script>";
+        return;
+    }
+
+    if (!isset($_SESSION['id_cliente'])) {
+        echo "<script>alert('Debe iniciar sesión para finalizar la compra.');window.location.href='../login.php';</script>";
         return;
     }
 
@@ -75,10 +79,17 @@ function finalizar() {
     $estado = "Finalizado";
     $id_cliente = $_SESSION['id_cliente'];
 
-    // Ruta del logotipo
-    $logoPath = 'C:\xampp\htdocs\SIW-TURISMO\IMAGENES\Logotipo_sinsombrapng_Mesa de trabajo 1-02.png';
+    // Ruta accesible desde navegador
+    $logoPath = '../IMAGENES/Logotipo_sinsombrapng_Mesa de trabajo 1-02.png';
 
-    // Construcción del HTML para el PDF
+    // Guardar venta en la base de datos primero para obtener ID
+    $stmt = $conn->prepare("INSERT INTO ventas (fecha, total, id_cliente, estado, detalles) VALUES (?, ?, ?, ?, ?)");
+    $estado = "solicitado";
+    $stmt->bind_param("sdiss", $fecha, $total, $id_cliente, $estado, $detallesTexto); // temporal
+    $stmt->execute();
+    $id_venta = $stmt->insert_id;
+
+    // Generar HTML para PDF
     $html = '
     <html>
     <head>
@@ -102,10 +113,10 @@ function finalizar() {
     </head>
     <body>
         <div style="text-align: center;">
-            <img src="' .$logoPath. '" class="logo" alt="JYS PROMOTORES DE VIAJES Y TURISMO">
+            <img src="' . $logoPath . '" class="logo" alt="JYS PROMOTORES DE VIAJES Y TURISMO">
         </div>
 
-        <h1>Resumen: SOLICITUD DE COMPRA<br>JYS PROMOTORES DE VIAJES Y TURISMO <br> RNT: 1252762</h1>
+        <h1>Resumen: SOLICITUD DE COMPRA N° ' . $id_venta . '<br>JYS PROMOTORES DE VIAJES Y TURISMO <br> RNT: 125482</h1>
 
         <table>
             <tr>
@@ -133,7 +144,6 @@ function finalizar() {
         $detallesTexto .= "{$item['nombre']} (x$cantidad) - $$sub\n ";
     }
 
-    
     $totalFinal = $total;
 
     $html .= '</table>
@@ -151,15 +161,12 @@ function finalizar() {
     </body>
     </html>';
 
-    // Guardar venta en la base de datos
-    
-    $stmt = $conn->prepare("INSERT INTO ventas (fecha, total, id_cliente, estado, detalles) VALUES (?, ?, ?, ?, ?)");
-    $estado= "solicitado";
-    $stmt->bind_param("sdiss", $fecha, $totalFinal, $id_cliente, $estado, $detallesTexto);
+    // Actualizar total y detalles en la base de datos
+    $stmt = $conn->prepare("UPDATE ventas SET total = ?, detalles = ? WHERE id = ?");
+    $stmt->bind_param("dsi", $totalFinal, $detallesTexto, $id_venta);
     $stmt->execute();
-    $id_venta = $stmt->insert_id;
 
-    // Generar y guardar PDF
+    // Generar PDF
     $dompdf = new Dompdf();
     $dompdf->loadHtml($html);
     $dompdf->setPaper('A4', 'portrait');
@@ -169,34 +176,31 @@ function finalizar() {
     $pdfPath = "../vista/general/resumenes/venta_$id_venta.pdf";
     file_put_contents($pdfPath, $pdf);
 
-    // Vaciar el carrito
+    // Vaciar carrito
     unset($_SESSION['carrito']);
 
-    // Generar URL de WhatsApp
+    // WhatsApp
     $numero = "573143144506";
-    $mensaje = "Hola, acabo de finalizar una compra. Venta N° $id_venta. Total: $" . number_format($totalFinal, 0, ',', '.') . ". Por favor revisar el resumen.";
+    $mensaje = "Hola, acabo de finalizar una solicitud de compra. Solicitud N° $id_venta. Total: $" . number_format($totalFinal, 0, ',', '.') . ". Por favor revisar el resumen para continuar con el proceso de compra.";
     $urlWhatsapp = "https://api.whatsapp.com/send?phone=$numero&text=" . urlencode($mensaje);
 
-    // Mostrar alerta y redireccionar
     echo "
     <script src='../libs/SweetAlert2/sweetalert2.all.min.js'></script>
     <body>
         <script>
-            // Descargar PDF automáticamente
             const link = document.createElement('a');
             link.href = '$pdfPath';
-            link.download = 'SOLICITUD_COMPRA_JYS.pdf';
+            link.download = 'SOLICITUD_COMPRA_JYS_N°$id_venta.pdf';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
 
-            // Mostrar alerta con opción a enviar WhatsApp
             Swal.fire({
                 title: '¡Solicitud finalizada con éxito!',
                 text: 'ENVÍA UN MENSAJE A WHATSAPP PARA NOTIFICAR LA VENTA.',
                 icon: 'success',
                 confirmButtonText: 'Sí, enviar',
-                confirmButtonColor: '#007BFF', // Color azul institucional
+                confirmButtonColor: '#007BFF',
                 allowOutsideClick: false,
                 allowEscapeKey: false,
                 allowEnterKey: false
@@ -211,5 +215,4 @@ function finalizar() {
         </script>
     </body>";
 }
-
 ?>
