@@ -58,7 +58,6 @@ function eliminarDelCarrito($index) {
     }
 }
 
-
 function finalizar() {
     global $conn;
     require '../vendor/autoload.php';
@@ -212,4 +211,5 @@ function finalizar() {
         </script>
     </body>";
 }
+
 ?>

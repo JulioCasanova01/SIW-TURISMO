@@ -17,7 +17,7 @@ function registrar($conn, $data) {
 }
 
 function obtenerAtenciones($conn) {
-    $result = mysqli_query($conn, "SELECT * FROM atencion_clientes");
+    $result = mysqli_query($conn, "SELECT * FROM atencion_clientes ORDER BY id DESC");
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 

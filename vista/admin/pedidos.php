@@ -1,9 +1,55 @@
 <?php 
     include('header.php');
 ?>
-<body>
+<style>
+    .table-responsive {
+    overflow-x: auto;
+    max-width: 100%;
+  }
 
-  <div class="d-flex">
+  .main-content {
+    padding: 1rem;
+  }
+
+    th, td {
+        overflow-wrap: break-word;
+        min-width: 120px;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+
+  @media (max-width: 576px) {
+    .main-content h2 {
+      font-size: 1.4rem;
+    }
+
+    .table-responsive {
+      font-size: 0.9rem;
+    }
+
+    .btn {
+      font-size: 0.85rem;
+    }
+  }
+
+  .descripcion-scroll {
+        max-height: 80px;       /* Alto máximo antes de hacer scroll vertical */
+        max-width: 250px;       /* Ancho máximo antes de hacer scroll horizontal */
+        overflow: auto;
+        white-space: pre-wrap;  /* Mantiene saltos de línea */
+    }
+    
+
+</style>
+<body>
+  <?php 
+        include '../../conexion.php';
+        include '../../modelo/pedidos_m.php';
+        $pedidos = obtenerPedidos($conn);
+  ?>
+
+  <div class="d-flex flex-column flex-lg-row">
 
     <?php include ('sidebar.php'); ?>
 
@@ -19,9 +65,7 @@
       <div class="main-content">
         <div class="d-flex justify-content-between align-items-center mb-4">
           <h2 class="mb-0 mt-4">PEDIDOS ONLINE</h2>
-          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPVendidos">
-            <i class="fas fa-plus me-2"></i>Nuevo Producto Vendido
-          </button>
+          
         </div>
 
         <!-- Tabla -->
@@ -33,29 +77,78 @@
               <th><i class="fas fa-user"></i> Cliente</th>
               <th><i class="fas fa-calendar-alt"></i> Fecha</th>
               <th><i class="fas fa-dollar-sign"></i> Total</th>
-              <th><i class="fas fa-store"></i> Tipo de Venta</th>
+              <th><i class="fas fa-store"></i> Detalles</th>
               <th><i class="fas fa-circle-notch"></i> Estado</th>
                 <th><i class="fas fa-cogs"></i> Acciones</th>
               </tr>
             </thead>
             <tbody>
+              <?php foreach ($pedidos as $pedido): ?>
 
-              <tr>
-                <td>1</td>
-                <td>3</td>
-                <td>02/05/2025</td>
-                <td>3'500.000</td>
-                <td>Local</td>
-                <td>Atendido</td>
-                
-                <td>
-                  <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
-                    data-bs-target="#modalEditar"><i class="fas fa-edit"></i></button>
-                  <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
-                </td>
-              </tr>
-              
-              <!-- Más PVendidos aquí -->
+                <tr>
+                  <td><?= $pedido['id'] ?></td>
+                  <td><?= $pedido['id_cliente'] ?></td>
+                  <td><?= $pedido['fecha'] ?></td>
+                  <td>$<?= number_format($pedido['total'], 0, ',', '.') ?></td>
+                  <td><?= htmlspecialchars($pedido['detalles']) ?></td>
+                  
+                 <?php
+                    $colores = [
+                        'atendido'   => '#28a745',
+                        'rechazado'  => '#dc3545',
+                        'solicitado' => '#007bff'
+                    ];
+
+                    $estado = strtolower($pedido['estado']);
+                    $color = isset($colores[$estado]) ? $colores[$estado] : '#6c757d'; // gris por defecto
+                  ?>
+                  <td style="background-color:<?= $color ?>;color:#fff;padding:5px;border-radius:4px;text-align:center;">
+                      <?= htmlspecialchars($pedido['estado']) ?>
+                  </td>
+                  
+                  <td>
+                    <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
+                        data-bs-target="#modalEditar<?= $pedido['id'] ?>">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger" 
+                        onclick="eliminar(event, <?= $pedido['id'] ?>)"><i class="fas fa-trash-alt"></i>
+                    </button>
+                    </td>
+                </tr>
+
+                <!--Modal editar Pedido  -->
+                <div class="modal fade" id="modalEditar<?= $pedido['id'] ?>" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary text-white">
+                            <h5 class="modal-title">Editar Solicitud de Pedido</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="../../controlador/pedidos_c.php?accion=cambiar" method="POST">
+                                    <input type="hidden" name="id" value="<?= $pedido['id'] ?>" />
+                                    
+                                    <div class="mb-3">
+                                    <label class="form-label">Estado</label>
+                                    <select class="form-select" name="estado">
+                                        <option value="atendido" <?= $pedido['estado'] == 'atendido' ? 'selected' : '' ?>>ATENDIDO</option>
+                                        <option value="rechazado" <?= $pedido['estado'] == 'rechazado' ? 'selected' : '' ?>>RECHAZADO</option>
+                                        <option value="solicitado" <?= $pedido['estado'] == 'solicitado' ? 'selected' : '' ?>>SOLICITADO</option>
+                                        
+                                    </select>
+                                    </div>
+                                
+                                    <div class="modal-footer">
+                                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <?php endforeach; ?>
 
             </tbody>
           </table>
@@ -64,142 +157,23 @@
     </div>
   </div>
 
-  <!-- Modal de nuevo PVendidos -->
-  <div class="modal fade" id="modalPVendidos" tabindex="-1" aria-labelledby="modalPVendidosLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title" id="modalPVendidosLabel">Nuevo Vendido</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <!-- <div class="mb-3">
-              <label for="contacto1PVendidos" class="form-label">Imagen</label>
-              <input type="file" id="imagen" name="imagen" accept="image/*" class="form-control" />
-            </div> -->
-            <div class="mb-3">
-              <label for="clientePVendidos" class="form-label">Cliente</label>
-              <input type="number" class="form-control" id="clientePVendidos" />
-            </div>
-             <div class="mb-3">
-              <label for="TipoPVendidos" class="form-label">Tipo_Producto</label>
-              <select class="form-select" id="TipoPVendidos">
-                <option value="Tour">Tour</option>
-                <option value="PI">Plan Individual</option>
-                <option value="PT">Paquete Turístico</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="nombrePVendidos" class="form-label">Producto Vendido</label>
-              <input type="number" class="form-control" id="nombrePVendidos" />
-            </div>
-            <!-- <div class="mb-3">
-              <label for="correoPVendidos" class="form-label">Correo</label>
-              <input type="email" class="form-control" id="correoPVendidos" />
-            </div> -->
-            <div class="mb-3">
-              <label for="fechaPVendidos" class="form-label">Fecha</label>
-              <input type="Date" class="form-control" id="fechaPVendidos" />
-            </div>
-            <div class="mb-3">
-              <label for="totalPVendidos" class="form-label">Total</label>
-              <input type="number" class="form-control" id="totalPVendidos" />
-            </div>
-            <div class="mb-3">
-              <label for="TipoVPVendidos" class="form-label">Tipo_Venta</label>
-              <select class="form-select" id="TipoVPVendidos">
-                <option value="Local">Local</option>
-                <option value="Online">Online</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="EstadoPVendidos" class="form-label">Estado</label>
-              <select class="form-select" id="EstadoVPVendidos">
-                <option value="solicitado">Solicitado</option>
-                <option value="atendido">Atendido</option>
-                <option value="entregado">Entregado</option>
-                <option value="rechazado">Rechazado</option>
 
-              </select>
-            </div>
-           
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button class="btn btn-primary">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-<!--Modal editar Usuario -->
-  <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title" id="modalEditarLabel">Editar Producto Vendido</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-          <div class="mb-3">
-              <label for="clientePVendidos" class="form-label">Cliente</label>
-              <input type="number" class="form-control" id="clientePVendidos" />
-            </div>
-             <div class="mb-3">
-              <label for="TipoPVendidos" class="form-label">Tipo_Producto</label>
-              <select class="form-select" id="TipoPVendidos">
-                <option value="Tour">Tour</option>
-                <option value="PI">Plan Individual</option>
-                <option value="PT">Paquete Turístico</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="nombrePVendidos" class="form-label">Producto Vendido</label>
-              <input type="number" class="form-control" id="nombrePVendidos" />
-            </div>
-            <!-- <div class="mb-3">
-              <label for="correoPVendidos" class="form-label">Correo</label>
-              <input type="email" class="form-control" id="correoPVendidos" />
-            </div> -->
-            <div class="mb-3">
-              <label for="fechaPVendidos" class="form-label">Fecha</label>
-              <input type="Date" class="form-control" id="fechaPVendidos" />
-            </div>
-            <div class="mb-3">
-              <label for="totalPVendidos" class="form-label">Total</label>
-              <input type="number" class="form-control" id="totalPVendidos" />
-            </div>
-            <div class="mb-3">
-              <label for="TipoVPVendidos" class="form-label">Tipo_Venta</label>
-              <select class="form-select" id="TipoVPVendidos">
-                <option value="Local">Local</option>
-                <option value="Online">Online</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="EstadoPVendidos" class="form-label">Estado</label>
-              <select class="form-select" id="EstadoVPVendidos">
-                <option value="solicitado">Solicitado</option>
-                <option value="atendido">Atendido</option>
-                <option value="entregado">Entregado</option>
-                <option value="rechazado">Rechazado</option>
-
-              </select>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button class="btn btn-primary">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <?php include ('footer.php'); ?>
+  <script>
+    async function eliminar(event, id) {
+        event.preventDefault();
+        const confirmarSalida = await confirmar(
+            '¿Estás seguro de que deseas eliminar esta SOLICITUD?',
+            'SÍ', 'No', 'warning'
+        );
+
+        if (confirmarSalida) {
+            window.location.href = `../../controlador/pedidos_c.php?accion=eliminar&id=${id}`;
+        }
+    }
+  </script>
 
   <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
