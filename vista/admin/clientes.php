@@ -62,6 +62,9 @@
     <nav class="navbar navbar-dark">
       <div class="container-fluid">
         <span class="navbar-brand text-white">Gestión de Clientes</span>
+        <div class="dataTables_filter">
+          <input type="search" id="buscar" class="form-control form-control-sm" placeholder="Buscar...">
+        </div>
       </div>
     </nav>
 
@@ -194,18 +197,29 @@
 
 <?php include('footer.php'); ?>
 <script>
-        async function eliminar(event, id) {
-            event.preventDefault();
-            const confirmarSalida = await confirmar(
-                '¿Estás seguro de que deseas eliminar a este CLIENTE?',
-                'SÍ', 'No', 'warning'
-            );
+  async function eliminar(event, id) {
+      event.preventDefault();
+      const confirmarSalida = await confirmar(
+          '¿Estás seguro de que deseas eliminar a este CLIENTE?',
+          'SÍ', 'No', 'warning'
+      );
 
-            if (confirmarSalida) {
-                window.location.href = `../../controlador/clientes_c.php?accion=eliminar&id=${id}`;
-            }
-        }
-    </script>
+      if (confirmarSalida) {
+          window.location.href = `../../controlador/clientes_c.php?accion=eliminar&id=${id}`;
+      }
+  }
+
+  // Filtro de búsqueda
+  document.getElementById("buscar").addEventListener("keyup", function () {
+  const filtro = this.value.toLowerCase();
+  const filas = document.querySelectorAll(".table-container tbody tr");
+
+  filas.forEach(fila => {
+      const textoFila = fila.textContent.toLowerCase();
+      fila.style.display = textoFila.includes(filtro) ? "" : "none";
+  });
+  });
+</script>
 
 
 

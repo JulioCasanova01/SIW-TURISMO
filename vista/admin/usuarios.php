@@ -58,7 +58,9 @@
       <nav class="navbar navbar-dark">
         <div class="container-fluid">
           <span class="navbar-brand">Gestión de USUARIOS</span>
-          <!-- <a href="#" class="btn btn-outline-light"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a> -->
+          <div class="dataTables_filter">
+            <input type="search" id="buscar" class="form-control form-control-sm" placeholder="Buscar...">
+          </div>
         </div>
       </nav>
 
@@ -264,6 +266,17 @@
                 window.location.href = `../../controlador/usuarios_c.php?accion=eliminar&id=${id}`;
             }
         }
+
+        // Filtro de búsqueda
+        document.getElementById("buscar").addEventListener("keyup", function () {
+        const filtro = this.value.toLowerCase();
+        const filas = document.querySelectorAll(".table-container tbody tr");
+
+        filas.forEach(fila => {
+            const textoFila = fila.textContent.toLowerCase();
+            fila.style.display = textoFila.includes(filtro) ? "" : "none";
+        });
+        });
     </script>
 
 

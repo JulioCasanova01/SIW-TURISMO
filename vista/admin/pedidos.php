@@ -59,6 +59,10 @@
         <div class="container-fluid">
           <span class="navbar-brand">Gestión de Pedidos</span>
           <!-- <a href="#" class="btn btn-outline-light"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a> -->
+           <div class="dataTables_filter">
+              <input type="search" id="buscar" class="form-control form-control-sm" placeholder="Buscar...">
+
+            </div>
         </div>
       </nav>
 
@@ -173,6 +177,16 @@
             window.location.href = `../../controlador/pedidos_c.php?accion=eliminar&id=${id}`;
         }
     }
+    // Filtro de búsqueda
+    document.getElementById("buscar").addEventListener("keyup", function () {
+        const filtro = this.value.toLowerCase();
+        const filas = document.querySelectorAll(".table-responsive tbody tr");
+
+        filas.forEach(fila => {
+            const textoFila = fila.textContent.toLowerCase();
+            fila.style.display = textoFila.includes(filtro) ? "" : "none";
+        });
+        });
   </script>
 
   <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>

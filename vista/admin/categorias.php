@@ -52,6 +52,9 @@
       <nav class="navbar ">
         <div class="container-fluid">
           <span class="navbar-brand text-white">Gestión de CATEGORÍAS</span>
+          <div class="dataTables_filter">
+            <input type="search" id="buscar" class="form-control form-control-sm" placeholder="Buscar...">
+          </div>
         </div>
       </nav>
 
@@ -81,7 +84,7 @@
                   <td><?= $categoria['id'] ?></td>
                   <td><?= $categoria['nombre'] ?></td>
                   <td>
-                    <div class="overflow-auto" style="max-height: 100px; max-width: 100%; text-align: left; overflow-wrap: break-word;"">
+                    <div class="overflow-auto" style="max-height: 100px; max-width: 100%; text-align: left; overflow-wrap: break-word;">
                       <?= $categoria['descripcion'] ?>
                     </div>
                   </td>
@@ -185,6 +188,17 @@
                 window.location.href = `../../controlador/categorias_c.php?accion=eliminar&id=${id}`;
             }
         }
+
+        // Filtro de búsqueda
+          document.getElementById("buscar").addEventListener("keyup", function () {
+          const filtro = this.value.toLowerCase();
+          const filas = document.querySelectorAll(".table-responsive tbody tr");
+
+          filas.forEach(fila => {
+              const textoFila = fila.textContent.toLowerCase();
+              fila.style.display = textoFila.includes(filtro) ? "" : "none";
+          });
+          });
     </script>
 
   <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
