@@ -97,7 +97,7 @@ INSERT INTO `clientes` (`id`, `nombre`, `tipo_documento`, `numero_documento`, `f
 (2, 'Juan Esteban', 'TI', 1084923574, '2025-05-25 23:53:04', '2008-08-16', 'juan@gmail.com', '3123456789', '32123456789', '$2y$10$CSU4/MBvhNtk7peVOcNMHOYjaOD0eNSATY2P5so8ePreXiCnSBt0K', 'Teruel, Cra 1 #4E-30'),
 (3, 'Vrenda Galindo', 'TI', 1084923524, '2025-05-27 01:58:57', '2008-10-17', 'vrenda@gmail.com', '3213456789', '', '$2y$10$2ZmzeEgmMU3SLEL78jPweez7jUDg1jKXCWA.OO2UKANorT9tr4hGq', 'Cra 4 #3-01'),
 (4, 'juan', 'TI', 21988982, '2025-06-04 20:42:44', '2001-02-23', 'juacho@silva.com', '310236623', '', '$2y$10$Ns/JcV1vHbUYNdspAMl5wOQwNNJDqI1lMTVKCVTS/UzjqKYOrryui', 'Teruel, Cra 1 #4E-31');
-
+--julio, esteban, vrenda, juan
 -- --------------------------------------------------------
 
 --
@@ -146,7 +146,7 @@ INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `rol`, `contacto_1`, `contacto
 (1, 'Juan Cerquera', 'juan@gmail.com', 'ADMIN', '312345662', '3213456789', '$2y$10$nIrnWA4SllFnKRyr3.umNOlgGpEDvh/hjrKHajt58ZgObhfb/OW/q'),
 (2, 'Julio Andrés ', 'julio@gmail.com', 'ADMIN', '320658535', '3125849964', '$2y$10$xIXKjfc7u.vNDtJ2N5z1NeRH2TFCs1VbkgQakNtUrpcm.0h.4PViW'),
 (3, 'Vrenda Galindo', 'vrenda@gmail.com', 'ATENCION_CLIENTE', '3125854562', '31023447895', '$2y$10$AdUSxJ8uqI5D76Lc2zfdk.atjehfJkv9kvHGN5OT/QNQj1NKAenjC');
-
+--juan, julio, vrenda
 -- --------------------------------------------------------
 
 --
@@ -167,15 +167,15 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`id`, `fecha`, `total`, `id_cliente`, `estado`, `detalles`) VALUES
-(1, '2025-06-15 05:53:56', 60000000, 15, 'solicitado', 'CARTAGENA (x4) - $60.000.000\n'),
-(2, '2025-06-14 23:02:55', 23800011, 15, 'solicitado', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
-(3, '2025-06-14 23:06:47', 35700011, 15, 'solicitado', 'nuevo (x1) - $9\nCARTAGENA (x2) - $30.000.000\n'),
-(4, '2025-06-14 23:16:47', 53550000, 15, 'solicitado', 'CARTAGENA (x3) - $45.000.000\n'),
-(5, '2025-06-14 23:25:17', 23800000, 15, 'solicitado', 'Santa Marta (x4) - $20.000.000\n'),
-(6, '2025-06-14 23:39:10', 35000009, 15, 'solicitado', 'CARTAGENA (x2) - $30.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
-(7, '2025-06-14 23:42:31', 306, 15, 'solicitado', 'nuevo (x34) - $306\n'),
-(8, '2025-06-14 23:44:38', 20000009, 15, 'solicitado', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
-(9, '2025-06-14 23:50:37', 20000000, 15, 'solicitado', 'Santa Marta (x4) - $20.000.000\n');
+(1, '2025-06-15 05:53:56', 60000000, 1, 'solicitado', 'CARTAGENA (x4) - $60.000.000\n'),
+(2, '2025-06-14 23:02:55', 23800011, 2, 'solicitado', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
+(3, '2025-06-14 23:06:47', 35700011, 3, 'solicitado', 'nuevo (x1) - $9\nCARTAGENA (x2) - $30.000.000\n'),
+(4, '2025-06-14 23:16:47', 53550000, 4, 'solicitado', 'CARTAGENA (x3) - $45.000.000\n'),
+(5, '2025-06-14 23:25:17', 23800000, 1, 'solicitado', 'Santa Marta (x4) - $20.000.000\n'),
+(6, '2025-06-14 23:39:10', 35000009, 2, 'solicitado', 'CARTAGENA (x2) - $30.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
+(7, '2025-06-14 23:42:31', 306, 2, 'solicitado', 'nuevo (x34) - $306\n'),
+(8, '2025-06-14 23:44:38', 20000009, 3, 'solicitado', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
+(9, '2025-06-14 23:50:37', 20000000, 3, 'solicitado', 'Santa Marta (x4) - $20.000.000\n');
 
 -- --------------------------------------------------------
 
