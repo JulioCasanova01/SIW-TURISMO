@@ -42,10 +42,10 @@ CREATE TABLE `atencion_clientes` (
 --
 
 INSERT INTO `atencion_clientes` (`id`, `nombre`, `mensaje`, `fecha`, `estado`, `correo`, `telefono`) VALUES
-(3, 'Julio Andrés ', 'DFKNVNÑ SDKFH V KEFHBVPJHEBFIVHBERF IPEHFBVUHFBVIBF´PVI FIVHBIERBFVPIDHFBP0IUGYB RIPBG0RTPIWRBY', '2025-06-14 13:34:33', 'PE', 'julio@gmail.com', 3102366157),
-(4, 'Juan Manuel', 'Hola mundo', '2025-06-07 20:37:37', 'RE', 'JuanManuelSena@gmail.com', 3227097033),
-(22, 'Julio Andrés ', 'Este es un mensaje de prueba', '2025-06-07 19:40:59', 'PE', 'juan@gmail.com', 3227097033),
-(23, 'Julio Andrés ', 'Mensaje de prueba', '2025-06-11 16:24:27', 'RE', 'julio@gmail.com', 3102366157);
+(1, 'Julio Andrés ', 'DFKNVNÑ SDKFH V KEFHBVPJHEBFIVHBERF IPEHFBVUHFBVIBF´PVI FIVHBIERBFVPIDHFBP0IUGYB RIPBG0RTPIWRBY', '2025-06-14 13:34:33', 'PE', 'julio@gmail.com', 3102366157),
+(2, 'Juan Manuel', 'Hola mundo', '2025-06-07 20:37:37', 'RE', 'JuanManuelSena@gmail.com', 3227097033),
+(3, 'Julio Andrés ', 'Este es un mensaje de prueba', '2025-06-07 19:40:59', 'PE', 'juan@gmail.com', 3227097033),
+(4, 'Julio Andrés ', 'Mensaje de prueba', '2025-06-11 16:24:27', 'RE', 'julio@gmail.com', 3102366157);
 
 -- --------------------------------------------------------
 
@@ -93,10 +93,10 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id`, `nombre`, `tipo_documento`, `numero_documento`, `fecha_registro`, `fecha_nacimiento`, `correo`, `contacto_1`, `contacto_2`, `clave`, `direccion`) VALUES
-(15, 'Julio Andrés ', 'TI', 1075252762, '2025-05-26 04:24:21', '2009-05-01', 'julio@gmail.com', '3102366157', '3208653588', '$2y$10$EO.zWhcbY.V.2Ac2QmvE/OKEzQp0uXC9quCJqDESDmGajBg0AWz6C', 'Teruel, Cra 3E #5-13'),
-(18, 'Juan Esteban', 'TI', 1084923574, '2025-05-25 23:53:04', '2008-08-16', 'juan@gmail.com', '3123456789', '32123456789', '$2y$10$CSU4/MBvhNtk7peVOcNMHOYjaOD0eNSATY2P5so8ePreXiCnSBt0K', 'Teruel, Cra 1 #4E-30'),
-(19, 'Vrenda Galindo', 'TI', 1084923524, '2025-05-27 01:58:57', '2008-10-17', 'vrenda@gmail.com', '3213456789', '', '$2y$10$2ZmzeEgmMU3SLEL78jPweez7jUDg1jKXCWA.OO2UKANorT9tr4hGq', 'Cra 4 #3-01'),
-(20, 'juan', 'TI', 21988982, '2025-06-04 20:42:44', '2001-02-23', 'juacho@silva.com', '310236623', '', '$2y$10$Ns/JcV1vHbUYNdspAMl5wOQwNNJDqI1lMTVKCVTS/UzjqKYOrryui', 'Teruel, Cra 1 #4E-31');
+(1, 'Julio Andrés ', 'TI', 1075252762, '2025-05-26 04:24:21', '2009-05-01', 'julio@gmail.com', '3102366157', '3208653588', '$2y$10$EO.zWhcbY.V.2Ac2QmvE/OKEzQp0uXC9quCJqDESDmGajBg0AWz6C', 'Teruel, Cra 3E #5-13'),
+(2, 'Juan Esteban', 'TI', 1084923574, '2025-05-25 23:53:04', '2008-08-16', 'juan@gmail.com', '3123456789', '32123456789', '$2y$10$CSU4/MBvhNtk7peVOcNMHOYjaOD0eNSATY2P5so8ePreXiCnSBt0K', 'Teruel, Cra 1 #4E-30'),
+(3, 'Vrenda Galindo', 'TI', 1084923524, '2025-05-27 01:58:57', '2008-10-17', 'vrenda@gmail.com', '3213456789', '', '$2y$10$2ZmzeEgmMU3SLEL78jPweez7jUDg1jKXCWA.OO2UKANorT9tr4hGq', 'Cra 4 #3-01'),
+(4, 'juan', 'TI', 21988982, '2025-06-04 20:42:44', '2001-02-23', 'juacho@silva.com', '310236623', '', '$2y$10$Ns/JcV1vHbUYNdspAMl5wOQwNNJDqI1lMTVKCVTS/UzjqKYOrryui', 'Teruel, Cra 1 #4E-31');
 
 -- --------------------------------------------------------
 
@@ -120,7 +120,7 @@ CREATE TABLE `productos` (
 INSERT INTO `productos` (`id`, `id_categoria`, `nombre`, `imagen`, `descripcion`, `precio`) VALUES
 (1, 1, 'CARTAGENA', '684d9631a1aeb-ejecafetero.jpg', '12344556 erjbjgbihbihbihb i ihbiibh  i  h  i vihr virwbwribgirbtbh tb wru btuh 0rub wr0ubh 0uwr tuwt u', 15000000),
 (2, 2, 'Santa Marta', '684d9639399ba-gif.gif', 'jerginr wr  iw rit iwrtught tg ewjnfgiw rigtirh gti ri tbihr ibribir brbi ir bi wri bi rhb r irntiugnri rigtirungtr th riwtnig hiruginr ', 5000000),
-(7, 2, 'nuevo', '684d965a83b54-playa.jpeg', 'djfmk9', 9);
+(3, 2, 'nuevo', '684d965a83b54-playa.jpeg', 'djfmk9', 9);
 
 -- --------------------------------------------------------
 
@@ -143,9 +143,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `rol`, `contacto_1`, `contacto_2`, `clave`) VALUES
-(3, 'Juan Cerquera', 'juan@gmail.com', 'ADMIN', '312345662', '3213456789', '$2y$10$nIrnWA4SllFnKRyr3.umNOlgGpEDvh/hjrKHajt58ZgObhfb/OW/q'),
-(5, 'Julio Andrés ', 'julio@gmail.com', 'ADMIN', '320658535', '3125849964', '$2y$10$xIXKjfc7u.vNDtJ2N5z1NeRH2TFCs1VbkgQakNtUrpcm.0h.4PViW'),
-(6, 'Vrenda Galindo', 'vrenda@gmail.com', 'ATENCION_CLIENTE', '3125854562', '31023447895', '$2y$10$AdUSxJ8uqI5D76Lc2zfdk.atjehfJkv9kvHGN5OT/QNQj1NKAenjC');
+(1, 'Juan Cerquera', 'juan@gmail.com', 'ADMIN', '312345662', '3213456789', '$2y$10$nIrnWA4SllFnKRyr3.umNOlgGpEDvh/hjrKHajt58ZgObhfb/OW/q'),
+(2, 'Julio Andrés ', 'julio@gmail.com', 'ADMIN', '320658535', '3125849964', '$2y$10$xIXKjfc7u.vNDtJ2N5z1NeRH2TFCs1VbkgQakNtUrpcm.0h.4PViW'),
+(3, 'Vrenda Galindo', 'vrenda@gmail.com', 'ATENCION_CLIENTE', '3125854562', '31023447895', '$2y$10$AdUSxJ8uqI5D76Lc2zfdk.atjehfJkv9kvHGN5OT/QNQj1NKAenjC');
 
 -- --------------------------------------------------------
 
@@ -200,7 +200,7 @@ CREATE TABLE `viajeros` (
 --
 
 INSERT INTO `viajeros` (`id`, `nombre`, `tipo_de_documento`, `numero_de_documento`, `fecha_registro`, `fecha_nacimiento`, `contacto_1`, `contacto_2`, `direccion`) VALUES
-(3, 'Julio Andrés ', 'CC', 1075252762, '2025-06-04 21:55:34', '2009-05-01', '3102366157', '3208653588', 'Teruel, Cra 3E #5-13');
+(1, 'Julio Andrés ', 'CC', 1075252762, '2025-06-04 21:55:34', '2009-05-01', '3102366157', '3208653588', 'Teruel, Cra 3E #5-13');
 
 --
 -- Índices para tablas volcadas
