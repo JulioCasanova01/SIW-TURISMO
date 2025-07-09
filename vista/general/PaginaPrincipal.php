@@ -316,8 +316,6 @@ if (!isset($_SESSION['id_cliente'])) {
 
     <!-- Bootstrap JS -->
     <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../libs/SweetAlert2/sweetalert2.all.min.js"></script>
-    <script src="../../vista/alertas/funcionesalert.js"></script>
     
     <script>
         // Smooth scrolling for navigation links
