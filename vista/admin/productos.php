@@ -42,7 +42,8 @@
     <?php 
         include '../../conexion.php';
         include '../../modelo/productos_m.php'; 
-        $productos = obtenerProductos($conn);
+        // $productos = obtenerProductos($conn);
+        $productos = obtenerProductosConCategorias($conn);
         $categorias = obtenerCategorias($conn);
     ?>
     <div class="d-flex flex-column flex-lg-row">
@@ -75,7 +76,7 @@
                             <tr>
                                 <th><i class="fas fa-id-badge"></i> ID</th>
                                 <th><i class="fas fa-tag"></i> Nombre</th>
-                                <th><i class="fas fa-folder"></i> ID_Categoría</th>
+                                <th><i class="fas fa-folder"></i> Categoría</th>
                                 <th><i class="fas fa-dollar-sign"></i> Precio</th>
                                 <th><i class="fas fa-align-left"></i> Descripción</th>
                                 <th><i class="fas fa-cogs"></i> Acciones</th>
@@ -90,7 +91,7 @@
                             <tr>
                                 <td><?= $producto['id'] ?></td>
                                 <td><?= $producto['nombre'] ?></td>
-                                <td><?= $producto['id_categoria'] ?></td>
+                                <td><?php echo htmlspecialchars($producto['nombre_categoria']); ?></td>
                                 <td>$<?= number_format($producto['precio'], 0, ',', '.') ?></td>
                                 <td><div class="overflow-auto" style="max-height: 100px; max-width: 100%; text-align: left; overflow-wrap: break-word;"><?= $producto['descripcion'] ?></div></td>
                                 

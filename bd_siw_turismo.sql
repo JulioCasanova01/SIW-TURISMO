@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-06-2025 a las 01:55:40
+-- Tiempo de generación: 09-07-2025 a las 23:22:00
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -42,10 +42,10 @@ CREATE TABLE `atencion_clientes` (
 --
 
 INSERT INTO `atencion_clientes` (`id`, `nombre`, `mensaje`, `fecha`, `estado`, `correo`, `telefono`) VALUES
-(1, 'Julio Andrés ', 'DFKNVNÑ SDKFH V KEFHBVPJHEBFIVHBERF IPEHFBVUHFBVIBF´PVI FIVHBIERBFVPIDHFBP0IUGYB RIPBG0RTPIWRBY', '2025-06-14 13:34:33', 'PE', 'julio@gmail.com', 3102366157),
+(1, 'Julio Andrés ', 'DFKNVNÑ SDKFH V KEFHBVPJHEBFIVHBERF IPEHFBVUHFBVIBF´PVI FIVHBIERBFVPIDHFBP0IUGYB RIPBG0RTPIWRBY', '2025-07-09 21:02:19', 'RE', 'julio@gmail.com', 3102366157),
 (2, 'Juan Manuel', 'Hola mundo', '2025-06-07 20:37:37', 'RE', 'JuanManuelSena@gmail.com', 3227097033),
-(3, 'Julio Andrés ', 'Este es un mensaje de prueba', '2025-06-07 19:40:59', 'PE', 'juan@gmail.com', 3227097033),
-(4, 'Julio Andrés ', 'Mensaje de prueba', '2025-06-11 16:24:27', 'RE', 'julio@gmail.com', 3102366157);
+(3, 'Julio Andrés ', 'Este es un mensaje de prueba', '2025-07-09 21:02:23', 'RE', 'juan@gmail.com', 3227097033),
+(4, 'Julio Andrés ', 'Mensaje de prueba', '2025-07-09 21:20:20', 'RE', 'julio@gmail.com', 3102366157);
 
 -- --------------------------------------------------------
 
@@ -97,6 +97,7 @@ INSERT INTO `clientes` (`id`, `nombre`, `tipo_documento`, `numero_documento`, `f
 (2, 'Juan Esteban', 'TI', 1084923574, '2025-05-25 23:53:04', '2008-08-16', 'juan@gmail.com', '3123456789', '32123456789', '$2y$10$CSU4/MBvhNtk7peVOcNMHOYjaOD0eNSATY2P5so8ePreXiCnSBt0K', 'Teruel, Cra 1 #4E-30'),
 (3, 'Vrenda Galindo', 'TI', 1084923524, '2025-05-27 01:58:57', '2008-10-17', 'vrenda@gmail.com', '3213456789', '', '$2y$10$2ZmzeEgmMU3SLEL78jPweez7jUDg1jKXCWA.OO2UKANorT9tr4hGq', 'Cra 4 #3-01'),
 (4, 'juan', 'TI', 21988982, '2025-06-04 20:42:44', '2001-02-23', 'juacho@silva.com', '310236623', '', '$2y$10$Ns/JcV1vHbUYNdspAMl5wOQwNNJDqI1lMTVKCVTS/UzjqKYOrryui', 'Teruel, Cra 1 #4E-31');
+
 -- --------------------------------------------------------
 
 --
@@ -117,9 +118,9 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `id_categoria`, `nombre`, `imagen`, `descripcion`, `precio`) VALUES
-(1, 1, 'CARTAGENA', '684d9631a1aeb-ejecafetero.jpg', '12344556 erjbjgbihbihbihb i ihbiibh  i  h  i vihr virwbwribgirbtbh tb wru btuh 0rub wr0ubh 0uwr tuwt u', 15000000),
+(1, 1, 'CARTAGENA', '686ecb6654928-qrcode_chulixx162.github.io.png', '12344556 erjbjgbihbihbihb i ihbiibh  i  h  i vihr virwbwribgirbtbh tb wru btuh 0rub wr0ubh 0uwr tuwt u', 15000000),
 (2, 2, 'Santa Marta', '684d9639399ba-gif.gif', 'jerginr wr  iw rit iwrtught tg ewjnfgiw rigtirh gti ri tbihr ibribir brbi ir bi wri bi rhb r irntiugnri rigtirungtr th riwtnig hiruginr ', 5000000),
-(3, 2, 'nuevo', '684d965a83b54-playa.jpeg', 'djfmk9', 9);
+(3, 2, 'nuevo', '686ecbb536cda-Screenshot_2025-03-09-11-28-01-384_com.duolingo.png', 'djfmk9', 9);
 
 -- --------------------------------------------------------
 
@@ -145,6 +146,7 @@ INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `rol`, `contacto_1`, `contacto
 (1, 'Juan Cerquera', 'juan@gmail.com', 'ADMIN', '312345662', '3213456789', '$2y$10$nIrnWA4SllFnKRyr3.umNOlgGpEDvh/hjrKHajt58ZgObhfb/OW/q'),
 (2, 'Julio Andrés ', 'julio@gmail.com', 'ADMIN', '320658535', '3125849964', '$2y$10$xIXKjfc7u.vNDtJ2N5z1NeRH2TFCs1VbkgQakNtUrpcm.0h.4PViW'),
 (3, 'Vrenda Galindo', 'vrenda@gmail.com', 'ATENCION_CLIENTE', '3125854562', '31023447895', '$2y$10$AdUSxJ8uqI5D76Lc2zfdk.atjehfJkv9kvHGN5OT/QNQj1NKAenjC');
+
 -- --------------------------------------------------------
 
 --
@@ -165,15 +167,18 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`id`, `fecha`, `total`, `id_cliente`, `estado`, `detalles`) VALUES
-(1, '2025-06-15 05:53:56', 60000000, 1, 'solicitado', 'CARTAGENA (x4) - $60.000.000\n'),
-(2, '2025-06-14 23:02:55', 23800011, 2, 'solicitado', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
-(3, '2025-06-14 23:06:47', 35700011, 3, 'solicitado', 'nuevo (x1) - $9\nCARTAGENA (x2) - $30.000.000\n'),
-(4, '2025-06-14 23:16:47', 53550000, 4, 'solicitado', 'CARTAGENA (x3) - $45.000.000\n'),
-(5, '2025-06-14 23:25:17', 23800000, 1, 'solicitado', 'Santa Marta (x4) - $20.000.000\n'),
-(6, '2025-06-14 23:39:10', 35000009, 2, 'solicitado', 'CARTAGENA (x2) - $30.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
-(7, '2025-06-14 23:42:31', 306, 2, 'solicitado', 'nuevo (x34) - $306\n'),
-(8, '2025-06-14 23:44:38', 20000009, 3, 'solicitado', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
-(9, '2025-06-14 23:50:37', 20000000, 3, 'solicitado', 'Santa Marta (x4) - $20.000.000\n');
+(1, '2025-07-09 20:56:20', 60000000, 1, 'atendido', 'CARTAGENA (x4) - $60.000.000\n'),
+(2, '2025-07-09 20:56:12', 23800011, 2, 'atendido', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
+(3, '2025-07-09 20:56:03', 35700011, 3, 'atendido', 'nuevo (x1) - $9\nCARTAGENA (x2) - $30.000.000\n'),
+(4, '2025-07-09 20:55:57', 53550000, 4, 'atendido', 'CARTAGENA (x3) - $45.000.000\n'),
+(5, '2025-07-09 20:55:52', 23800000, 1, 'atendido', 'Santa Marta (x4) - $20.000.000\n'),
+(6, '2025-07-09 20:55:45', 35000009, 2, 'rechazado', 'CARTAGENA (x2) - $30.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
+(7, '2025-07-09 20:55:40', 306, 2, 'rechazado', 'nuevo (x34) - $306\n'),
+(8, '2025-07-09 20:55:35', 20000009, 3, 'rechazado', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
+(9, '2025-07-09 20:55:29', 20000000, 3, 'atendido', 'Santa Marta (x4) - $20.000.000\n'),
+(10, '2025-07-09 19:59:11', 20000000, 3, 'rechazado', 'Santa Marta (x1) - $5.000.000\n CARTAGENA (x1) - $15.000.000\n '),
+(11, '2025-07-09 20:55:01', 15000000, 3, 'rechazado', 'CARTAGENA (x1) - $15.000.000\n '),
+(12, '2025-07-09 21:20:27', 60000108, 1, 'atendido', 'CARTAGENA (x4) - $60.000.000\n nuevo (x12) - $108\n ');
 
 -- --------------------------------------------------------
 
@@ -265,7 +270,7 @@ ALTER TABLE `atencion_clientes`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
@@ -289,7 +294,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `viajeros`

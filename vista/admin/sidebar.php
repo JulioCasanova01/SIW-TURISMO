@@ -1,3 +1,9 @@
+<?php 
+include '../../conexion.php';
+include '../../modelo/obtenerEstados.php';
+$CampanaPedidos = hayPedidos($conn);
+$CampanaAtencion = hayAtenciones($conn);
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -68,11 +74,19 @@
                 <li class="nav-item">
                     <a href="http://localhost/SIW-TURISMO/vista/admin/atencion_cliente.php" class="nav-link i-atencion_cliente text-white">
                         <i class="fas fa-comments me-2"></i>Atención al Cliente
+                        <?php if ($CampanaAtencion): ?>
+                            <i class="fas fa-bell text-warning ms-2"></i> <!-- Campana -->
+                        <?php endif; ?>
                     </a>
                 </li>
-                <li class="nav-item">
+               <li class="nav-item">
                     <a href="http://localhost/SIW-TURISMO/vista/admin/pedidos.php" class="nav-link i-pedidos text-white">
-                        <i class="fas fa-file-invoice-dollar me-2"></i>Pedidos Online
+                        <i class="fas fa-file-invoice-dollar me-2"></i>
+                        Pedidos Online
+
+                        <?php if ($CampanaPedidos): ?>
+                            <i class="fas fa-bell text-warning ms-2"></i> <!-- Campana -->
+                        <?php endif; ?>
                     </a>
                 </li>
                 <li class="nav-item">

@@ -316,6 +316,8 @@ if (!isset($_SESSION['id_cliente'])) {
 
     <!-- Bootstrap JS -->
     <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../libs/SweetAlert2/sweetalert2.all.min.js"></script>
+    <script src="../../vista/alertas/funcionesalert.js"></script>
     
     <script>
         // Smooth scrolling for navigation links
@@ -343,16 +345,13 @@ if (!isset($_SESSION['id_cliente'])) {
                 navbar.style.backdropFilter = 'none';
             }
         });
+        async function salir() {
+            event.preventDefault();
+            const confirmarSalida = await confirmar('¿Estás seguro de que deseas cerrar sesión?','Si, Salir', 'No, cancelar', 'question');
+            if (confirmarSalida) {
+                window.location.href =  '../../controlador/clientes_c.php?accion=salir';
+            }
+        }
     </script>
-    <script>
-    async function salir() {
-      event.preventDefault();
-      const confirmarSalida = await confirmar('¿Estás seguro de que deseas cerrar sesión?','Si, Salir', 'No, cancelar', 'question');
-      if (confirmarSalida) {
-        window.location.href =  '../../controlador/clientes_c.php?accion=salir';
-      }
-    }
-
-  </script>
 </body>
 </html>

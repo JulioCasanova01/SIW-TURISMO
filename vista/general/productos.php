@@ -134,7 +134,7 @@
 
                 <!-- Botón WhatsApp-->
                 <div class="d-flex">
-                    
+                    <a class="btn btn-danger me-2" onclick="salir(); ">Cerrar Sesión</a>
                     <a id="whatsappLink" class="btn btn-success me-2" target="_blank">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
@@ -316,14 +316,6 @@
                 boton.closest('form').submit();
             }
         }
-    </script>
-
-
-
-
-
-    <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
-    <script>
         window.addEventListener('load', () => {
             const pos = localStorage.getItem('scrollPos');
             if (pos) {
@@ -331,7 +323,15 @@
             localStorage.removeItem('scrollPos');
             }
         });
+        async function salir() {
+            event.preventDefault();
+            const confirmarSalida = await confirmar('¿Estás seguro de que deseas cerrar sesión?','Si, Salir', 'No, cancelar', 'question');
+            if (confirmarSalida) {
+                window.location.href =  '../../controlador/clientes_c.php?accion=salir';
+            }
+        }
     </script>
+    <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

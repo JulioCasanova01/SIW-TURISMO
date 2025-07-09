@@ -13,7 +13,7 @@
 
         return $pedidos;
     }
-
+   
     function cambiarestado($conn, $data) {
         $sql = "UPDATE ventas SET estado='{$data['estado']}'  WHERE id={$data['id']}";
         mysqli_query($conn, $sql);
