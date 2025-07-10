@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-07-2025 a las 23:22:00
+-- Tiempo de generación: 11-07-2025 a las 01:40:39
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -45,7 +45,7 @@ INSERT INTO `atencion_clientes` (`id`, `nombre`, `mensaje`, `fecha`, `estado`, `
 (1, 'Julio Andrés ', 'DFKNVNÑ SDKFH V KEFHBVPJHEBFIVHBERF IPEHFBVUHFBVIBF´PVI FIVHBIERBFVPIDHFBP0IUGYB RIPBG0RTPIWRBY', '2025-07-09 21:02:19', 'RE', 'julio@gmail.com', 3102366157),
 (2, 'Juan Manuel', 'Hola mundo', '2025-06-07 20:37:37', 'RE', 'JuanManuelSena@gmail.com', 3227097033),
 (3, 'Julio Andrés ', 'Este es un mensaje de prueba', '2025-07-09 21:02:23', 'RE', 'juan@gmail.com', 3227097033),
-(4, 'Julio Andrés ', 'Mensaje de prueba', '2025-07-09 21:20:20', 'RE', 'julio@gmail.com', 3102366157);
+(4, 'Julio Andrés ', 'Mensaje de prueba', '2025-07-10 22:37:23', 'PE', 'julio@gmail.com', 3102366157);
 
 -- --------------------------------------------------------
 
@@ -118,9 +118,9 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `id_categoria`, `nombre`, `imagen`, `descripcion`, `precio`) VALUES
-(1, 1, 'CARTAGENA', '686ecb6654928-qrcode_chulixx162.github.io.png', '12344556 erjbjgbihbihbihb i ihbiibh  i  h  i vihr virwbwribgirbtbh tb wru btuh 0rub wr0ubh 0uwr tuwt u', 15000000),
-(2, 2, 'Santa Marta', '684d9639399ba-gif.gif', 'jerginr wr  iw rit iwrtught tg ewjnfgiw rigtirh gti ri tbihr ibribir brbi ir bi wri bi rhb r irntiugnri rigtirungtr th riwtnig hiruginr ', 5000000),
-(3, 2, 'nuevo', '686ecbb536cda-Screenshot_2025-03-09-11-28-01-384_com.duolingo.png', 'djfmk9', 9);
+(1, 1, 'CARTAGENA', '68704e9ecf73c-CARTAGENA.jpg', 'Disfruta de una experiencia inolvidable de 5 noches y 6 días en la joya del Caribe colombiano, con alojamiento en hotel cuatro estrellas, desayunos buffet, cenas incluidas y transporte aéreo o terrestre ida y regreso, según tu preferencia.', 15000000),
+(2, 2, 'Santa Marta', '68704eb518564-SANTA MARTA.jpg', 'Incluye transporte aéreo o terrestre ida y regreso, hospedaje en hotel tres o cuatro estrellas con vista al mar, desayunos buffet y cenas incluidas. Recorre la ciudad más antigua de Colombia con un tour guiado por el centro histórico, el Malecón de El Rodadero y la Quinta de San Pedro Alejandrino.', 5000000),
+(3, 2, 'Medellín', '68704eca101e1-COMUNA.jpg', 'Este plan completo incluye transporte aéreo o terrestre ida y regreso, 6 días y 5 noches de alojamiento en un hotel cómodo y bien ubicado, desayunos tipo buffet, cenas y traslados internos en vehículo climatizado.', 500000);
 
 -- --------------------------------------------------------
 
@@ -176,7 +176,7 @@ INSERT INTO `ventas` (`id`, `fecha`, `total`, `id_cliente`, `estado`, `detalles`
 (7, '2025-07-09 20:55:40', 306, 2, 'rechazado', 'nuevo (x34) - $306\n'),
 (8, '2025-07-09 20:55:35', 20000009, 3, 'rechazado', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
 (9, '2025-07-09 20:55:29', 20000000, 3, 'atendido', 'Santa Marta (x4) - $20.000.000\n'),
-(10, '2025-07-09 19:59:11', 20000000, 3, 'rechazado', 'Santa Marta (x1) - $5.000.000\n CARTAGENA (x1) - $15.000.000\n '),
+(10, '2025-07-10 01:13:31', 20000000, 3, 'solicitado', 'Santa Marta (x1) - $5.000.000\n CARTAGENA (x1) - $15.000.000\n '),
 (11, '2025-07-09 20:55:01', 15000000, 3, 'rechazado', 'CARTAGENA (x1) - $15.000.000\n '),
 (12, '2025-07-09 21:20:27', 60000108, 1, 'atendido', 'CARTAGENA (x4) - $60.000.000\n nuevo (x12) - $108\n ');
 
