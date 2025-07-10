@@ -12,9 +12,15 @@ elseif ($accion=='registrar') {
 
 } elseif ($accion == 'actualizar') {
     $producto = obtenerProductoPorID($conn, $_POST['id']);
-    $_POST['imagen'] = guardar_imagen($_FILES['imagen'],  $producto);
-    actualizar($conn, $_POST);
 
+    // Verifica si se subió una nueva imagen
+    if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+        $_POST['imagen'] = guardar_imagen($_FILES['imagen'],  $producto);
+    } else {
+        $_POST['imagen'] = $producto['imagen']; // Mantiene la imagen actual
+    }
+
+    actualizar($conn, $_POST);
 }
 elseif ($accion == 'eliminar') {
     $producto = obtenerProductoPorID($conn, $_GET['id']);

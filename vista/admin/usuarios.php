@@ -214,16 +214,16 @@
             </div> -->
             <div class="mb-3">
               <label for="nombreusuarios" class="form-label">Nombre</label>
-              <input type="text" class="form-control" name="nombre" id="nombreusuarios" />
+              <input type="text" class="form-control" name="nombre" id="nombreusuarios" required />
             </div>
             <div class="mb-3">
               <label for="correousuarios" class="form-label">Correo</label>
-              <input type="email" class="form-control" name="UserEmail" id="correousuarios" />
+              <input type="email" class="form-control" name="UserEmail" id="correousuarios" required />
             </div>
             <div class="mb-3">
               <label for="rolusuarios" class="form-label">Rol</label>
 
-              <select class="form-select" name="rolUsuario" id="rolusuarios">
+              <select class="form-select" name="rolUsuario" id="rolusuarios" required>
                 <option value="ADMIN">Administrador</option>
                 <option value="Agente">Agente</option>
                 <option value="Atencion_cliente">Atención al Cliente</option>
@@ -231,7 +231,7 @@
             </div>
             <div class="mb-3">
               <label for="contacto1usuarios" class="form-label">Contacto_1</label>
-              <input type="number" name="contacto1" class="form-control" id="contacto1usuarios" />
+              <input type="number" name="contacto1" class="form-control" id="contacto1usuarios" required/>
             </div>
             <div class="mb-3">
               <label for="contacto2usuarios" class="form-label">Contacto_2</label>
@@ -239,7 +239,7 @@
             </div>
             <div class="mb-3">
               <label for="claveusuario" class="form-label">CLAVE</label>
-              <input type="password" name="clave"  class="form-control" id="claveusuario" />
+              <input type="password" name="clave"  class="form-control" id="claveusuario" required/>
             </div>
             
              <div class="modal-footer">

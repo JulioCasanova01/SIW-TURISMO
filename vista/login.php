@@ -143,6 +143,24 @@
 			</div>
 		</nav>
 	</section>
+	<!-- Botón flotante para regresar -->
+     <button onclick="window.location.href='../vista/general/index.php'"
+        style="
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 9999;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 50px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    ">
+    <i class="fas fa-home"></i>
+    </button>
 	<br>
 	<form class="full-box logInForm " id="formulario" action="../controlador/clientes_c.php?accion=ingresar" method="POST">
 		<p class="text-center text-muted"><i class="fa fa-user-circle fa-5x"></i></p>

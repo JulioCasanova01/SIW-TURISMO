@@ -204,11 +204,11 @@
             </div> -->
             <div class="mb-3">
               <label for="nombreviajeros" class="form-label">Nombre</label>
-              <input type="text" class="form-control" name="nombre" id="nombreviajeros" />
+              <input type="text" class="form-control" name="nombre" id="nombreviajeros" required />
             </div>
             <div class="mb-3">
               <label for="tipodocumentoviajeros" class="form-label">Tipo de Documento</label>
-              <select class="form-select" name="tipo_documento" id="tipodocumentoviajeros">
+              <select class="form-select" name="tipo_documento" id="tipodocumentoviajeros" required>
                 <option value="CC">Cédula de Ciudadanía</option>
                 <option value="TI">Tarjeta de Identidad</option>
                 <option value="RC">Registro Civil</option>
@@ -218,7 +218,7 @@
             </div>
             <div class="mb-3">
               <label for="numerodocumentoviajeros" class="form-label">Número de Documento</label>
-              <input type="number" class="form-control" name="numero_documento" id="numerodocumentoviajeros" />
+              <input type="number" class="form-control" name="numero_documento" id="numerodocumentoviajeros" required />
             </div>
             <div class="mb-3">
               <label for="fechanacimientoviajeros" class="form-label">Fecha de Nacimiento</label>
@@ -230,7 +230,7 @@
             </div>
             <div class="mb-3">
               <label for="contacto1viajeros" class="form-label">Contacto_1</label>
-              <input type="number" name="contacto1" class="form-control" id="contacto1viajeros" />
+              <input type="number" name="contacto1" class="form-control" id="contacto1viajeros" required />
             </div>
             <div class="mb-3">
               <label for="contacto2viajeros" class="form-label">Contacto_2</label>

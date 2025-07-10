@@ -219,23 +219,23 @@
                     <form action="../../controlador/productos_c.php?accion=registrar" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="descripcionproducto" class="form-label">Imagen</label>
-                            <input type="file" id="imagen" name="imagen" accept="image/*" class="form-control" />
+                            <input type="file" id="imagen" name="imagen" accept="image/*" class="form-control" required />
                         </div>
                         <div class="mb-3">
                             <label for="nombreproducto" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" name="nombre" id="nombreproducto" />
+                            <input type="text" class="form-control" name="nombre" id="nombreproducto" required />
                         </div>
                         <div class="mb-3">
                             <label for="descripcionproducto" class="form-label">Descripción</label>
-                            <input type="text" class="form-control" name="descripcion" id="descripcionproducto" />
+                            <input type="text" class="form-control" name="descripcion" id="descripcionproducto" required />
                         </div>
                         <div class="mb-3">
                             <label for="precioproducto" class="form-label">Precio</label>
-                            <input type="number" class="form-control" name="precio" id="precioproducto" />
+                            <input type="number" class="form-control" name="precio" id="precioproducto" required/>
                         </div>
                         <div class="mb-3">
                             <label for="categoriaProducto" class="form-label">Categoría del Producto</label>
-                            <select class="form-select" name="id_categoria" id="categoriaProducto">
+                            <select class="form-select" name="id_categoria" id="categoriaProducto" required>
                                 <?php foreach ($categorias as $categoria): ?>
                                     <option value="<?= $categoria['id'] ?>">
                                         <?= htmlspecialchars($categoria['nombre']) ?>
@@ -243,14 +243,7 @@
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        
-                        <div class="mb-3">
-                            <label for="categoriaproducto" class="form-label">ID Categoría</label>
-                            <select name="id_categoria" class="form-select" id="categoriaproducto">
-                                <option value="1">Tours</option>
-                                <option value="2">Paquete</option>
-                            </select>
-                        </div>
+                    
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-primary">Guardar</button>
