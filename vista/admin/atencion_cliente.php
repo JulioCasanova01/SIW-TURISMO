@@ -99,9 +99,22 @@
                                     </td>
 
                                    <td>
-                                        <div class="overflow-auto" style="max-height: 100px; max-width: 100%; text-align: left; overflow-wrap: break-word;">
-                                            <?= htmlspecialchars($atencion['mensaje']) ?>
-                                        </div>
+                                        <textarea lass="overflow-auto" style="
+                                            max-height: 100px;
+                                            max-width: 100%;
+                                            text-align: left;
+                                            overflow-wrap: break-word;
+                                            background-color: #f0f8ff; /* azul claro suave */
+                                            padding: 8px 12px;
+                                            border-radius: 10px;
+                                            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                                            font-size: 14px;
+                                            color: #333;
+                                            "
+                                            readonly><?= htmlspecialchars($atencion['mensaje']) ?>
+                                        </textarea>
+                                        
                                     </td>
 
                                     <td><?= $atencion['fecha'] ?></td>

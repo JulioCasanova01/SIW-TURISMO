@@ -64,9 +64,11 @@
             <div class="main-content">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2 class="mb-3 mb-md-0 mt-4 ">Productos</h2>
-                    <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalproducto">
-                        <i class="fas fa-plus me-2"></i>Nuevo producto
-                    </button>
+                    <?php if ($_SESSION['rol'] == 'ADMIN' || $_SESSION['rol'] == 'AGENTE'): ?>
+                        <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalproducto">
+                            <i class="fas fa-plus me-2"></i>Nuevo producto
+                        </button>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Tabla -->
@@ -79,8 +81,9 @@
                                 <th><i class="fas fa-folder"></i> Categoría</th>
                                 <th><i class="fas fa-dollar-sign"></i> Precio</th>
                                 <th><i class="fas fa-align-left"></i> Descripción</th>
-                                <th><i class="fas fa-cogs"></i> Acciones</th>
-                                
+                                <?php if ($_SESSION['rol'] == 'ADMIN' || $_SESSION['rol'] == 'AGENTE'): ?>
+                                    <th><i class="fas fa-cogs"></i> Acciones</th>
+                                <?php endif; ?>
 
                             </tr>
                         </thead>
@@ -93,21 +96,25 @@
                                 <td><?= $producto['nombre'] ?></td>
                                 <td><?php echo htmlspecialchars($producto['nombre_categoria']); ?></td>
                                 <td>$<?= number_format($producto['precio'], 0, ',', '.') ?></td>
-                                <td><div class="overflow-auto" style="max-height: 100px; max-width: 100%; text-align: left; overflow-wrap: break-word;"><?= $producto['descripcion'] ?></div></td>
-                                
                                 <td>
-                                    <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
-                                        data-bs-target="#modalEditar<?= $producto['id'] ?>"><i class="fas fa-edit"></i>
-                                    </button>
-                                   
-                                        
-                                        
-                                        
-                                    <button class="btn btn-sm btn-outline-danger" onclick="eliminar(event, <?= $producto['id'] ?>)" >
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                    
+                                    <textarea class="form-control descripcion-scroll" readonly style="max-height: 100px; max-width: 100%; text-align: left; overflow-wrap: break-word;"><?= $producto['descripcion'] ?></textarea>
+
                                 </td>
+                                <?php if ($_SESSION['rol'] == 'ADMIN' || $_SESSION['rol'] == 'AGENTE'): ?>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
+                                            data-bs-target="#modalEditar<?= $producto['id'] ?>"><i class="fas fa-edit"></i>
+                                        </button>
+                                    
+                                            
+                                            
+                                            
+                                        <button class="btn btn-sm btn-outline-danger" onclick="eliminar(event, <?= $producto['id'] ?>)" >
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                        
+                                    </td>
+                                <?php endif; ?>    
                             </tr>
                         
                             <!-- Modal de edición -->

@@ -39,6 +39,13 @@
       --verde-acento: #218838;
       
     }
+    .img-producto {
+        width: 100%;
+        height: 200px; /* o el alto que desees */
+        object-fit: cover; /* Recorta y ajusta sin deformar */
+        border-radius: 0.5rem;
+    }
+
 
     body {
       background-color: #e6f0fa;
@@ -203,18 +210,23 @@
             <?php foreach ($productos as $producto): ?>
                 <div class="col">
                     <div class="card h-100 d-flex flex-column">
-                        <img src="../../img/productos/<?php echo htmlspecialchars($producto['imagen']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
+                        <img src="../../img/productos/<?php echo htmlspecialchars($producto['imagen']); ?>" class="card-img-top img-producto" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
                         <div class="card-body flex-grow-1">
                             <h5 class="card-title"><?php echo htmlspecialchars($producto['nombre']); ?></h5>
-                            <p class="card-text"><?php echo htmlspecialchars($producto['descripcion']); ?></p>
+                            <p class="card-text">
+                                <?php echo substr(htmlspecialchars($producto['descripcion']), 0, 100); ?>...
+                            </p>
+                            <!-- Botón para abrir el modal -->
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalProducto<?php echo $producto['id']; ?>">
+                                Ver más
+                            </button>
                         </div>
 
                         <div class="card-footer mt-auto">
                             <p class="card-text"><strong>Precio:</strong> $<?php echo number_format($producto['precio'], 0, ',', '.'); ?></p>
                             <p class="card-text"><strong>Categoría:</strong> <?php echo htmlspecialchars($producto['nombre_categoria']); ?></p>
 
-                            <!-- Formulario para agregar al carrito -->
-                           <form class="form-agregar-carrito" action="../../controlador/carrito_c.php?accion=agregar" method="POST">
+                            <form class="form-agregar-carrito" action="../../controlador/carrito_c.php?accion=agregar" method="POST">
                                 <input type="hidden" name="id_producto" value="<?php echo $producto['id']; ?>">
                                 <input type="hidden" name="nombre" value="<?php echo $producto['nombre']; ?>">
                                 <input type="hidden" name="precio" value="<?php echo $producto['precio']; ?>">
@@ -223,12 +235,32 @@
                                     <i class="fas fa-cart-plus"></i> Añadir al carrito
                                 </button>
                             </form>
+                        </div>
+                    </div>
+                </div>
 
-
+                <!-- Modal -->
+                <div class="modal fade" id="modalProducto<?php echo $producto['id']; ?>" tabindex="-1" aria-labelledby="modalLabel<?php echo $producto['id']; ?>" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel<?php echo $producto['id']; ?>">
+                                    <?php echo htmlspecialchars($producto['nombre']); ?>
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="../../img/productos/<?php echo htmlspecialchars($producto['imagen']); ?>" class="card-img-top img-producto" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
+                                <p><?php echo nl2br(htmlspecialchars($producto['descripcion'])); ?></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             <?php endforeach; ?>
+
 
         
 

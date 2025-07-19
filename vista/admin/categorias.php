@@ -61,9 +61,11 @@
       <div class="main-content">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
           <h2 class="mb-3 mb-md-0 mt-4">CATEGORÍAS</h2>
-          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCategoria">
-            <i class="fas fa-plus me-2"></i>Nueva Categoría
-          </button>
+          <?php if ($_SESSION['rol'] == 'ADMIN'): ?>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCategoria">
+              <i class="fas fa-plus me-2"></i>Nueva Categoría
+            </button>
+          <?php endif; ?>
         </div>
 
         <!-- Tabla -->
@@ -74,7 +76,9 @@
                 <th><i class="fas fa-id-badge"></i> ID</th>
                 <th><i class="fas fa-tag"></i> Nombre</th>
                 <th><i class="fas fa-align-left"></i> Descripción</th>
-                <th><i class="fas fa-cogs"></i> Acciones</th>
+                <?php if ($_SESSION['rol'] == 'ADMIN'): ?>
+                  <th><i class="fas fa-cogs"></i> Acciones</th>
+                <?php endif; ?>
               </tr>
             </thead>
 
@@ -84,20 +88,20 @@
                   <td><?= $categoria['id'] ?></td>
                   <td><?= $categoria['nombre'] ?></td>
                   <td>
-                    <div class="overflow-auto" style="max-height: 100px; max-width: 100%; text-align: left; overflow-wrap: break-word;">
-                      <?= $categoria['descripcion'] ?>
-                    </div>
+                    <textarea class="form-control descripcion-scroll" style="max-height: 100px; max-width: 100%; text-align: left; overflow-wrap: break-word;" readonly><?= $categoria['descripcion'] ?></textarea>
+                    
                   </td>
-
-                  <td>
-                    <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
-                      data-bs-target="#modalEditar<?= $categoria['id'] ?>">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                    <button class="btn btn-sm btn-outline-danger" 
-                      onclick="eliminar(event, <?= $categoria['id'] ?>)"><i class="fas fa-trash-alt"></i>
-                    </button>
-                  </td>
+                  <?php if ($_SESSION['rol'] == 'ADMIN'): ?>
+                    <td>
+                      <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
+                        data-bs-target="#modalEditar<?= $categoria['id'] ?>">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger" 
+                        onclick="eliminar(event, <?= $categoria['id'] ?>)"><i class="fas fa-trash-alt"></i>
+                      </button>
+                    </td>
+                  <?php endif; ?>
                 </tr>
 
                 <!-- Modal editar categoría -->

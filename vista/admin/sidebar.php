@@ -41,11 +41,13 @@ $CampanaAtencion = hayAtenciones($conn);
                         <i class="fas fa-chart-line me-2"></i>ADMINISTRAR
                     </a>
                 </li>
+                
                 <li class="nav-item">
                     <a href="http://localhost/SIW-TURISMO/vista/admin/productos.php" class="nav-link i-productos text-white">
                         <i class="fas fa-suitcase-rolling me-2"></i>PRODUCTOS
                     </a>
                 </li>
+
                 <!-- <li class="nav-item">
                     <a href="http://localhost/SIW-TURISMO/vista/admin/planes.php" class="nav-link i-planes text-white">
                         <i class="fas fa-user me-2"></i>Planes Individuales
@@ -56,11 +58,13 @@ $CampanaAtencion = hayAtenciones($conn);
                         <i class="fas fa-map-marked-alt me-2"></i>Tours
                     </a>
                 </li> -->
-                <li class="nav-item">
-                    <a href="http://localhost/SIW-TURISMO/vista/admin/usuarios.php" class="nav-link i-usuarios text-white">
-                        <i class="fas fa-users-cog me-2"></i>Usuarios
-                    </a>
-                </li>
+                <?php if ($_SESSION['rol'] == 'ADMIN'):?>
+                    <li class="nav-item">
+                        <a href="http://localhost/SIW-TURISMO/vista/admin/usuarios.php" class="nav-link i-usuarios text-white">
+                            <i class="fas fa-users-cog me-2"></i>Usuarios
+                        </a>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <a href="http://localhost/SIW-TURISMO/vista/admin/clientes.php" class="nav-link i-clientes text-white">
                         <i class="fas fa-id-card me-2"></i>Clientes
@@ -71,14 +75,16 @@ $CampanaAtencion = hayAtenciones($conn);
                         <i class="fas fa-globe me-2"></i>Círculo Viajero
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="http://localhost/SIW-TURISMO/vista/admin/atencion_cliente.php" class="nav-link i-atencion_cliente text-white">
-                        <i class="fas fa-comments me-2"></i>Atención al Cliente
-                        <?php if ($CampanaAtencion): ?>
-                            <i class="fas fa-bell text-warning ms-2"></i> <!-- Campana -->
-                        <?php endif; ?>
-                    </a>
-                </li>
+                <?php if ($_SESSION['rol'] == 'ADMIN' || $_SESSION['rol'] == 'ATENCION_CLIENTE'):?>
+                    <li class="nav-item">
+                        <a href="http://localhost/SIW-TURISMO/vista/admin/atencion_cliente.php" class="nav-link i-atencion_cliente text-white">
+                            <i class="fas fa-comments me-2"></i>Atención al Cliente
+                            <?php if ($CampanaAtencion): ?>
+                                <i class="fas fa-bell text-warning ms-2"></i> <!-- Campana -->
+                            <?php endif; ?>
+                        </a>
+                    </li>
+                <?php endif; ?>
                <li class="nav-item">
                     <a href="http://localhost/SIW-TURISMO/vista/admin/pedidos.php" class="nav-link i-pedidos text-white">
                         <i class="fas fa-file-invoice-dollar me-2"></i>

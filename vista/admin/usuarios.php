@@ -1,4 +1,8 @@
 <?php include ('header.php');
+  if ($_SESSION['rol'] !== 'ADMIN') {
+      header("Location: vista_general.php");
+      exit();
+  }
  ?>
 <style>
   .main-content {
@@ -67,9 +71,11 @@
       <div class="main-content">
         <div class="d-flex justify-content-between align-items-center mb-4">
           <h2 class="mb-0 mt-4">USUARIOS</h2>
-          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalusuarios">
-            <i class="fas fa-plus me-2"></i>Nuevo Usuario
-          </button>
+          <?php if ($_SESSION['rol'] == 'ADMIN'): ?>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalusuarios">
+              <i class="fas fa-plus me-2"></i>Nuevo Usuario
+            </button>
+          <?php endif; ?>
         </div>
 
         <!-- Tabla -->
@@ -81,9 +87,11 @@
                 <th><i class="fas fa-user"></i> Nombre</th>
                 <th><i class="fas fa-envelope"></i> Correo</th>
                 <th><i class="fas fa-user-tag"></i> Rol</th>
-                <th><i class="fas fa-phone"></i> Contacto_1</th>
-                <th><i class="fas fa-mobile-alt"></i> Contacto_2</th>
-                <th><i class="fas fa-cogs"></i> Acciones</th>
+                <?php if ($_SESSION['rol'] == 'ADMIN'): ?>
+                  <th><i class="fas fa-phone"></i> Contacto_1</th>
+                  <th><i class="fas fa-mobile-alt"></i> Contacto_2</th>
+                  <th><i class="fas fa-cogs"></i> Acciones</th>
+                <?php endif; ?>
               </tr>
             </thead>
             
@@ -96,28 +104,33 @@
                 <td><?= $usuario['nombre'] ?></td>
                 <td><?= $usuario['correo'] ?></td>
                 <td><?= $usuario['rol'] ?></td>
-                <td>
-                  <a href="https://wa.me/57<?= preg_replace('/\D/', '', $usuario['contacto_1']) ?>" target="_blank">
-                    <?= $usuario['contacto_1'] ?>
-                  </a>
-                </td>
-                <td>
-                  <a href="https://wa.me/57<?= preg_replace('/\D/', '', $usuario['contacto_2']) ?>" target="_blank">
-                    <?= $usuario['contacto_2'] ?>
-                  </a>
-                </td>
-                <td>
-                  <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
-                    data-bs-target="#modalEditar<?= $usuario['id'] ?>"><i class="fas fa-edit"></i></button>
-                  <!-- <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></button> -->
+                <?php if ($_SESSION['rol'] == 'ADMIN'): ?>
+                  <td>
+                    <a href="https://wa.me/57<?= preg_replace('/\D/', '', $usuario['contacto_1']) ?>" target="_blank">
+                      <?= $usuario['contacto_1'] ?>
+                    </a>
+                  </td>
                   
-                  <button class="btn btn-sm btn-outline-danger" 
-                    onclick="eliminar(event, <?= $usuario['id'] ?>)"><i class="fas fa-trash-alt"></i>
-                  </button>
+                  <td>
+                    <a href="https://wa.me/57<?= preg_replace('/\D/', '', $usuario['contacto_2']) ?>" target="_blank">
+                      <?= $usuario['contacto_2'] ?>
+                    </a>
+                  </td>
+                <?php endif; ?>
+                <?php if ($_SESSION['rol'] == 'ADMIN'): ?>
+                  <td>
+                    <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
+                      data-bs-target="#modalEditar<?= $usuario['id'] ?>"><i class="fas fa-edit"></i></button>
+                    <!-- <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></button> -->
                     
-                  
+                    <button class="btn btn-sm btn-outline-danger" 
+                      onclick="eliminar(event, <?= $usuario['id'] ?>)"><i class="fas fa-trash-alt"></i>
+                    </button>
+                      
+                    
 
-                </td>
+                  </td>
+                <?php endif; ?>
               </tr>
               
               <!-- Más usuarios aquí -->

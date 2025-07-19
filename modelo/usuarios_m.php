@@ -90,5 +90,18 @@ function actualizar($conn, $data) {
     header("Location: ../vista/admin/usuarios.php");
 }
 
+function contarClientes($conn) {
+    $sql = "SELECT COUNT(*) as total FROM clientes";
+    $resultado = $conn->query($sql);
+
+    if ($resultado && $resultado->num_rows > 0) {
+        $fila = $resultado->fetch_assoc();
+        return $fila['total'];
+    } else {
+        return 0;
+    }
+}
+
+
 ?>
 
