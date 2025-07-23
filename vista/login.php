@@ -179,12 +179,12 @@
 			<input type="submit" value="Iniciar sesión" class="btncolor" id="btn_iniciar">
 			<!-- <a href="http://localhost\SIW-TURISMO\vista\general\PaginaPrincipal.php">Ingresar sin Cuenta</a> -->
 			<br>
-			<a href="http://localhost\SIW-TURISMO\vista\general\crear_cuenta.php">¿No tienes Cuenta?-Crea Una</a>
+			<a href="general\crear_cuenta.php">¿No tienes Cuenta?-Crea Una</a>
 			<br> <br>
 			
 		</div>
 	</form>
-	<a class="" href="http://localhost/SIW-TURISMO/vista/admin/login_admin.php" ><button class="btn btn-primary mt-1 mb-3"><li class="fas fa-user-shield"></li></button></a>
+	<a class="" href="admin/login_admin.php" ><button class="btn btn-primary mt-1 mb-3"><li class="fas fa-user-shield"></li></button></a>
 
 	<script src="../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 	

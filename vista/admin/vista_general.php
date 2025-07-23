@@ -71,7 +71,7 @@
                 <!-- Cards resumen -->
                 <div class="row g-4">
                     <div class="col-md-4">
-                        <a href="http://localhost/SIW-TURISMO/vista/admin/clientes.php">
+                        <a href="clientes.php">
                         <div class="card shadow border-0">
                             <div class="card-body text-center">
                                 <i class="fas fa-users fa-2x text-primary"></i>
@@ -83,7 +83,7 @@
                     </div>
 
                     <div class="col-md-4">
-                        <a href="http://localhost/SIW-TURISMO/vista/admin/productos.php">
+                        <a href="productos.php">
                         <div class="card shadow border-0">
                             <div class="card-body text-center">
                                 <i class="fas fa-suitcase fa-2x text-success"></i>
@@ -95,7 +95,7 @@
                     </div>
                     <?php if ($_SESSION['rol'] == 'ADMIN'): ?>
                         <div class="col-md-4">
-                            <a href="http://localhost/SIW-TURISMO/vista/admin/usuarios.php">
+                            <a href="usuarios.php">
                             <div class="card shadow border-0">
                                 <div class="card-body text-center">
                                     <i class="fas fa-users-cog fa-2x text-warning"></i>

@@ -280,7 +280,7 @@ if (!isset($_SESSION['id_cliente'])) {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                      <a class="nav-link" id="iconInicio" href="http://localhost/SIW-TURISMO/vista/general/PaginaPrincipal.php">
+                      <a class="nav-link" id="iconInicio" href="PaginaPrincipal.php">
                         <i class="fas fa-home"></i> Inicio
                       </a>
                     </li>
@@ -314,8 +314,7 @@ if (!isset($_SESSION['id_cliente'])) {
 
     <?php include 'footer.php' ?>
 
-    <!-- Bootstrap JS -->
-    <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    
     
     <script>
         // Smooth scrolling for navigation links

@@ -135,7 +135,7 @@
                 </button>
             </div>
             <div class="mt-3 text-center">
-                <a href="http://localhost/SIW-TURISMO/vista/login.php" class="text-decoration-none" style="color: #017C86;">
+                <a href="../login.php" class="text-decoration-none" style="color: #017C86;">
                     <i class="bi bi-box-arrow-in-right"></i> ¿Ya tienes cuenta? - Inicia sesión
                 </a>
             </div>

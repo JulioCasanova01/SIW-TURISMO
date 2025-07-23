@@ -196,9 +196,9 @@
                     <!-- <li class="nav-item"><a class="nav-menu" href="http://localhost/SIW-TURISMO/vista/general/login.php">Servicios</a> -->
                     </li>
                     <li class="nav-item"><a class="nav-menu"
-                            href="http://localhost/SIW-TURISMO/vista/general/contactanos.php">Contacto</a></li>
+                            href="contactanos.php">Contacto</a></li>
                     <li class="nav-item"><a class="btn btn-outline-light "
-                            href="http://localhost/SIW-TURISMO/vista/login.php">INGRESAR</a></li>
+                            href="../login.php">INGRESAR</a></li>
                 </ul>
             </div>
         </div>
@@ -213,7 +213,7 @@
                         <h1 class="fw-bold">Explora, vive y disfruta</h1>
                         <p class="lead">En <strong>JYS Promotores de Viajes y Turismo</strong> nos encargamos de planear
                             tu viaje soñado. Más que una agencia, somos tu guía de aventuras.</p>
-                        <a href="http://localhost/SIW-TURISMO/vista/general/quienes_somos.php"
+                        <a href="quienes_somos.php"
                             class="btn btn-outline-light">Conócenos</a>
                     </div>
                 </div>
@@ -221,7 +221,7 @@
                     <div class="ya text-light p-4 ">
                         <h4 class="mb-3">¿Ya tienes cuenta?</h4>
                         <p>Haz clic aquí para iniciar sesión:</p>
-                        <a href="http://localhost/SIW-TURISMO/vista/login.php" class="inicia btn btn-outline-light">Iniciar
+                        <a href="../login.php" class="inicia btn btn-outline-light">Iniciar
                             sesión</a>
                     </div>
                 </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-07-2025 a las 01:40:39
+-- Tiempo de generación: 23-07-2025 a las 03:35:37
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -45,7 +45,7 @@ INSERT INTO `atencion_clientes` (`id`, `nombre`, `mensaje`, `fecha`, `estado`, `
 (1, 'Julio Andrés ', 'DFKNVNÑ SDKFH V KEFHBVPJHEBFIVHBERF IPEHFBVUHFBVIBF´PVI FIVHBIERBFVPIDHFBP0IUGYB RIPBG0RTPIWRBY', '2025-07-09 21:02:19', 'RE', 'julio@gmail.com', 3102366157),
 (2, 'Juan Manuel', 'Hola mundo', '2025-06-07 20:37:37', 'RE', 'JuanManuelSena@gmail.com', 3227097033),
 (3, 'Julio Andrés ', 'Este es un mensaje de prueba', '2025-07-09 21:02:23', 'RE', 'juan@gmail.com', 3227097033),
-(4, 'Julio Andrés ', 'Mensaje de prueba', '2025-07-10 22:37:23', 'PE', 'julio@gmail.com', 3102366157);
+(4, 'Julio Andrés ', 'Mensaje de prueba', '2025-07-22 02:06:01', 'RE', 'julio@gmail.com', 3102366157);
 
 -- --------------------------------------------------------
 
@@ -176,9 +176,10 @@ INSERT INTO `ventas` (`id`, `fecha`, `total`, `id_cliente`, `estado`, `detalles`
 (7, '2025-07-09 20:55:40', 306, 2, 'rechazado', 'nuevo (x34) - $306\n'),
 (8, '2025-07-09 20:55:35', 20000009, 3, 'rechazado', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
 (9, '2025-07-09 20:55:29', 20000000, 3, 'atendido', 'Santa Marta (x4) - $20.000.000\n'),
-(10, '2025-07-10 01:13:31', 20000000, 3, 'solicitado', 'Santa Marta (x1) - $5.000.000\n CARTAGENA (x1) - $15.000.000\n '),
+(10, '2025-07-22 02:06:15', 20000000, 3, 'atendido', 'Santa Marta (x1) - $5.000.000\n CARTAGENA (x1) - $15.000.000\n '),
 (11, '2025-07-09 20:55:01', 15000000, 3, 'rechazado', 'CARTAGENA (x1) - $15.000.000\n '),
-(12, '2025-07-09 21:20:27', 60000108, 1, 'atendido', 'CARTAGENA (x4) - $60.000.000\n nuevo (x12) - $108\n ');
+(12, '2025-07-09 21:20:27', 60000108, 1, 'atendido', 'CARTAGENA (x4) - $60.000.000\n nuevo (x12) - $108\n '),
+(13, '2025-07-22 01:51:40', 5000000, 1, 'solicitado', 'Santa Marta (x1) - $5.000.000\n ');
 
 -- --------------------------------------------------------
 
@@ -294,7 +295,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `viajeros`

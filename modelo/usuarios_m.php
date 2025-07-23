@@ -27,7 +27,7 @@ function login($conn, $data) {
                 <script src='../vista/alertas/funcionesalert.js'></script>
                 <body>
                     <script>
-                        informar('$mensaje', 'ACEPTAR', 'http://localhost/SIW-TURISMO/vista/admin/vista_general.php', 'success');
+                        informar('$mensaje', 'ACEPTAR', '../vista/admin/vista_general.php', 'success');
                     </script>
                 </body>";
             exit();
@@ -37,7 +37,7 @@ function login($conn, $data) {
                 <script src='../vista/alertas/funcionesalert.js'></script>
                 <body>
                     <script>
-                        informar('CLAVE INCORRECTA, Por favor, verifica tu contraseña.', 'REINTENTAR', 'http://localhost/SIW-TURISMO/vista/admin/login_admin.php', 'warning');
+                        informar('CLAVE INCORRECTA, Por favor, verifica tu contraseña.', 'REINTENTAR', '../vista/admin/login_admin.php', 'warning');
                     </script>
                 </body>";
             exit();
@@ -48,7 +48,7 @@ function login($conn, $data) {
             <script src='../vista/alertas/funcionesalert.js'></script>
                 <body>
                     <script>
-                        informar('USUARIO NO ENCONTRADO', 'REINTENTAR', 'http://localhost/SIW-TURISMO/vista/admin/login_admin.php', 'error');
+                        informar('USUARIO NO ENCONTRADO', 'REINTENTAR', '../vista/admin/login_admin.php', 'error');
                     </script>
                 </body>";
         exit();

@@ -125,7 +125,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/SIW-TURISMO/vista/general/PaginaPrincipal.php">
+                        <a class="nav-link" href="PaginaPrincipal.php">
                             <i class="fas fa-home"></i> Página Principal
                         </a>
                     </li>
