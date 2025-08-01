@@ -1,4 +1,4 @@
-<?php 
+<?php
 // include '../../conexion.php';
 // include '../../modelo/clientes_m.php';
 ?>
@@ -114,21 +114,37 @@
             </div>
             <div class="mb-3">
                 <label for="contacto1" class="form-label">Contacto 1:</label>
-                <input type="number" class="form-control" id="contacto1" name="contacto1" placeholder="3123456789"  required>
-                <small class="form-text text-muted">Formato:  3XXXXXXXXX</small>
+                <input type="number" class="form-control" id="contacto1" name="contacto1" placeholder="3123456789" required>
+                <small class="form-text text-muted">Formato: 3XXXXXXXXX</small>
             </div>
             <div class="mb-3">
                 <label for="contacto2" class="form-label">Contacto 2 (opcional):</label>
-                <input type="number" class="form-control" id="contacto2" name="contacto2" placeholder="3213456789" >
+                <input type="number" class="form-control" id="contacto2" name="contacto2" placeholder="3213456789">
             </div>
             <div class="mb-3">
                 <label for="direccion" class="form-label">Dirección:</label>
                 <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Teruel, Cra 3e# 5-13" autocomplete="address-line1">
             </div>
+
             <div class="mb-3">
                 <label for="password" class="form-label">Contraseña:</label>
-                <input type="password" class="form-control" id="password" name="clave" placeholder="Crea una contraseña" required autocomplete="new-password">
+                <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    name="clave"
+                    placeholder="Crea una contraseña"
+                    required
+                    autocomplete="new-password">
+                <ul class="mt-2" id="passwordRequirements" style="list-style: none; padding-left: 0;">
+                    <li id="length" class="text-danger">❌ Mínimo 8 caracteres</li>
+                    <li id="lowercase" class="text-danger">❌ Al menos una letra minúscula</li>
+                    <li id="uppercase" class="text-danger">❌ Al menos una letra mayúscula</li>
+                    <li id="number" class="text-danger">❌ Al menos un número</li>
+                    <li id="special" class="text-danger">❌ Al menos un carácter especial (!@#$%^&*)</li>
+                </ul>
             </div>
+
             <div class="d-grid">
                 <button type="submit" class="btn btn-lg btn-custom">
                     <i class="bi bi-check-circle-fill"></i> Registrarse
@@ -143,6 +159,55 @@
     </div>
 
     <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <small id="passwordHelp" class="text-muted"></small>
+
+    <script>
+        const passwordInput = document.getElementById('password');
+
+        const rules = {
+            length: {
+                regex: /.{8,}/,
+                element: document.getElementById('length')
+            },
+            lowercase: {
+                regex: /[a-z]/,
+                element: document.getElementById('lowercase')
+            },
+            uppercase: {
+                regex: /[A-Z]/,
+                element: document.getElementById('uppercase')
+            },
+            number: {
+                regex: /[0-9]/,
+                element: document.getElementById('number')
+            },
+            special: {
+                regex: /[\W_]/,
+                element: document.getElementById('special')
+            }
+        };
+
+        passwordInput.addEventListener('input', () => {
+            const value = passwordInput.value;
+
+            for (const key in rules) {
+                const {
+                    regex,
+                    element
+                } = rules[key];
+                if (regex.test(value)) {
+                    element.classList.remove('text-danger');
+                    element.classList.add('text-success');
+                    element.innerHTML = '✅ ' + element.textContent.slice(2);
+                } else {
+                    element.classList.remove('text-success');
+                    element.classList.add('text-danger');
+                    element.innerHTML = '❌ ' + element.textContent.slice(2);
+                }
+            }
+        });
+    </script>
+
 </body>
 
 </html>

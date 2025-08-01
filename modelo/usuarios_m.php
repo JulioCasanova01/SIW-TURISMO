@@ -85,9 +85,48 @@ function eliminar($conn, $id) {
 }
 
 function actualizar($conn, $data) {
-    $sql = "UPDATE usuarios SET nombre='{$data['nombre']}', correo='{$data['UserEmail']}', rol='{$data['rolUsuario']}', contacto_1='{$data['contacto1']}', contacto_2='{$data['contacto2']}'  WHERE id={$data['id']}";
-    mysqli_query($conn, $sql);
-    header("Location: ../vista/admin/usuarios.php");
+    // Primero, construimos el SQL base
+    $sql = "UPDATE usuarios SET nombre=?, correo=?, rol=?, contacto_1=?, contacto_2=?";
+    $params = [
+        $data['nombre'],
+        $data['UserEmail'],
+        $data['rolUsuario'],
+        $data['contacto1'],
+        $data['contacto2']
+    ];
+    $types = "sssss"; // s = string
+
+    // Verificamos si se quiere cambiar la clave
+    if (!empty($data['cambiarClave'])) {
+        $sql .= ", clave=?";
+        $claveHash = password_hash($data['cambiarClave'], PASSWORD_DEFAULT);
+        $params[] = $claveHash;
+        $types .= "s";
+    }
+
+    // Añadimos la condición WHERE
+    $sql .= " WHERE id=?";
+    $params[] = $data['id'];
+    $types .= "i"; // i = integer
+
+    // Preparamos la sentencia
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        die("Error en prepare: " . $conn->error);
+    }
+
+    // Construimos los parámetros dinámicamente
+    $stmt->bind_param($types, ...$params);
+
+    // Ejecutamos la consulta
+    if ($stmt->execute()) {
+        header("Location: ../vista/admin/usuarios.php");
+        exit();
+    } else {
+        echo "Error al actualizar: " . $stmt->error;
+    }
+
+    $stmt->close();
 }
 
 function contarClientes($conn) {

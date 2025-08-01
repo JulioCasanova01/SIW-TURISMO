@@ -146,17 +146,48 @@ function eliminar($conn, $id) {
 
 function actualizar($conn, $data) {
     $sql = "UPDATE clientes SET 
-        nombre = '{$data['nombre']}',
-        tipo_documento = '{$data['tipo_documento']}',
-        numero_documento = '{$data['numero_documento']}',
-        fecha_nacimiento = '{$data['fecha_nacimiento']}',
-        correo = '{$data['correo']}',
-        contacto_1 = '{$data['contacto1']}',
-        contacto_2 = '{$data['contacto2']}',
-        direccion = '{$data['direccion']}'
-        WHERE id = {$data['id']}";
+        nombre = ?, 
+        tipo_documento = ?, 
+        numero_documento = ?, 
+        fecha_nacimiento = ?, 
+        correo = ?, 
+        contacto_1 = ?, 
+        contacto_2 = ?, 
+        direccion = ?";
 
-    mysqli_query($conn, $sql);
+    $params = [
+        $data['nombre'],
+        $data['tipo_documento'],
+        $data['numero_documento'],
+        $data['fecha_nacimiento'],
+        $data['correo'],
+        $data['contacto1'],
+        $data['contacto2'],
+        $data['direccion']
+    ];
+    $types = "ssssssss";
+
+    // Verificamos si se quiere cambiar la clave
+    if (!empty($data['cambiarClave'])) {
+        $sql .= ", clave = ?";
+        $claveHash = password_hash($data['cambiarClave'], PASSWORD_DEFAULT);
+        $params[] = $claveHash;
+        $types .= "s";
+    }
+
+    $sql .= " WHERE id = ?";
+    $params[] = $data['id'];
+    $types .= "i";
+
+    $stmt = mysqli_prepare($conn, $sql);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, $types, ...$params);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    } else {
+        die("Error al preparar la consulta: " . mysqli_error($conn));
+    }
+
     header("Location: ../vista/admin/clientes.php");
 }
 
