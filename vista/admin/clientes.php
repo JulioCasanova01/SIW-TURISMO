@@ -179,25 +179,29 @@
                             <input type="text" class="form-control" name="direccion" value="<?= $cliente['direccion'] ?>" />
                           </div>
 
+                          <details>
+                            <summary>Nueva contraseña (opcional)</summary>
 
-                          <div class="mb-3">
-                            <label for="contrasena_<?= $cliente['id'] ?>">Nueva contraseña (opcional)</label>
-                            <input
-                              type="password"
-                              class="form-control"
-                              id="contrasena_<?= $cliente['id'] ?>"
-                              name="cambiarClave"
-                              placeholder="Llena este campo si deseas cambiar la contraseña"
-                              autocomplete="new-password">
-                            <ul class="mt-2" id="passwordRequirements_<?= $cliente['id'] ?>">
-                              <li id="length_<?= $cliente['id'] ?>" class="text-danger">❌ Mínimo 8 caracteres</li>
-                              <li id="lowercase_<?= $cliente['id'] ?>" class="text-danger">❌ Al menos una letra minúscula</li>
-                              <li id="uppercase_<?= $cliente['id'] ?>" class="text-danger">❌ Al menos una letra mayúscula</li>
-                              <li id="number_<?= $cliente['id'] ?>" class="text-danger">❌ Al menos un número</li>
-                              <li id="special_<?= $cliente['id'] ?>" class="text-danger">❌ Al menos un carácter especial (!@#$%^&*)</li>
-                            </ul>
+                            <div class="mb-3 mt-4">
+                              <label for="contrasena_<?= $cliente['id'] ?>">Contraseña:</label>
+                              <input
+                                type="password"
+                                class="form-control"
+                                id="contrasena_<?= $cliente['id'] ?>"
+                                name="cambiarClave"
+                                placeholder="Llena este campo si deseas cambiar la contraseña"
+                                autocomplete="new-password">
+                              <ul class="mt-2" id="passwordRequirements_<?= $cliente['id'] ?>">
+                                <li id="length_<?= $cliente['id'] ?>" class="text-danger">❌ Mínimo 8 caracteres</li>
+                                <li id="lowercase_<?= $cliente['id'] ?>" class="text-danger">❌ Al menos una letra minúscula</li>
+                                <li id="uppercase_<?= $cliente['id'] ?>" class="text-danger">❌ Al menos una letra mayúscula</li>
+                                <li id="number_<?= $cliente['id'] ?>" class="text-danger">❌ Al menos un número</li>
+                                <li id="special_<?= $cliente['id'] ?>" class="text-danger">❌ Al menos un carácter especial (!@#$%^&*)</li>
+                              </ul>
 
-                          </div>
+                            </div>
+                          </details>
+
                           <script>
                             (function() {
                               const id = <?= $cliente['id'] ?>;
@@ -258,7 +262,7 @@
                                     e.preventDefault(); // Evita el envío del formulario
                                     informar2('Tu contraseña debe cumplir todos los requisitos:\n- Mínimo 8 caracteres\n- Una mayúscula\n- Una minúscula\n- Un número\n- Un carácter especial (!@#$%^&*)', 'Ok');
                                     // Mostrar alerta personalizada
-                                   
+
                                   }
                                 }
                               });
@@ -266,9 +270,9 @@
 
                             function informar2(texto, icono) {
                               Swal.fire({
-                              title: texto,
-                              icon: icono,
-                              draggable: true
+                                title: texto,
+                                icon: icono,
+                                draggable: true
                               });
                             }
                           </script>

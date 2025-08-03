@@ -183,25 +183,28 @@ if ($_SESSION['rol'] !== 'ADMIN') {
                           <input type="number" class="form-control" name="contacto2" value="<?= $usuario['contacto_2'] ?>" />
                         </div>
                         <?php if ($_SESSION['rol'] == 'ADMIN'): ?>
+                          <details>
+                            <summary>Nueva contraseña (opcional)</summary>
+                            <div class="mb-3 mt-4">
+                              <label for="contrasena_<?= $usuario['id'] ?>">Contraseña:</label>
+                              <input
+                                type="password"
+                                class="form-control"
+                                id="contrasena_<?= $usuario['id'] ?>"
+                                name="cambiarClave"
+                                placeholder="Llena este campo si deseas cambiar la contraseña"
+                                autocomplete="new-password">
+                              <ul class="mt-2" id="passwordRequirements_<?= $usuario['id'] ?>">
+                                <li id="length_<?= $usuario['id'] ?>" class="text-danger">❌ Mínimo 8 caracteres</li>
+                                <li id="lowercase_<?= $usuario['id'] ?>" class="text-danger">❌ Al menos una letra minúscula</li>
+                                <li id="uppercase_<?= $usuario['id'] ?>" class="text-danger">❌ Al menos una letra mayúscula</li>
+                                <li id="number_<?= $usuario['id'] ?>" class="text-danger">❌ Al menos un número</li>
+                                <li id="special_<?= $usuario['id'] ?>" class="text-danger">❌ Al menos un carácter especial (!@#$%^&*)</li>
+                              </ul>
 
-                          <div class="mb-3">
-                            <label for="contrasena_<?= $usuario['id'] ?>">Nueva contraseña (opcional)</label>
-                            <input
-                              type="password"
-                              class="form-control"
-                              id="contrasena_<?= $usuario['id'] ?>"
-                              name="cambiarClave"
-                              placeholder="Llena este campo si deseas cambiar la contraseña"
-                              autocomplete="new-password">
-                            <ul class="mt-2" id="passwordRequirements_<?= $usuario['id'] ?>">
-                              <li id="length_<?= $usuario['id'] ?>" class="text-danger">❌ Mínimo 8 caracteres</li>
-                              <li id="lowercase_<?= $usuario['id'] ?>" class="text-danger">❌ Al menos una letra minúscula</li>
-                              <li id="uppercase_<?= $usuario['id'] ?>" class="text-danger">❌ Al menos una letra mayúscula</li>
-                              <li id="number_<?= $usuario['id'] ?>" class="text-danger">❌ Al menos un número</li>
-                              <li id="special_<?= $usuario['id'] ?>" class="text-danger">❌ Al menos un carácter especial (!@#$%^&*)</li>
-                            </ul>
+                            </div>
+                          </details>
 
-                          </div>
                           <script>
                             (function() {
                               const id = <?= $usuario['id'] ?>;
