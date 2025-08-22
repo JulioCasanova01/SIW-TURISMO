@@ -284,6 +284,11 @@ if (!isset($_SESSION['id_cliente'])) {
                         <i class="fas fa-home"></i> Inicio
                       </a>
                     </li>
+                    <li>
+                        <a href="perfil.php" class="nav-link">
+                            <i class="fas fa-user"></i> Perfil
+                        </a>
+                    </li>
                     
                 </ul>
             </div>

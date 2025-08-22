@@ -217,13 +217,6 @@
           <p><i class="fas fa-phone me-2"></i>+57 314 314 4506</p>
         </div>
 
-        <div class="col-md-4 mb-4">
-          <h5>Enlaces rápidos</h5>
-          <ul class="list-unstyled">
-            <li><a href="index.php">Inicio</a></li>
-            <li><a href="contactanos.php">Contáctanos</a></li>
-          </ul>
-        </div>
 
         <div class="col-md-4 mb-4">
           <h5>Síguenos</h5>

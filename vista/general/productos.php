@@ -6,6 +6,8 @@
     }
     include '../../conexion.php';
     include '../../modelo/productos_m.php';
+    include '../../modelo/obtenerEstados.php';
+    $haycarrito = haycarrito();
     $nombreCliente = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : 'Cliente';
     // Obtener filtros desde GET
     $filtroCategoria = isset($_GET['categoria']) ? $_GET['categoria'] : '';
@@ -127,11 +129,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="PaginaPrincipal.php">
                             <i class="fas fa-home"></i> Página Principal
+                            <hr>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="carrito.php">
                             <i class="fas fa-cart-shopping"></i> Carrito
+                            <?php if ($haycarrito): ?>
+                                <span class="badge bg-danger"><?php echo count($_SESSION['carrito']); ?></span>
+                            <?php endif; ?>
+                            <hr>
                         </a>
                     </li>
                     

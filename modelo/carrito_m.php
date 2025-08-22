@@ -1,11 +1,13 @@
 <?php
 require '../vendor/autoload.php';
+
 use Dompdf\Dompdf;
 
 include '../conexion.php';
 session_start();
 
-function agregar($data) {
+function agregar($data)
+{
     $id = $data['id_producto'];
     $nombre = $data['nombre'];
     $precio = $data['precio'];
@@ -39,7 +41,8 @@ function agregar($data) {
     exit();
 }
 
-function actualizar($data) {
+function actualizar($data)
+{
     $index = $data['index'];
     $cantidad = $data['cantidad'];
 
@@ -51,25 +54,35 @@ function actualizar($data) {
     exit();
 }
 
-function eliminarDelCarrito($index) {
+function eliminarDelCarrito($index)
+{
     if (isset($_SESSION['carrito'][$index])) {
         unset($_SESSION['carrito'][$index]);
         $_SESSION['carrito'] = array_values($_SESSION['carrito']);
     }
 }
 
-function finalizar() {
+function finalizar()
+{
     global $conn;
 
     if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
-        echo "<script>alert('El carrito está vacío.');window.location.href='../vista/general/Productos.php';</script>";
-        return;
+        echo "
+                <script src='../libs/SweetAlert2/sweetalert2.all.min.js'></script>
+                <script src='../vista/alertas/funcionesalert.js'></script>
+                <body>
+                        <script>
+                            informar('El carrito está vacío.','VOLVER', '../vista/general/Productos.php', 'error');
+                        </script>
+                </body>";
+        exit();
     }
 
     if (!isset($_SESSION['id_cliente'])) {
         echo "<script>alert('Debe iniciar sesión para finalizar la compra.');window.location.href='../login.php';</script>";
         return;
     }
+
 
     $carrito = $_SESSION['carrito'];
     $total = 0;
@@ -215,4 +228,3 @@ function finalizar() {
         </script>
     </body>";
 }
-?>
