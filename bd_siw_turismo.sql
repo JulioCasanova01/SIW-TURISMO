@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-07-2025 a las 03:35:37
+-- Tiempo de generación: 22-08-2025 a las 04:40:10
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `bd_siw_turismo`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `abonos`
+--
+
+CREATE TABLE `abonos` (
+  `id` int(11) NOT NULL,
+  `id_venta` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `monto` decimal(10,2) NOT NULL,
+  `metodo_pago` varchar(50) NOT NULL,
+  `observaciones` text DEFAULT NULL,
+  `comprobante_pago` varchar(250) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `abonos`
+--
+
+INSERT INTO `abonos` (`id`, `id_venta`, `fecha`, `monto`, `metodo_pago`, `observaciones`, `comprobante_pago`) VALUES
+(1, 15, '0000-00-00', 25000.00, 'nequi', NULL, NULL),
+(2, 15, '0000-00-00', 10475000.00, 'nequi', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -93,7 +117,7 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id`, `nombre`, `tipo_documento`, `numero_documento`, `fecha_registro`, `fecha_nacimiento`, `correo`, `contacto_1`, `contacto_2`, `clave`, `direccion`) VALUES
-(1, 'Julio Andrés ', 'TI', 1075252762, '2025-05-26 04:24:21', '2009-05-01', 'julio@gmail.com', '3102366157', '3208653588', '$2y$10$EO.zWhcbY.V.2Ac2QmvE/OKEzQp0uXC9quCJqDESDmGajBg0AWz6C', 'Teruel, Cra 3E #5-13'),
+(1, 'Julio Andrés', 'TI', NULL, '2025-05-26 04:24:21', NULL, 'julio@gmail.com', '3102366157', '3208653588', '$2y$10$v5r9ANHf7QFilHtUd3wHpeix5AzL.1YmSrMpAK4k1kSp8wD/ssIp6', 'Teruel, Cra 3E #5-13'),
 (2, 'Juan Esteban', 'TI', 1084923574, '2025-05-25 23:53:04', '2008-08-16', 'juan@gmail.com', '3123456789', '32123456789', '$2y$10$CSU4/MBvhNtk7peVOcNMHOYjaOD0eNSATY2P5so8ePreXiCnSBt0K', 'Teruel, Cra 1 #4E-30'),
 (3, 'Vrenda Galindo', 'TI', 1084923524, '2025-05-27 01:58:57', '2008-10-17', 'vrenda@gmail.com', '3213456789', '', '$2y$10$2ZmzeEgmMU3SLEL78jPweez7jUDg1jKXCWA.OO2UKANorT9tr4hGq', 'Cra 4 #3-01'),
 (4, 'juan', 'TI', 21988982, '2025-06-04 20:42:44', '2001-02-23', 'juacho@silva.com', '310236623', '', '$2y$10$Ns/JcV1vHbUYNdspAMl5wOQwNNJDqI1lMTVKCVTS/UzjqKYOrryui', 'Teruel, Cra 1 #4E-31');
@@ -167,8 +191,8 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`id`, `fecha`, `total`, `id_cliente`, `estado`, `detalles`) VALUES
-(1, '2025-07-09 20:56:20', 60000000, 1, 'atendido', 'CARTAGENA (x4) - $60.000.000\n'),
-(2, '2025-07-09 20:56:12', 23800011, 2, 'atendido', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
+(1, '2025-08-22 00:40:43', 60000000, 1, 'rechazado', 'CARTAGENA (x4) - $60.000.000\n'),
+(2, '2025-08-22 00:41:46', 23800011, 2, 'rechazado', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
 (3, '2025-07-09 20:56:03', 35700011, 3, 'atendido', 'nuevo (x1) - $9\nCARTAGENA (x2) - $30.000.000\n'),
 (4, '2025-07-09 20:55:57', 53550000, 4, 'atendido', 'CARTAGENA (x3) - $45.000.000\n'),
 (5, '2025-07-09 20:55:52', 23800000, 1, 'atendido', 'Santa Marta (x4) - $20.000.000\n'),
@@ -179,7 +203,9 @@ INSERT INTO `ventas` (`id`, `fecha`, `total`, `id_cliente`, `estado`, `detalles`
 (10, '2025-07-22 02:06:15', 20000000, 3, 'atendido', 'Santa Marta (x1) - $5.000.000\n CARTAGENA (x1) - $15.000.000\n '),
 (11, '2025-07-09 20:55:01', 15000000, 3, 'rechazado', 'CARTAGENA (x1) - $15.000.000\n '),
 (12, '2025-07-09 21:20:27', 60000108, 1, 'atendido', 'CARTAGENA (x4) - $60.000.000\n nuevo (x12) - $108\n '),
-(13, '2025-07-22 01:51:40', 5000000, 1, 'solicitado', 'Santa Marta (x1) - $5.000.000\n ');
+(13, '2025-08-22 00:42:45', 5000000, 1, 'rechazado', 'Santa Marta (x1) - $5.000.000\n '),
+(14, '2025-08-21 22:07:08', 15000000, 1, 'solicitado', 'CARTAGENA (x1) - $15.000.000\n '),
+(15, '2025-08-21 22:47:29', 10500000, 1, 'solicitado', 'Santa Marta (x2) - $10.000.000\n Medellín (x1) - $500.000\n ');
 
 -- --------------------------------------------------------
 
@@ -209,6 +235,13 @@ INSERT INTO `viajeros` (`id`, `nombre`, `tipo_de_documento`, `numero_de_document
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `abonos`
+--
+ALTER TABLE `abonos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_venta` (`id_venta`);
 
 --
 -- Indices de la tabla `atencion_clientes`
@@ -262,6 +295,12 @@ ALTER TABLE `viajeros`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `abonos`
+--
+ALTER TABLE `abonos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `atencion_clientes`
 --
 ALTER TABLE `atencion_clientes`
@@ -295,7 +334,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `viajeros`
@@ -306,6 +345,12 @@ ALTER TABLE `viajeros`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `abonos`
+--
+ALTER TABLE `abonos`
+  ADD CONSTRAINT `abonos_ibfk_1` FOREIGN KEY (`id_venta`) REFERENCES `ventas` (`id`);
 
 --
 -- Filtros para la tabla `productos`
