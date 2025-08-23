@@ -336,7 +336,6 @@ $compras->data_seek(0); // Reset result pointer para usar en tabla
 
                                     // Obtener todos los abonos de la venta
                                     $abonos = obtenerAbonosPorVenta($conn, $id_venta);
-
                                     // Obtener el total de abonos
                                     $totalAbonos = obtenerTotalAbonosPorVenta($conn, $id_venta);
                                     $abonos_rechazados = obtenerAbonosRechazados($conn, $id_venta);

@@ -1,8 +1,10 @@
-<?php 
+<?php
 include '../../conexion.php';
 include '../../modelo/obtenerEstados.php';
 $CampanaPedidos = hayPedidos($conn);
 $CampanaAtencion = hayAtenciones($conn);
+$CampanaPedidosFisicos=hayPedidosFisicos($conn);
+$campanaAbonos = hayAbonosPendientes($conn);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,12 +15,11 @@ $CampanaAtencion = hayAtenciones($conn);
     <title>sidebar</title>
     <!-- Font Awesome CDN para que funcionen los iconos -->
     <link
-      href="../../libs/bootstrap-5.3.3-dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+        href="../../libs/bootstrap-5.3.3-dist/css/bootstrap.min.css"
+        rel="stylesheet" />
     <link href="../../libs/fontawesome-free-6.7.2-web/css/all.min.css" />
     <!-- Aquí puedes agregar tus estilos CSS o enlaces a Bootstrap si usas -->
-    
+
 
 </head>
 
@@ -41,7 +42,7 @@ $CampanaAtencion = hayAtenciones($conn);
                         <i class="fas fa-chart-line me-2"></i>ADMINISTRAR
                     </a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="productos.php" class="nav-link i-productos text-white">
                         <i class="fas fa-suitcase-rolling me-2"></i>PRODUCTOS
@@ -58,7 +59,7 @@ $CampanaAtencion = hayAtenciones($conn);
                         <i class="fas fa-map-marked-alt me-2"></i>Tours
                     </a>
                 </li> -->
-                <?php if ($_SESSION['rol'] == 'ADMIN'):?>
+                <?php if ($_SESSION['rol'] == 'ADMIN'): ?>
                     <li class="nav-item">
                         <a href="usuarios.php" class="nav-link i-usuarios text-white">
                             <i class="fas fa-users-cog me-2"></i>Usuarios
@@ -75,7 +76,7 @@ $CampanaAtencion = hayAtenciones($conn);
                         <i class="fas fa-globe me-2"></i>Círculo Viajero
                     </a>
                 </li>
-                <?php if ($_SESSION['rol'] == 'ADMIN' || $_SESSION['rol'] == 'ATENCION_CLIENTE'):?>
+                <?php if ($_SESSION['rol'] == 'ADMIN' || $_SESSION['rol'] == 'ATENCION_CLIENTE'): ?>
                     <li class="nav-item">
                         <a href="atencion_cliente.php" class="nav-link i-atencion_cliente text-white">
                             <i class="fas fa-comments me-2"></i>Atención al Cliente
@@ -85,7 +86,7 @@ $CampanaAtencion = hayAtenciones($conn);
                         </a>
                     </li>
                 <?php endif; ?>
-               <li class="nav-item">
+                <li class="nav-item">
                     <a href="pedidos.php" class="nav-link i-pedidos text-white">
                         <i class="fas fa-file-invoice-dollar me-2"></i>
                         Pedidos Online
@@ -95,9 +96,30 @@ $CampanaAtencion = hayAtenciones($conn);
                         <?php endif; ?>
                     </a>
                 </li>
+                 <li class="nav-item">
+                    <a href="pedidos_tienda.php" class="nav-link i-pedidos_tienda text-white">
+                        <i class="fas fa-store me-2"></i>
+                        Pedidos en Tienda
+
+                        <?php if ($CampanaPedidosFisicos): ?>
+                            <i class="fas fa-bell text-warning ms-2"></i> <!-- Campana -->
+                        <?php endif; ?>
+                    </a>
+                </li>
+                <?php if ($_SESSION['rol'] != 'ATENCION_CLIENTE'): ?>
+                    <li class="nav-item">
+                        <a href="abonos.php" class="nav-link i-abonos text-white">
+                            <i class="fas fa-hand-holding-usd me-2"></i>Abonos
+                            <?php if ($campanaAbonos): ?>
+                            <i class="fas fa-bell text-warning ms-2"></i> <!-- Campana -->
+                        <?php endif; ?>
+                        </a>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <a href="categorias.php" class="nav-link i-categorias text-white">
                         <i class="fas fa-car me-2"></i>Categorías
+                        
                     </a>
                 </li>
 
@@ -111,19 +133,18 @@ $CampanaAtencion = hayAtenciones($conn);
             </ul>
         </nav>
     </div>
-    
+
 
 
     <script>
         async function salir() {
-        event.preventDefault();
-        const confirmarSalida = await confirmar('¿Estás seguro de que deseas cerrar sesión?','Si, Salir', 'No, cancelar', 'question');
-        if (confirmarSalida) {
-            window.location.href =  '../../controlador/clientes_c.php?accion=salir';
+            event.preventDefault();
+            const confirmarSalida = await confirmar('¿Estás seguro de que deseas cerrar sesión?', 'Si, Salir', 'No, cancelar', 'question');
+            if (confirmarSalida) {
+                window.location.href = '../../controlador/clientes_c.php?accion=salir';
+            }
         }
-        }
-
-  </script>
+    </script>
     <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../libs/SweetAlert2/sweetalert2.all.min.js"></script>
     <script src="../alertas/funcionesalert.js"></script>

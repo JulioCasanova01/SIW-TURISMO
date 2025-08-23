@@ -30,13 +30,15 @@
         <p><strong>Fecha de compra:</strong> <?php echo $venta['fecha']; ?></p>
         <hr>
 
+
         <h6>💰 Abonos realizados:</h6>
         <ul>
           <?php if (!empty($abonos)): ?>
             <?php foreach ($abonos as $abono): ?>
               <li>
+
                 $<?php echo number_format($abono['monto'], 0, ',', '.'); ?>
-                - <?php echo $abono['fecha']; ?>
+                - <?php echo $abono['fecha']; ?> (Aceptado)
               </li>
             <?php endforeach; ?>
           <?php else: ?>
@@ -50,6 +52,7 @@
           <?php if (!empty($abonos_pendientes)): ?>
             <?php foreach ($abonos_pendientes as $abonoP): ?>
               <li>
+
                 $<?php echo number_format($abonoP['monto'], 0, ',', '.'); ?>
                 - <?php echo $abonoP['fecha']; ?> (Pendiente)
               </li>

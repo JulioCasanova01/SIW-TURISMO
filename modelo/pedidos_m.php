@@ -2,7 +2,7 @@
     function obtenerPedidos($conn) {
         $pedidos = [];
 
-        $sql = "SELECT id, fecha, total, id_cliente, estado, detalles FROM ventas ORDER BY id DESC";
+        $sql = "SELECT id, fecha, total, id_cliente, estado, detalles FROM ventas WHERE tipo_venta = 'online' ORDER BY id DESC";
         $resultado = $conn->query($sql);
 
         if ($resultado && $resultado->num_rows > 0) {
@@ -13,7 +13,20 @@
 
         return $pedidos;
     }
-   
+   function obtenerPedidosFisicos($conn) {
+        $pedidos = [];
+
+        $sql = "SELECT * FROM ventas WHERE tipo_venta = 'fisica' ORDER BY id DESC";
+        $resultado = $conn->query($sql);
+
+        if ($resultado && $resultado->num_rows > 0) {
+            while ($fila = $resultado->fetch_assoc()) {
+                $pedidos[] = $fila;
+            }
+        }
+
+        return $pedidos;
+    }
     function cambiarestado($conn, $data) {
         $sql = "UPDATE ventas SET estado='{$data['estado']}'  WHERE id={$data['id']}";
         mysqli_query($conn, $sql);

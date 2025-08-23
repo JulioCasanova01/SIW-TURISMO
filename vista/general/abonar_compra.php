@@ -1,7 +1,7 @@
  <div class="modal fade" id="abonarCompraModal<?php echo $compra['id']; ?>" tabindex="-1" aria-labelledby="abonarCompraLabel" aria-hidden="true">
      <div class="modal-dialog">
          <div class="modal-content">
-             <form method="POST" action="../../controlador/abonos_c.php?accion=crear">
+             <form method="POST" action="../../controlador/abonos_c.php?accion=registrar" enctype="multipart/form-data">
                  <div class="modal-header bg-success text-white">
                      <h5 class="modal-title" id="abonarCompraLabel">Realizar Abono</h5>
                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -21,7 +21,8 @@
                         <input type="text" name="tipo_transferencia" class="form-control" placeholder="Ejemplo: Nequi, Daviplata, Bancolombia..." required>
                      </div>
                      <div class="mb-3">
-                         <input type="file" class="form-control" name="comprobante" accept="image/*,pdf">
+                        <label for="">Adjuntar comprobante de pago</label>
+                         <input type="file" class="form-control" name="comprobante" accept="image/*,pdf" required>
                      </div>
                      <div class="mb-3">
                          <label>Observaciones (opcional)</label>
