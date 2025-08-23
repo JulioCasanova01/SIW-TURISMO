@@ -41,7 +41,7 @@ function obtenerVentasporId($conn, $id_venta) {
 }
 // Obtener lista de abonos de una venta
 function obtenerAbonosPorVenta($conn, $id_venta) {
-    $sql = "SELECT * FROM abonos WHERE id_venta = ?";
+    $sql = "SELECT * FROM abonos WHERE id_venta = ? AND estado = 'aceptado'";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id_venta);
     $stmt->execute();
@@ -52,7 +52,7 @@ function obtenerAbonosPorVenta($conn, $id_venta) {
 
 // Obtener el total de abonos de una venta
 function obtenerTotalAbonosPorVenta($conn, $id_venta) {
-    $sql = "SELECT SUM(monto) AS total_abonos FROM abonos WHERE id_venta = ?";
+    $sql = "SELECT SUM(monto) AS total_abonos FROM abonos WHERE id_venta = ? AND estado = 'aceptado'";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id_venta);
     $stmt->execute();
@@ -60,6 +60,25 @@ function obtenerTotalAbonosPorVenta($conn, $id_venta) {
     $row = $result->fetch_assoc();
     
     return $row['total_abonos'] ?? 0;
+}
+// obtener abonos rechazados
+function obtenerAbonosRechazados($conn, $id_venta) {
+    $sql = "SELECT * FROM abonos WHERE id_venta = ? AND estado = 'rechazado'";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id_venta);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+function obtenerAbonosPendientes($conn, $id_venta) {
+    $sql = "SELECT * FROM abonos WHERE id_venta = ? AND estado = 'pendiente'";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id_venta);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    return $result->fetch_all(MYSQLI_ASSOC);
 }
 
 ?>

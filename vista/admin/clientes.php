@@ -146,7 +146,7 @@
                             <label class="form-label">Tipo de Documento</label>
                             <select class="form-select" name="tipo_documento">
                               <?php
-                              $tipos = ["CC" => "Cédula de Ciudadanía", "TI" => "Tarjeta de Identidad", "RC" => "Registro Civil", "PASAPORTE" => "Pasaporte", "CE" => "Cédula de Extranjería"];
+                              $tipos = ["CC" => "Cédula de Ciudadanía", "PASAPORTE" => "Pasaporte", "CE" => "Cédula de Extranjería"];
                               foreach ($tipos as $clave => $texto):
                                 $selected = $cliente['tipo_documento'] == $clave ? 'selected' : '';
                                 echo "<option value=\"$clave\" $selected>$texto</option>";

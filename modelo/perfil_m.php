@@ -3,7 +3,9 @@
 function actualizarCliente($conn, $data) {
     $sql = "UPDATE clientes SET 
         nombre = ?, 
-        tipo_documento = ?, 
+        tipo_documento = ?,
+        numero_documento = ?,
+        fecha_nacimiento = ?, 
         correo = ?, 
         contacto_1 = ?, 
         contacto_2 = ?, 
@@ -13,13 +15,15 @@ function actualizarCliente($conn, $data) {
     $params = [
         $data['nombre'],
         $data['tipo_documento'],
+        $data['numero_documento'],
+        $data['fecha_nacimiento'],
         $data['correo'],
         $data['contacto1'],
         $data['contacto2'],
         $data['direccion']
     ];
 
-    $types = "ssssss";
+    $types = "ssssssss";
 
     if (!empty($data['claveHash'])) {
         $params[] = $data['claveHash'];

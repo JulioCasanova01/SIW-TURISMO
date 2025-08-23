@@ -98,8 +98,6 @@
                 <select class="form-select" name="tipo_documento" id="tipo_documento" required>
                     <option value="">Selecciona...</option>
                     <option value="CC">Cédula de Ciudadanía</option>
-                    <option value="TI">Tarjeta de Identidad</option>
-                    <option value="RC">Registro Civil</option>
                     <option value="PASAPORTE">Pasaporte</option>
                     <option value="CE">Cédula de Extranjería</option>
                 </select>

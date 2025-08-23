@@ -9,7 +9,7 @@ include '../../modelo/ventas_m.php';
 
 // Datos del cliente
 $id = $_SESSION['id_cliente'];
-$stmt = $conn->prepare("SELECT nombre, correo, contacto_1, contacto_2, direccion FROM clientes WHERE id = ?");
+$stmt = $conn->prepare("SELECT nombre, tipo_documento, numero_documento, fecha_nacimiento, correo, contacto_1, contacto_2, direccion FROM clientes WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -142,8 +142,20 @@ $compras->data_seek(0); // Reset result pointer para usar en tabla
                                 <div class="mb-3">
                                     <label>Nombre</label>
                                     <input type="text" class="form-control" name="nombre" value="<?= $cliente['nombre'] ?>" required>
+                                    <hr>
                                 </div>
-
+                                <div class="mb-3">
+                                    <label>Número de Documento</label>
+                                    <input type="text" class="form-control" readonly name="numero_documento" value="<?= $cliente['numero_documento'] ?>" required>
+                                    <small>No se puede modificar</small>
+                                    <hr>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Fecha de Nacimiento</label>
+                                    <input type="date" class="form-control" readonly name="fecha_nacimiento" value="<?= $cliente['fecha_nacimiento'] ?>" required>
+                                    <small>No se puede modificar</small>
+                                    <hr>
+                                </div>
                                 <div class="mb-3">
                                     <label>Correo</label>
                                     <input type="email" class="form-control" name="correo" value="<?= $cliente['correo'] ?>" required>
@@ -153,7 +165,7 @@ $compras->data_seek(0); // Reset result pointer para usar en tabla
                                     <label>Tipo de Documento</label>
                                     <select class="form-select" name="tipo_documento" required>
                                         <option value="CC" <?= ($cliente['tipo_documento'] ?? '') == 'CC' ? 'selected' : '' ?>>Cédula de Ciudadanía</option>
-                                        <option value="TI" <?= ($cliente['tipo_documento'] ?? '') == 'TI' ? 'selected' : '' ?>>Tarjeta de Identidad</option>
+                                        <option value="PASAPORTE" <?= ($cliente['tipo_documento'] ?? '') == 'PASAPORTE' ? 'selected' : '' ?>>Pasaporte</option>
                                         <option value="CE" <?= ($cliente['tipo_documento'] ?? '') == 'CE' ? 'selected' : '' ?>>Cédula de Extranjería</option>
                                     </select>
                                 </div>
@@ -302,7 +314,8 @@ $compras->data_seek(0); // Reset result pointer para usar en tabla
                                 <th>Fecha</th>
                                 <th>Total</th>
                                 <th>Estado</th>
-                                <th>Acción</th>
+                                <th>Abonos</th>
+                                <th>Detalles</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -326,29 +339,45 @@ $compras->data_seek(0); // Reset result pointer para usar en tabla
 
                                     // Obtener el total de abonos
                                     $totalAbonos = obtenerTotalAbonosPorVenta($conn, $id_venta);
-                                    
+                                    $abonos_rechazados = obtenerAbonosRechazados($conn, $id_venta);
+                                    $abonos_pendientes = obtenerAbonosPendientes($conn, $id_venta);
+
                                     $saldoPendiente = $venta['total'] - $totalAbonos;
                                     ?>
+                                    <td>
+                                        <?php if ($venta['estado'] === 'atendido' && $saldoPendiente > 0): ?>
+
+                                            <a href="#" class="btn btn-sm btn-success" data-bs-toggle="modal" 
+                                                data-bs-target="#abonarCompraModal<?php echo $compra['id']; ?>">
+                                                <i class="fas fa-dollar"></i> Abonar
+                                            </a>
+                                           
+
+                                        <?php elseif ($saldoPendiente == 0): ?>
+                                            <span class="badge bg-success">Pagado</span>
+                                        <?php endif; ?>
+                                    </td>
                                     <td>
                                         <a href="#" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#detalleCompraModal<?php echo $compra['id']; ?>">
                                             <i class="fas fa-eye"></i> Ver
                                         </a>
                                     </td>
-
-                                    <?php include 'detalle_compra.php'; ?>
-
-
-                                </tr>
-                            <?php endwhile; ?>
-
-                        </tbody>
-                    </table>
-
                 </div>
-            <?php else: ?>
-                <p class="text-center text-muted mt-3">Aún no has realizado compras.</p>
-            <?php endif; ?>
+                <?php include 'abonar_compra.php'; ?>
+                <?php include 'detalle_compra.php'; ?>
+
+
+                </tr>
+            <?php endwhile; ?>
+
+            </tbody>
+            </table>
+
         </div>
+    <?php else: ?>
+        <p class="text-center text-muted mt-3">Aún no has realizado compras.</p>
+    <?php endif; ?>
+    </div>
     </div>
 
     <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>

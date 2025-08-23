@@ -16,15 +16,15 @@
         <p><strong>Cliente:</strong> <?php echo $cliente['nombre'] ?? 'No definido'; ?></p>
         <p><strong>Descripción:</strong> <?php echo $venta['detalles']; ?></p>
 
-        <p><strong>Total venta:</strong> 
+        <p><strong>Total venta:</strong>
           $<?php echo number_format($venta['total'], 0, ',', '.'); ?>
         </p>
 
-        <p><strong>Total abonado:</strong> 
+        <p><strong>Total abonado:</strong>
           $<?php echo number_format($totalAbonos, 0, ',', '.'); ?>
         </p>
 
-        <p><strong>Saldo pendiente:</strong> 
+        <p><strong>Saldo pendiente:</strong>
           $<?php echo number_format($saldoPendiente, 0, ',', '.'); ?>
         </p>
         <p><strong>Fecha de compra:</strong> <?php echo $venta['fecha']; ?></p>
@@ -33,24 +33,59 @@
         <h6>💰 Abonos realizados:</h6>
         <ul>
           <?php if (!empty($abonos)): ?>
-              <?php foreach ($abonos as $abono): ?>
-                <li>
-                  $<?php echo number_format($abono['monto'], 0, ',', '.'); ?> 
-                  - <?php echo $abono['fecha']; ?>
-                </li>
-              <?php endforeach; ?>
+            <?php foreach ($abonos as $abono): ?>
+              <li>
+                $<?php echo number_format($abono['monto'], 0, ',', '.'); ?>
+                - <?php echo $abono['fecha']; ?>
+              </li>
+            <?php endforeach; ?>
           <?php else: ?>
-              <li>No hay abonos registrados.</li>
+            <li>No hay abonos registrados.</li>
           <?php endif; ?>
         </ul>
+
+        <hr>
+        <h6>Abonos pendientes:</h6>
+        <ul>
+          <?php if (!empty($abonos_pendientes)): ?>
+            <?php foreach ($abonos_pendientes as $abonoP): ?>
+              <li>
+                $<?php echo number_format($abonoP['monto'], 0, ',', '.'); ?>
+                - <?php echo $abonoP['fecha']; ?> (Pendiente)
+              </li>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <li>No hay abonos pendientes.</li>
+          <?php endif; ?>
+        </ul>
+
+        <hr>
+        <h6>Abonos rechazados:</h6>
+        <ul>
+          <?php if (!empty($abonos_rechazados)): ?>
+            <?php foreach ($abonos_rechazados as $abonoR): ?>
+              <li>
+                $<?php echo number_format($abonoR['monto'], 0, ',', '.'); ?>
+                - <?php echo $abonoR['fecha']; ?> (Rechazado)
+              </li>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <li>No hay abonos rechazados.</li>
+          <?php endif; ?>
+        </ul>
+
       </div>
 
       <!-- Pie -->
       <div class="modal-footer">
-        <?php if ($saldoPendiente > 0): ?>
-          <span class="badge bg-warning">Pendiente</span>
-        <?php else: ?>
-          <span class="badge bg-success">Pagado</span>
+        <?php if ($compra['estado'] === 'rechazado'): ?>
+          <span class="badge bg-danger">Compra rechazada</span>
+        <?php else : ?>
+          <?php if ($saldoPendiente > 0): ?>
+            <span class="badge bg-warning">Pendiente</span>
+          <?php else: ?>
+            <span class="badge bg-success">Pagado</span>
+          <?php endif; ?>
         <?php endif; ?>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
