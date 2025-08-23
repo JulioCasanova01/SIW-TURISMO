@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-08-2025 a las 04:40:10
+-- Tiempo de generación: 23-08-2025 a las 04:37:57
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -33,17 +33,21 @@ CREATE TABLE `abonos` (
   `fecha` date NOT NULL,
   `monto` decimal(10,2) NOT NULL,
   `metodo_pago` varchar(50) NOT NULL,
+  `tipo_transferencia` varchar(20) NOT NULL,
   `observaciones` text DEFAULT NULL,
-  `comprobante_pago` varchar(250) DEFAULT NULL
+  `comprobante_pago` varchar(250) DEFAULT NULL,
+  `estado` enum('pendiente','aceptado','rechazado') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `abonos`
 --
 
-INSERT INTO `abonos` (`id`, `id_venta`, `fecha`, `monto`, `metodo_pago`, `observaciones`, `comprobante_pago`) VALUES
-(1, 15, '0000-00-00', 25000.00, 'nequi', NULL, NULL),
-(2, 15, '0000-00-00', 10475000.00, 'nequi', NULL, NULL);
+INSERT INTO `abonos` (`id`, `id_venta`, `fecha`, `monto`, `metodo_pago`, `tipo_transferencia`, `observaciones`, `comprobante_pago`, `estado`) VALUES
+(1, 15, '0000-00-00', 25000.00, 'Transferencia', 'nequi', NULL, NULL, 'pendiente'),
+(2, 15, '0000-00-00', 10475000.00, 'Transferencia', 'nequi', NULL, NULL, 'aceptado'),
+(3, 15, '2025-08-22', 25000.00, 'Transferencia', 'nequi', NULL, NULL, 'aceptado'),
+(5, 15, '2025-08-22', 10000.00, 'Transferencia', 'bancolombia', NULL, NULL, 'rechazado');
 
 -- --------------------------------------------------------
 
@@ -117,10 +121,10 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id`, `nombre`, `tipo_documento`, `numero_documento`, `fecha_registro`, `fecha_nacimiento`, `correo`, `contacto_1`, `contacto_2`, `clave`, `direccion`) VALUES
-(1, 'Julio Andrés', 'TI', NULL, '2025-05-26 04:24:21', NULL, 'julio@gmail.com', '3102366157', '3208653588', '$2y$10$v5r9ANHf7QFilHtUd3wHpeix5AzL.1YmSrMpAK4k1kSp8wD/ssIp6', 'Teruel, Cra 3E #5-13'),
-(2, 'Juan Esteban', 'TI', 1084923574, '2025-05-25 23:53:04', '2008-08-16', 'juan@gmail.com', '3123456789', '32123456789', '$2y$10$CSU4/MBvhNtk7peVOcNMHOYjaOD0eNSATY2P5so8ePreXiCnSBt0K', 'Teruel, Cra 1 #4E-30'),
-(3, 'Vrenda Galindo', 'TI', 1084923524, '2025-05-27 01:58:57', '2008-10-17', 'vrenda@gmail.com', '3213456789', '', '$2y$10$2ZmzeEgmMU3SLEL78jPweez7jUDg1jKXCWA.OO2UKANorT9tr4hGq', 'Cra 4 #3-01'),
-(4, 'juan', 'TI', 21988982, '2025-06-04 20:42:44', '2001-02-23', 'juacho@silva.com', '310236623', '', '$2y$10$Ns/JcV1vHbUYNdspAMl5wOQwNNJDqI1lMTVKCVTS/UzjqKYOrryui', 'Teruel, Cra 1 #4E-31');
+(1, 'Julio Andrés', 'CC', 1075252762, '2025-05-26 04:24:21', '2009-05-01', 'julio@gmail.com', '3102366157', '3123456789', '$2y$10$v5r9ANHf7QFilHtUd3wHpeix5AzL.1YmSrMpAK4k1kSp8wD/ssIp6', 'Teruel, Cra 3E #5-13'),
+(2, 'Juan Esteban', 'CC', 1084923574, '2025-05-25 23:53:04', '2008-08-16', 'juan@gmail.com', '3123456789', '32123456789', '$2y$10$CSU4/MBvhNtk7peVOcNMHOYjaOD0eNSATY2P5so8ePreXiCnSBt0K', 'Teruel, Cra 1 #4E-30'),
+(3, 'Vrenda Galindo', 'CC', 1084923524, '2025-05-27 01:58:57', '2008-10-17', 'vrenda@gmail.com', '3213456789', '', '$2y$10$2ZmzeEgmMU3SLEL78jPweez7jUDg1jKXCWA.OO2UKANorT9tr4hGq', 'Cra 4 #3-01'),
+(4, 'juan', 'CC', 21988982, '2025-06-04 20:42:44', '2001-02-23', 'juacho@silva.com', '310236623', '', '$2y$10$Ns/JcV1vHbUYNdspAMl5wOQwNNJDqI1lMTVKCVTS/UzjqKYOrryui', 'Teruel, Cra 1 #4E-31');
 
 -- --------------------------------------------------------
 
@@ -179,7 +183,7 @@ INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `rol`, `contacto_1`, `contacto
 
 CREATE TABLE `ventas` (
   `id` int(11) NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
   `total` int(11) NOT NULL,
   `id_cliente` int(11) NOT NULL,
   `estado` enum('solicitado','atendido','rechazado') DEFAULT NULL,
@@ -204,8 +208,8 @@ INSERT INTO `ventas` (`id`, `fecha`, `total`, `id_cliente`, `estado`, `detalles`
 (11, '2025-07-09 20:55:01', 15000000, 3, 'rechazado', 'CARTAGENA (x1) - $15.000.000\n '),
 (12, '2025-07-09 21:20:27', 60000108, 1, 'atendido', 'CARTAGENA (x4) - $60.000.000\n nuevo (x12) - $108\n '),
 (13, '2025-08-22 00:42:45', 5000000, 1, 'rechazado', 'Santa Marta (x1) - $5.000.000\n '),
-(14, '2025-08-21 22:07:08', 15000000, 1, 'solicitado', 'CARTAGENA (x1) - $15.000.000\n '),
-(15, '2025-08-21 22:47:29', 10500000, 1, 'solicitado', 'Santa Marta (x2) - $10.000.000\n Medellín (x1) - $500.000\n ');
+(14, '2025-08-22 23:21:21', 15000000, 1, 'rechazado', 'CARTAGENA (x1) - $15.000.000\n '),
+(15, '2025-08-22 23:21:41', 10500000, 1, 'atendido', 'Santa Marta (x2) - $10.000.000\n Medellín (x1) - $500.000\n ');
 
 -- --------------------------------------------------------
 
@@ -298,7 +302,7 @@ ALTER TABLE `viajeros`
 -- AUTO_INCREMENT de la tabla `abonos`
 --
 ALTER TABLE `abonos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `atencion_clientes`
