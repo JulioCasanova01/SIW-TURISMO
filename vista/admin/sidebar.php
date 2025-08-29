@@ -87,6 +87,11 @@ $campanaAbonos = hayAbonosPendientes($conn);
                     </li>
                 <?php endif; ?>
                 <li class="nav-item">
+                    <a href="venta_tienda.php" class="nav-link i-venta_tienda text-white">
+                        <i class="fas fa-cash-register me-2"></i>Ventas en Tienda
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="pedidos.php" class="nav-link i-pedidos text-white">
                         <i class="fas fa-file-invoice-dollar me-2"></i>
                         Pedidos Online

@@ -141,7 +141,9 @@
                             <hr>
                         </a>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a href="perfil.php" class="nav-link"><i class="fas fa-user"></i> Perfil <hr></a>
+                    </li>
                     
                     
                 </ul>

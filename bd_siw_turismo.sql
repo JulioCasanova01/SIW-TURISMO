@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-08-2025 a las 04:37:57
+-- Tiempo de generación: 24-08-2025 a las 20:25:26
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -44,10 +44,17 @@ CREATE TABLE `abonos` (
 --
 
 INSERT INTO `abonos` (`id`, `id_venta`, `fecha`, `monto`, `metodo_pago`, `tipo_transferencia`, `observaciones`, `comprobante_pago`, `estado`) VALUES
-(1, 15, '0000-00-00', 25000.00, 'Transferencia', 'nequi', NULL, NULL, 'pendiente'),
-(2, 15, '0000-00-00', 10475000.00, 'Transferencia', 'nequi', NULL, NULL, 'aceptado'),
-(3, 15, '2025-08-22', 25000.00, 'Transferencia', 'nequi', NULL, NULL, 'aceptado'),
-(5, 15, '2025-08-22', 10000.00, 'Transferencia', 'bancolombia', NULL, NULL, 'rechazado');
+(1, 15, '0000-00-00', 25000.00, 'Transferencia', 'nequi', NULL, NULL, 'rechazado'),
+(2, 15, '0000-00-00', 10475000.00, 'Transferencia', 'nequi', '', '68aa4a37290ec-21470714072ecdd016b65cc8ba2b3424.png', 'aceptado'),
+(3, 15, '2025-08-22', 25000.00, 'Transferencia', 'nequi', '', '68aa4a60be933-career.webp', 'aceptado'),
+(5, 15, '2025-08-22', 10000.00, 'Transferencia', 'bancolombia', NULL, NULL, 'rechazado'),
+(6, 12, '2025-08-23', 250000.00, 'Transferencia', 'Daviplata', 'Hola', '', 'aceptado'),
+(7, 12, '2025-08-23', 50000.00, 'Transferencia', 'Nequi', 'okokok', '', 'rechazado'),
+(8, 12, '2025-08-23', 50000000.00, 'Transferencia', 'Nequi', 'jojojo', '68a9cdadca2c3-Piecewise-functions.png', 'rechazado'),
+(9, 4, '2025-08-23', 50000000.00, 'Transferencia', 'Daviplata', 'uuuuuuuuuu', '68a9f6cfd85d0-21470714072ecdd016b65cc8ba2b3424.png', 'aceptado'),
+(10, 12, '2025-08-23', 59750108.00, 'Efectivo', 'Bancolombia', 'prueba', '', 'aceptado'),
+(11, 5, '2025-08-23', 2380000.00, 'Transferencia', 'Daviplata', 'Observaciones', '68aa315bc5cb6-conclusion-text-written-on-blueb.png', 'aceptado'),
+(12, 5, '2025-08-23', 21420000.00, 'Transferencia', 'Daviplata', '', '68aa31b637e11-89fbf09b3110e5849b96036a18316a1f.png', 'aceptado');
 
 -- --------------------------------------------------------
 
@@ -73,7 +80,7 @@ INSERT INTO `atencion_clientes` (`id`, `nombre`, `mensaje`, `fecha`, `estado`, `
 (1, 'Julio Andrés ', 'DFKNVNÑ SDKFH V KEFHBVPJHEBFIVHBERF IPEHFBVUHFBVIBF´PVI FIVHBIERBFVPIDHFBP0IUGYB RIPBG0RTPIWRBY', '2025-07-09 21:02:19', 'RE', 'julio@gmail.com', 3102366157),
 (2, 'Juan Manuel', 'Hola mundo', '2025-06-07 20:37:37', 'RE', 'JuanManuelSena@gmail.com', 3227097033),
 (3, 'Julio Andrés ', 'Este es un mensaje de prueba', '2025-07-09 21:02:23', 'RE', 'juan@gmail.com', 3227097033),
-(4, 'Julio Andrés ', 'Mensaje de prueba', '2025-07-22 02:06:01', 'RE', 'julio@gmail.com', 3102366157);
+(4, 'Julio Andrés ', 'Mensaje de prueba', '2025-08-23 19:29:52', 'PE', 'julio@gmail.com', 3102366157);
 
 -- --------------------------------------------------------
 
@@ -183,6 +190,7 @@ INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `rol`, `contacto_1`, `contacto
 
 CREATE TABLE `ventas` (
   `id` int(11) NOT NULL,
+  `tipo_venta` enum('online','fisica','','') NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
   `total` int(11) NOT NULL,
   `id_cliente` int(11) NOT NULL,
@@ -194,22 +202,22 @@ CREATE TABLE `ventas` (
 -- Volcado de datos para la tabla `ventas`
 --
 
-INSERT INTO `ventas` (`id`, `fecha`, `total`, `id_cliente`, `estado`, `detalles`) VALUES
-(1, '2025-08-22 00:40:43', 60000000, 1, 'rechazado', 'CARTAGENA (x4) - $60.000.000\n'),
-(2, '2025-08-22 00:41:46', 23800011, 2, 'rechazado', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
-(3, '2025-07-09 20:56:03', 35700011, 3, 'atendido', 'nuevo (x1) - $9\nCARTAGENA (x2) - $30.000.000\n'),
-(4, '2025-07-09 20:55:57', 53550000, 4, 'atendido', 'CARTAGENA (x3) - $45.000.000\n'),
-(5, '2025-07-09 20:55:52', 23800000, 1, 'atendido', 'Santa Marta (x4) - $20.000.000\n'),
-(6, '2025-07-09 20:55:45', 35000009, 2, 'rechazado', 'CARTAGENA (x2) - $30.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
-(7, '2025-07-09 20:55:40', 306, 2, 'rechazado', 'nuevo (x34) - $306\n'),
-(8, '2025-07-09 20:55:35', 20000009, 3, 'rechazado', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
-(9, '2025-07-09 20:55:29', 20000000, 3, 'atendido', 'Santa Marta (x4) - $20.000.000\n'),
-(10, '2025-07-22 02:06:15', 20000000, 3, 'atendido', 'Santa Marta (x1) - $5.000.000\n CARTAGENA (x1) - $15.000.000\n '),
-(11, '2025-07-09 20:55:01', 15000000, 3, 'rechazado', 'CARTAGENA (x1) - $15.000.000\n '),
-(12, '2025-07-09 21:20:27', 60000108, 1, 'atendido', 'CARTAGENA (x4) - $60.000.000\n nuevo (x12) - $108\n '),
-(13, '2025-08-22 00:42:45', 5000000, 1, 'rechazado', 'Santa Marta (x1) - $5.000.000\n '),
-(14, '2025-08-22 23:21:21', 15000000, 1, 'rechazado', 'CARTAGENA (x1) - $15.000.000\n '),
-(15, '2025-08-22 23:21:41', 10500000, 1, 'atendido', 'Santa Marta (x2) - $10.000.000\n Medellín (x1) - $500.000\n ');
+INSERT INTO `ventas` (`id`, `tipo_venta`, `fecha`, `total`, `id_cliente`, `estado`, `detalles`) VALUES
+(1, 'online', '2025-08-22 00:40:43', 60000000, 1, 'rechazado', 'CARTAGENA (x4) - $60.000.000\n'),
+(2, 'fisica', '2025-08-22 00:41:46', 23800011, 2, 'solicitado', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
+(3, 'online', '2025-07-09 20:56:03', 35700011, 3, 'atendido', 'nuevo (x1) - $9\nCARTAGENA (x2) - $30.000.000\n'),
+(4, 'fisica', '2025-07-09 20:55:57', 53550000, 4, 'atendido', 'CARTAGENA (x3) - $45.000.000\n'),
+(5, 'online', '2025-07-09 20:55:52', 23800000, 1, 'atendido', 'Santa Marta (x4) - $20.000.000\n'),
+(6, 'online', '2025-07-09 20:55:45', 35000009, 2, 'rechazado', 'CARTAGENA (x2) - $30.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
+(7, 'online', '2025-07-09 20:55:40', 306, 2, 'rechazado', 'nuevo (x34) - $306\n'),
+(8, 'online', '2025-07-09 20:55:35', 20000009, 3, 'rechazado', 'CARTAGENA (x1) - $15.000.000\nSanta Marta (x1) - $5.000.000\nnuevo (x1) - $9\n'),
+(9, 'online', '2025-07-09 20:55:29', 20000000, 3, 'atendido', 'Santa Marta (x4) - $20.000.000\n'),
+(10, 'online', '2025-07-22 02:06:15', 20000000, 3, 'atendido', 'Santa Marta (x1) - $5.000.000\n CARTAGENA (x1) - $15.000.000\n '),
+(11, 'online', '2025-07-09 20:55:01', 15000000, 3, 'solicitado', 'CARTAGENA (x1) - $15.000.000\n '),
+(12, 'online', '2025-07-09 21:20:27', 60000108, 1, 'atendido', 'CARTAGENA (x4) - $60.000.000\n nuevo (x12) - $108\n '),
+(13, 'online', '2025-08-22 00:42:45', 5000000, 1, 'rechazado', 'Santa Marta (x1) - $5.000.000\n '),
+(14, 'online', '2025-08-22 23:21:21', 15000000, 1, 'rechazado', 'CARTAGENA (x1) - $15.000.000\n '),
+(15, 'online', '2025-08-22 23:21:41', 10500000, 1, 'atendido', 'Santa Marta (x2) - $10.000.000\n Medellín (x1) - $500.000\n ');
 
 -- --------------------------------------------------------
 
@@ -302,7 +310,7 @@ ALTER TABLE `viajeros`
 -- AUTO_INCREMENT de la tabla `abonos`
 --
 ALTER TABLE `abonos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `atencion_clientes`

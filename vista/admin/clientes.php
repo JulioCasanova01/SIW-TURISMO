@@ -4,48 +4,99 @@
     padding: 1rem;
   }
 
+  /* Contenedor con scroll solo en móviles */
   .table-container {
     width: 100%;
     overflow-x: auto;
-    overflow-y: hidden;
   }
 
   table {
-    min-width: 100%;
+    width: 100%;
+    border-collapse: collapse;
   }
 
   th,
   td {
-    overflow-wrap: break-word;
-    min-width: 100px;
+    word-wrap: break-word;
     text-align: center;
     vertical-align: middle;
   }
 
-  @media (max-width: 768px) {
+  /* Estilos para pantallas pequeñas */
+  @media (max-width: 576px) {
     .table {
-      font-size: 0.85rem;
+      font-size: 0.75rem;
     }
 
     .btn {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.4rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+    }
+
+    .navbar .form-control {
       font-size: 0.75rem;
-      padding: 0.25rem 0.5rem;
+    }
+
+    .modal-dialog {
+      margin: 0.5rem;
+      width: 95% !important;
+    }
+
+    /* en móviles, damos un ancho mínimo para que aparezca el scroll */
+    table {
+      min-width: 800px;
     }
   }
 
-  @media (min-width: 768px) {
+  /* Tablets */
+  @media (min-width: 577px) and (max-width: 991px) {
     .table {
       font-size: 0.85rem;
     }
 
     .btn {
       font-size: 0.75rem;
-      padding: 0.25rem 0.5rem;
+      padding: 0.3rem 0.6rem;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+    }
+
+    .modal-dialog {
+      width: 90% !important;
+    }
+
+    table {
+      min-width: 900px;
+    }
+  }
+
+  /* Escritorio */
+  @media (min-width: 992px) {
+    .table {
+      font-size: 0.9rem;
+    }
+
+    .btn {
+      font-size: 0.8rem;
+      padding: 0.35rem 0.75rem;
+    }
+
+    .modal-dialog {
+      max-width: 800px;
+    }
+
+    /* En escritorio NO forzamos min-width → se adapta sin scroll */
+    table {
+      min-width: unset;
     }
   }
 </style>
-
-
 
 
 <body>
@@ -59,42 +110,41 @@
     <?php include('sidebar.php'); ?>
 
     <div class="flex-grow-1">
-      <nav class="navbar navbar-dark">
+      <!-- Navbar -->
+      <nav class="navbar navbar-dark bg-primary">
         <div class="container-fluid">
           <span class="navbar-brand text-white">Gestión de Clientes</span>
-          <div class="dataTables_filter">
+          <div class="dataTables_filter ms-auto">
             <input type="search" id="buscar" class="form-control form-control-sm" placeholder="Buscar...">
           </div>
         </div>
       </nav>
 
+      <!-- Contenido principal -->
       <div class="main-content">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
           <h2 class="mb-3 mb-md-0 mt-4">Clientes</h2>
-          <!-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalClientes">
-          <i class="fas fa-plus me-2"></i>Nuevo Cliente
-        </button> -->
         </div>
 
+        <!-- Tabla responsive -->
         <div class="table-container">
           <table class="table table-striped table-hover align-middle">
             <thead class="table-dark text-center">
               <tr>
-                <th><i class="fas fa-id-badge"></i> ID</th>
-                <th><i class="fas fa-user"></i> Nombre Completo</th>
-                <th><i class="fas fa-id-card"></i> Tipo Doc.</th>
-                <th><i class="fas fa-hashtag"></i> Número</th>
-                <th><i class="fas fa-birthday-cake"></i> Nacimiento</th>
-                <th><i class="fas fa-calendar-plus"></i> Registro</th>
-                <th><i class="fas fa-envelope"></i> Correo</th>
-                <th><i class="fas fa-phone-alt"></i> Contacto 1</th>
-                <th><i class="fas fa-mobile-alt"></i> Contacto 2</th>
-                <th><i class="fas fa-map-marker-alt"></i> Dirección</th>
-                <th><i class="fas fa-cogs"></i> Acciones</th>
-
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Tipo Doc.</th>
+                <th>Número</th>
+                <th>Nacimiento</th>
+                <th>Registro</th>
+                <th>Correo</th>
+                <th>Contacto 1</th>
+                <th>Contacto 2</th>
+                <th>Dirección</th>
+                <th>Acciones</th>
               </tr>
             </thead>
-            <tbody class="text-center">
+            <tbody>
               <?php foreach ($clientes as $cliente): ?>
                 <tr>
                   <td><?= $cliente['id'] ?></td>
@@ -115,73 +165,77 @@
                     </a>
                   </td>
                   <td><?= $cliente['direccion'] ?></td>
-
                   <td>
-                    <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
+                    <button class="btn btn-sm btn-outline-primary m-2" data-bs-toggle="modal"
                       data-bs-target="#modalEditar<?= $cliente['id'] ?>">
                       <i class="fas fa-edit"></i>
                     </button>
                     <button class="btn btn-sm btn-outline-danger"
-                      onclick="eliminar(event, <?= $cliente['id'] ?>)"><i class="fas fa-trash-alt"></i>
+                      onclick="eliminar(event, <?= $cliente['id'] ?>)">
+                      <i class="fas fa-trash-alt"></i>
                     </button>
                   </td>
                 </tr>
 
                 <!-- Modal Editar Cliente -->
-                <div class="modal fade" id="modalEditar<?= $cliente['id'] ?>" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
-                  <div class="modal-dialog">
+                <div class="modal fade" id="modalEditar<?= $cliente['id'] ?>" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                       <div class="modal-header bg-primary text-white">
                         <h5 class="modal-title">Editar Cliente</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                       </div>
                       <div class="modal-body">
                         <form action="../../controlador/clientes_c.php?accion=actualizar" method="POST">
                           <input type="hidden" name="id" value="<?= $cliente['id'] ?>" />
-                          <div class="mb-3">
-                            <label class="form-label">Nombre</label>
-                            <input type="text" class="form-control" name="nombre" value="<?= $cliente['nombre'] ?>" />
-                          </div>
-                          <div class="mb-3">
-                            <label class="form-label">Tipo de Documento</label>
-                            <select class="form-select" name="tipo_documento">
-                              <?php
-                              $tipos = ["CC" => "Cédula de Ciudadanía", "PASAPORTE" => "Pasaporte", "CE" => "Cédula de Extranjería"];
-                              foreach ($tipos as $clave => $texto):
-                                $selected = $cliente['tipo_documento'] == $clave ? 'selected' : '';
-                                echo "<option value=\"$clave\" $selected>$texto</option>";
-                              endforeach;
-                              ?>
-                            </select>
-                          </div>
-                          <div class="mb-3">
-                            <label class="form-label">Número de Documento</label>
-                            <input type="number" class="form-control" name="numero_documento" value="<?= $cliente['numero_documento'] ?>" />
-                          </div>
-                          <div class="mb-3">
-                            <label class="form-label">Fecha de Nacimiento</label>
-                            <input type="date" class="form-control" name="fecha_nacimiento" value="<?= $cliente['fecha_nacimiento'] ?>" />
-                          </div>
-                          <div class="mb-3">
-                            <label class="form-label">Correo</label>
-                            <input type="email" class="form-control" name="correo" value="<?= $cliente['correo'] ?>" />
-                          </div>
-                          <div class="mb-3">
-                            <label class="form-label">Contacto 1</label>
-                            <input type="number" class="form-control" name="contacto1" value="<?= $cliente['contacto_1'] ?>" />
-                          </div>
-                          <div class="mb-3">
-                            <label class="form-label">Contacto 2</label>
-                            <input type="number" class="form-control" name="contacto2" value="<?= $cliente['contacto_2'] ?>" />
-                          </div>
-                          <div class="mb-3">
-                            <label class="form-label">Dirección</label>
-                            <input type="text" class="form-control" name="direccion" value="<?= $cliente['direccion'] ?>" />
+
+                          <!-- Formulario en grid -->
+                          <div class="row g-3">
+                            <div class="col-sm-6">
+                              <label class="form-label">Nombre</label>
+                              <input type="text" class="form-control" name="nombre" value="<?= $cliente['nombre'] ?>">
+                            </div>
+                            <div class="col-sm-6">
+                              <label class="form-label">Tipo Doc.</label>
+                              <select class="form-select" name="tipo_documento">
+                                <?php
+                                $tipos = ["CC" => "Cédula de Ciudadanía", "PASAPORTE" => "Pasaporte", "CE" => "Cédula de Extranjería"];
+                                foreach ($tipos as $clave => $texto):
+                                  $selected = $cliente['tipo_documento'] == $clave ? 'selected' : '';
+                                  echo "<option value=\"$clave\" $selected>$texto</option>";
+                                endforeach;
+                                ?>
+                              </select>
+                            </div>
+                            <div class="col-sm-6">
+                              <label class="form-label">Número Documento</label>
+                              <input type="number" class="form-control" name="numero_documento" value="<?= $cliente['numero_documento'] ?>">
+                            </div>
+                            <div class="col-sm-6">
+                              <label class="form-label">Nacimiento</label>
+                              <input type="date" class="form-control" name="fecha_nacimiento" value="<?= $cliente['fecha_nacimiento'] ?>">
+                            </div>
+                            <div class="col-sm-6">
+                              <label class="form-label">Correo</label>
+                              <input type="email" class="form-control" name="correo" value="<?= $cliente['correo'] ?>">
+                            </div>
+                            <div class="col-sm-6">
+                              <label class="form-label">Contacto 1</label>
+                              <input type="number" class="form-control" name="contacto1" value="<?= $cliente['contacto_1'] ?>">
+                            </div>
+                            <div class="col-sm-6">
+                              <label class="form-label">Contacto 2</label>
+                              <input type="number" class="form-control" name="contacto2" value="<?= $cliente['contacto_2'] ?>">
+                            </div>
+                            <div class="col-12">
+                              <label class="form-label">Dirección</label>
+                              <input type="text" class="form-control" name="direccion" value="<?= $cliente['direccion'] ?>">
+                            </div>
                           </div>
 
+                          <!-- Contraseña opcional -->
                           <details>
                             <summary>Nueva contraseña (opcional)</summary>
-
                             <div class="mb-3 mt-4">
                               <label for="contrasena_<?= $cliente['id'] ?>">Contraseña:</label>
                               <input
@@ -201,7 +255,6 @@
 
                             </div>
                           </details>
-
                           <script>
                             (function() {
                               const id = <?= $cliente['id'] ?>;
@@ -276,9 +329,7 @@
                               });
                             }
                           </script>
-
-
-                          <div class="modal-footer">
+                          <div class="modal-footer mt-3">
                             <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-primary">Guardar</button>
                           </div>
@@ -309,11 +360,10 @@
       }
     }
 
-    // Filtro de búsqueda
+    // Filtro búsqueda
     document.getElementById("buscar").addEventListener("keyup", function() {
       const filtro = this.value.toLowerCase();
       const filas = document.querySelectorAll(".table-container tbody tr");
-
       filas.forEach(fila => {
         const textoFila = fila.textContent.toLowerCase();
         fila.style.display = textoFila.includes(filtro) ? "" : "none";
@@ -322,5 +372,4 @@
   </script>
   <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

@@ -2,44 +2,70 @@
     include('header.php');
 ?>
 <style>
-    .table-responsive {
-    overflow-x: auto;
-    max-width: 100%;
+ .table-responsive {
+  width: 100%;
+  overflow-x: auto; /* Scroll solo si es necesario */
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+th, td {
+  text-align: left;
+  vertical-align: middle;
+  word-wrap: break-word;
+}
+
+/* ====== MÓVILES ====== */
+@media (max-width: 576px) {
+  .main-content h2 {
+    font-size: 1.4rem;
   }
 
-  .main-content {
-    padding: 1rem;
+  .table-responsive {
+    font-size: 0.9rem;
   }
 
-    th, td {
-        overflow-wrap: break-word;
-        min-width: 120px;
-        text-align: left;
-        vertical-align: middle;
-    }
-
-
-  @media (max-width: 576px) {
-    .main-content h2 {
-      font-size: 1.4rem;
-    }
-
-    .table-responsive {
-      font-size: 0.9rem;
-    }
-
-    .btn {
-      font-size: 0.85rem;
-    }
+  .btn {
+    font-size: 0.85rem;
   }
 
-  .descripcion-scroll {
-        max-height: 80px;       /* Alto máximo antes de hacer scroll vertical */
-        max-width: 250px;       /* Ancho máximo antes de hacer scroll horizontal */
-        overflow: auto;
-        white-space: pre-wrap;  /* Mantiene saltos de línea */
-    }
-    
+  table {
+    min-width: 800px; /* Fuerza scroll horizontal en móviles */
+  }
+
+  th, td {
+    white-space: nowrap;
+  }
+}
+
+/* ====== TABLETS ====== */
+@media (min-width: 577px) and (max-width: 991px) {
+  .table-responsive {
+    font-size: 0.95rem;
+  }
+
+  table {
+    min-width: 900px; /* Puede necesitar scroll */
+  }
+
+  th, td {
+    white-space: nowrap;
+  }
+}
+
+/* ====== ESCRITORIO (PC) ====== */
+@media (min-width: 992px) {
+  table {
+    width: 100%;
+    min-width: unset;   /* Se adapta al ancho disponible */
+    table-layout: auto; /* Ajusta automáticamente las columnas */
+  }
+
+  th, td {
+    white-space: normal;    /* Permite saltos de línea */
+    word-wrap: break-word;  /* Rompe palabras largas */
+  }
+}
 
 </style>
 <body>
@@ -126,11 +152,11 @@
 
                                     
                                     <td>
-                                    <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
+                                    <button class="btn btn-sm btn-outline-primary m-2" data-bs-toggle="modal"
                                         data-bs-target="#modalEditar<?= $atencion['id'] ?>">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <button class="btn btn-sm btn-outline-danger" 
+                                    <button class="btn btn-sm btn-outline-danger m-2" 
                                         onclick="eliminar(event, <?= $atencion['id'] ?>)"><i class="fas fa-trash-alt"></i>
                                     </button>
                                     </td>

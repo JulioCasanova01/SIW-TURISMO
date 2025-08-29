@@ -6,72 +6,57 @@ $abonos = obtenerAbonos($conn);
 ?>
 
 <style>
-    .main-content {
-        padding: 1rem;
-    }
+/* Tabla en desktop */
+.table thead {
+    background: #212529;
+    color: #fff;
+}
 
-    /* Tabla en desktop */
-    .table thead {
-        background: #212529;
-        color: #fff;
+.table td, .table th {
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* ====== SOLO escritorio ====== */
+@media (min-width: 992px) {
+    .table {
+        width: 100%;
+        table-layout: auto; /* Se adapta */
     }
 
     .table td, .table th {
-        vertical-align: middle;
-        text-align: center;
-        white-space: nowrap;
+        white-space: normal;   /* Permite saltos */
+        word-wrap: break-word; /* Rompe palabras largas */
     }
 
-    /* Badges para los estados */
-    .badge-estado {
-        display: inline-block;
-        padding: 0.4rem 0.6rem;
-        font-size: 0.8rem;
-        font-weight: 600;
-        border-radius: 6px;
+    /* Ejemplo: limitar ancho de columna Observaciones */
+    td[data-label="Observaciones"] {
+        max-width: 250px;
     }
-    .badge-aceptado { background: #28a745; color: #fff; }
-    .badge-rechazado { background: #dc3545; color: #fff; }
-    .badge-pendiente { background: #076aff; color: #fff; }
+}
+.badge-estado {
+    padding: 0.03rem 0.06rem;
+    border-radius: 12px;
+    font-weight: bold;
+    color: white;
+    font-size: 0.68rem;
+    display: inline-block;
+    text-transform: uppercase;
+}
 
-    /* Estilo de tarjetas en móvil */
-    @media (max-width: 768px) {
-        .table-responsive {
-            border: none;
-        }
+/* Colores según estado */
+.badge-pendiente {
+    background-color: #007bff; /* Azul */
+}
 
-        .table thead {
-            display: none;
-        }
+.badge-rechazado {
+    background-color: #dc3545; /* Rojo */
+}
 
-        .table tbody tr {
-            display: block;
-            margin-bottom: 1rem;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            background: #fff;
-            padding: 0.75rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
+.badge-aceptado {
+    background-color: #28a745; /* Verde */
+}
 
-        .table tbody td {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-align: left;
-            padding: 0.4rem 0;
-            border: none;
-            white-space: normal;
-        }
-
-        .table tbody td::before {
-            content: attr(data-label);
-            font-weight: bold;
-            color: #495057;
-            margin-right: 10px;
-            flex: 1;
-        }
-    }
 </style>
 
 <body>
@@ -131,12 +116,28 @@ $abonos = obtenerAbonos($conn);
                                 <?php endif; ?>
                             </td>
 
-                            <?php $estado = strtolower($abono['estado']); ?>
+                            <?php 
+                            $estado = strtolower($abono['estado']); 
+
+                            $colorClase = '';
+                            switch ($estado) {
+                                case 'pendiente':
+                                    $colorClase = 'badge-pendiente';
+                                    break;
+                                case 'rechazado':
+                                    $colorClase = 'badge-rechazado';
+                                    break;
+                                case 'aceptado':
+                                    $colorClase = 'badge-aceptado';
+                                    break;
+                            }
+                            ?>
                             <td data-label="Estado">
-                                <span class="badge-estado badge-<?= $estado ?>">
+                                <span class="badge-estado <?= $colorClase ?>">
                                     <?= strtoupper($abono['estado']) ?>
                                 </span>
                             </td>
+
 
                             <td data-label="Acciones">
                                 <button class="btn btn-sm btn-outline-primary"

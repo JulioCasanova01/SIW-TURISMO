@@ -1,51 +1,84 @@
 <?php include('header.php'); ?>
 <style>
-  .main-content {
-    padding: 1rem;
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Scroll solo si es necesario */
+  overflow-y: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* ====== MÓVILES ====== */
+@media (max-width: 576px) {
+  .table {
+    font-size: 0.75rem;
   }
 
-  .table-container {
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
+  .btn {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.4rem;
   }
 
   table {
-    min-width: 100%; 
+    min-width: 800px; /* fuerza scroll horizontal */
+  }
+
+  th, td {
+    white-space: nowrap; /* evita cortes en móviles */
+  }
+}
+
+/* ====== TABLETS ====== */
+@media (min-width: 577px) and (max-width: 991px) {
+  .table {
+    font-size: 0.85rem;
+  }
+
+  .btn {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  table {
+    min-width: 900px; /* aún puede necesitar scroll */
   }
 
   th, td {
     white-space: nowrap;
-    vertical-align: middle;
+  }
+}
+
+/* ====== ESCRITORIO (PC) ====== */
+@media (min-width: 992px) {
+  .table {
+    font-size: 0.9rem;
   }
 
-  @media (max-width: 768px) {
-    .table {
-      font-size: 0.85rem;
-    }
-
-    .btn {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.5rem;
-    }
+  .btn {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.75rem;
   }
-   @media (min-width: 768px) {
-    .table {
-      font-size: 0.85rem;
-    }
 
-    .btn {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.5rem;
-    }
+  table {
+    min-width: unset; /* se adapta */
+    table-layout: auto; /* ancho automático */
   }
- 
+
+  th, td {
+    white-space: normal; /* permite saltos de línea */
+    word-wrap: break-word; /* rompe palabras largas */
+  }
+}
 
 </style>
-
-
-
-
 <body>
 <?php 
     include '../../conexion.php';
@@ -112,7 +145,7 @@
                 </td>
                 <td><?= $viajero['direccion'] ?></td>
                 <td>
-                  <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal"
+                  <button class="btn btn-sm btn-outline-primary m-2" data-bs-toggle="modal"
                     data-bs-target="#modalEditar<?= $viajero['id'] ?>">
                     <i class="fas fa-edit"></i>
                   </button>
