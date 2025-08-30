@@ -3,59 +3,63 @@ include('header.php');
 include '../../conexion.php';
 include '../../modelo/abonosAdmin_m.php';
 $abonos = obtenerAbonos($conn);
+if ($_SESSION['rol'] === 'ATENCION_CLIENTE') {
+    header('Location: vista_general.php');
+    exit();
+}
 ?>
 
 <style>
-/* Tabla en desktop */
-.table thead {
-    background: #212529;
-    color: #fff;
-}
-
-.table td, .table th {
-    vertical-align: middle;
-    text-align: center;
-}
-
-/* ====== SOLO escritorio ====== */
-@media (min-width: 992px) {
-    .table {
-        width: 100%;
-        table-layout: auto; /* Se adapta */
+    /* Tabla en desktop */
+    .table thead {
+        background: #212529;
+        color: #fff;
     }
 
     .table td, .table th {
-        white-space: normal;   /* Permite saltos */
-        word-wrap: break-word; /* Rompe palabras largas */
+        vertical-align: middle;
+        text-align: center;
     }
 
-    /* Ejemplo: limitar ancho de columna Observaciones */
-    td[data-label="Observaciones"] {
-        max-width: 250px;
+    /* ====== SOLO escritorio ====== */
+    @media (min-width: 992px) {
+        .table {
+            width: 100%;
+            table-layout: auto; /* Se adapta */
+        }
+
+        .table td, .table th {
+            white-space: normal;   /* Permite saltos */
+            word-wrap: break-word; /* Rompe palabras largas */
+        }
+
+        /* Ejemplo: limitar ancho de columna Observaciones */
+        td[data-label="Observaciones"] {
+            max-width: 250px;
+        }
     }
-}
-.badge-estado {
-    padding: 0.03rem 0.06rem;
-    border-radius: 12px;
-    font-weight: bold;
-    color: white;
-    font-size: 0.68rem;
-    display: inline-block;
-    text-transform: uppercase;
-}
+    .badge-estado {
+        padding: 0.03rem 0.06rem;
+        border-radius: 12px;
+        font-weight: bold;
+        color: white;
+        font-size: 0.68rem;
+        display: inline-block;
+        text-transform: uppercase;
+    }
 
-/* Colores según estado */
-.badge-pendiente {
-    background-color: #007bff; /* Azul */
-}
+    /* Colores según estado */
+    .badge-pendiente {
+        background-color: #007bff; /* Azul */
+    }
 
-.badge-rechazado {
-    background-color: #dc3545; /* Rojo */
-}
+    .badge-rechazado {
+        background-color: #dc3545; /* Rojo */
+    }
 
-.badge-aceptado {
-    background-color: #28a745; /* Verde */
-}
+    .badge-aceptado {
+        background-color: #28a745; /* Verde */
+    }
 
 </style>
 
@@ -99,7 +103,7 @@ $abonos = obtenerAbonos($conn);
                     <?php foreach ($abonos as $abono): ?>
                         <tr>
                             <td data-label="ID"><?= $abono['id'] ?></td>
-                            <td data-label="ID Venta"><?= $abono['venta_id'] ?></td>
+                            <td data-label="ID Venta"><?= $abono['venta_id'] . ' (' . (($abono['tipo_venta'] == 'online') ? 'O' : 'F') . ')' ?></td>
                             <td data-label="Fecha"><?= $abono['fecha'] ?></td>
                             <td data-label="Monto">$<?= number_format($abono['monto'], 0, ',', '.') ?></td>
                             <td data-label="Método"><?= $abono['metodo_pago'] ?></td>

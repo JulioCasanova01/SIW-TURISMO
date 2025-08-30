@@ -22,7 +22,7 @@ function login($conn, $data) {
                 <script src='../vista/alertas/funcionesalert.js'></script>
                 <body>
                         <script>
-                            informar('Bienvenido " . addslashes($_SESSION["nombre"]) . "','ACEPTAR', 'http://localhost/SIW-TURISMO/vista/general/PaginaPrincipal.php', 'success');
+                            informar('Bienvenido " . addslashes($_SESSION["nombre"]) . "','ACEPTAR', '../vista/general/PaginaPrincipal.php', 'success');
                         </script>
             </body>";
 
@@ -34,7 +34,7 @@ function login($conn, $data) {
                 <script src='../vista/alertas/funcionesalert.js'></script>
                 <body>
                         <script>
-                            informar('CLAVE INCORRECTA','REINTENTAR', 'http://localhost/SIW-TURISMO/vista/login.php', 'error');
+                            informar('CLAVE INCORRECTA','REINTENTAR', '../vista/login.php', 'error');
                         </script>
             </body>";
         }
@@ -44,7 +44,7 @@ function login($conn, $data) {
                 <script src='../vista/alertas/funcionesalert.js'></script>
                 <body>
                         <script>
-                            informar('CLIENTE NO ENCONTRADO','REINTENTAR', 'http://localhost/SIW-TURISMO/vista/login.php', 'warning');
+                            informar('CLIENTE NO ENCONTRADO','REINTENTAR', '../vista/login.php', 'warning');
                         </script>
             </body>";
         exit();

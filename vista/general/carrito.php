@@ -113,7 +113,7 @@ if (!isset($_SESSION['id_cliente'])) {
                       <form method='POST' action='../../controlador/carrito_c.php?accion=actualizar' class='d-inline'>
                         <input type='hidden' name='index' value='<?php echo $index; ?>'>
                         <input type='number' name='cantidad' class='form-control w-50 d-inline' value='<?php echo $item['cantidad']; ?>' min='1'>
-                        <button type='submit' class='btn btn-sm btn-success ms-1'>
+                        <button type='submit' class='btn btn-sm btn-success ms-1' title='Actualizar cantidad'>
                           <i class='fas fa-sync-alt'></i>
                         </button>
                       </form>
@@ -241,7 +241,7 @@ if (!isset($_SESSION['id_cliente'])) {
     }
 
     function confirmarSolicitud() {
-      carrito('¿Estás seguro de finalizar la solicitud de compra?', 'Sí, finalizar', 'Cancelar', '../../controlador/carrito_c.php?accion=finalizar', 'question');
+      carrito('¿Estás seguro de finalizar la solicitud de compra? <br> Antes de finalizar, actualice todas las cantidades.', 'Sí, finalizar', 'Cancelar', '../../controlador/carrito_c.php?accion=finalizar', 'question');
 
     };
   </script>

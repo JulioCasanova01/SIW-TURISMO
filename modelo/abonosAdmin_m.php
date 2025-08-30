@@ -9,7 +9,7 @@ function registrar($conn, $data)
     $comprobante = !empty($data['comprobante']) ? "'{$data['comprobante']}'" : "NULL";
 
     $sql = "INSERT INTO abonos 
-           (id, id_venta, fecha, monto, metodo_pago, tipo_transferencia, observaciones, comprobante, estado)
+           (id, id_venta, fecha, monto, metodo_pago, tipo_transferencia, observaciones, comprobante_pago, estado)
            VALUES (NULL, '{$data['id_venta']}', '$fecha_abono', '{$data['monto']}', '{$data['metodo_pago']}',
            '{$data['tipo_transferencia']}', '{$data['observaciones']}', $comprobante, '$estado')";
 
@@ -75,14 +75,16 @@ function obtenerabonoPorID($conn, $id)
 function obtenerAbonos($conn)
 {
     $sql = "SELECT a.*, 
-                   v.id AS venta_id, 
-                   v.id_cliente, 
-                   v.total AS total_venta, 
-                   c.nombre AS nombre_cliente
-            FROM abonos a
-            JOIN ventas v ON a.id_venta = v.id
-            JOIN clientes c ON c.id = v.id_cliente
-            ORDER BY a.id DESC";
+       v.id AS venta_id, 
+       v.id_cliente, 
+       v.total AS total_venta, 
+       v.tipo_venta AS tipo_venta,     -- Aquí ves si es online o fisica
+       c.nombre AS nombre_cliente
+        FROM abonos a
+        JOIN ventas v ON a.id_venta = v.id
+        LEFT JOIN clientes c ON c.id = v.id_cliente
+        ORDER BY a.id DESC;
+        ";
 
     $result = mysqli_query($conn, $sql);
     return mysqli_fetch_all($result, MYSQLI_ASSOC);

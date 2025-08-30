@@ -111,7 +111,7 @@
 
     <div class="flex-grow-1">
       <!-- Navbar -->
-      <nav class="navbar navbar-dark bg-primary">
+      <nav class="navbar navbar-dark" style="background-color: #0077b6;">
         <div class="container-fluid">
           <span class="navbar-brand text-white">Gestión de Clientes</span>
           <div class="dataTables_filter ms-auto">

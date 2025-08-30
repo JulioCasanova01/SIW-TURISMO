@@ -2,24 +2,32 @@
 include('header.php');
 ?>
 <style>
-    .table-responsive {
-        overflow-x: auto;
-        max-width: 100%;
+   .table-responsive {
+    width: 100%;
     }
 
-    .main-content {
-        padding: 1rem;
-    }
-
-    th,
-    td {
-        overflow-wrap: break-word;
-        min-width: 120px;
+    /* Celdas generales */
+    th, td {
+        overflow-wrap: break-word; /* permite partir palabras largas */
+        word-wrap: break-word;
+        white-space: normal;       /* permite saltos de línea */
         text-align: left;
         vertical-align: middle;
     }
 
+    /* Solo en pantallas grandes: tabla fluida */
+    @media (min-width: 992px) {
+        .table {
+            width: 100%;
+            table-layout: auto; /* se ajusta automáticamente */
+        }
 
+        th, td {
+            min-width: unset; /* elimina el mínimo de 120px que forzaba scroll */
+        }
+    }
+
+    /* En móviles mantenemos el responsive normal */
     @media (max-width: 576px) {
         .main-content h2 {
             font-size: 1.4rem;
@@ -27,6 +35,7 @@ include('header.php');
 
         .table-responsive {
             font-size: 0.9rem;
+            overflow-x: auto; /* aquí sí permitimos scroll horizontal */
         }
 
         .btn {
@@ -34,15 +43,6 @@ include('header.php');
         }
     }
 
-    .descripcion-scroll {
-        max-height: 80px;
-        /* Alto máximo antes de hacer scroll vertical */
-        max-width: 250px;
-        /* Ancho máximo antes de hacer scroll horizontal */
-        overflow: auto;
-        white-space: pre-wrap;
-        /* Mantiene saltos de línea */
-    }
 </style>
 
 <body>
@@ -50,7 +50,7 @@ include('header.php');
     include '../../conexion.php';
     include '../../modelo/pedidos_m.php';
     include '../../modelo/ventas_m.php';
-    $pedidos_fisicos = obtenerPedidosFisicos($conn);
+    $pedidos_fisicos = obtenerVentaFisicaConCliente($conn);
     ?>
 
     <div class="d-flex flex-column flex-lg-row">
@@ -83,6 +83,8 @@ include('header.php');
                             <tr>
                                 <th><i class="fas fa-id-badge"></i> ID</th>
                                 <th><i class="fas fa-user"></i> Cliente</th>
+                                <th><i class="fas fa-phone"></i> Teléfono</th>
+                                <th><i class="fas fa-map-marker-alt"></i> Dirección</th>
                                 <th><i class="fas fa-calendar-alt"></i> Fecha</th>
                                 <th><i class="fas fa-dollar-sign"></i> Total</th>
                                 <th><i class="fas fa-store"></i> Detalles</th>
@@ -95,10 +97,26 @@ include('header.php');
 
                                 <tr>
                                     <td><?= $pedido['id'] ?></td>
-                                    <td><?= $pedido['id_cliente'] ?></td>
+                                    <td><?= $pedido['nombre_cliente']?></td>
+                                    <td><?= $pedido['telefono']?></td>
+                                   <td><?= $pedido['direccion'] ?? 'Sin direccion'; ?></td>
                                     <td><?= $pedido['fecha'] ?></td>
                                     <td>$<?= number_format($pedido['total'], 0, ',', '.') ?></td>
-                                    <td><?= htmlspecialchars($pedido['detalles']) ?></td>
+                                    <td><textarea lass="overflow-auto" style="
+                                            max-height: 100px;
+                                            max-width: 100%;
+                                            text-align: left;
+                                            overflow-wrap: break-word;
+                                            background-color: #f0f8ff; /* azul claro suave */
+                                            padding: 8px 12px;
+                                            border-radius: 10px;
+                                            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                                            font-size: 14px;
+                                            color: #333;
+                                            "
+                                            readonly><?= htmlspecialchars($pedido['detalles']) ?>
+                                        </textarea></td>
 
                                     <?php
                                     $colores = [

@@ -86,6 +86,7 @@ $campanaAbonos = hayAbonosPendientes($conn);
                         </a>
                     </li>
                 <?php endif; ?>
+                
                 <li class="nav-item">
                     <a href="venta_tienda.php" class="nav-link i-venta_tienda text-white">
                         <i class="fas fa-cash-register me-2"></i>Ventas en Tienda

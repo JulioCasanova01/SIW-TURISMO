@@ -91,14 +91,15 @@ function finalizar()
     $fecha = date("Y-m-d H:i:s");
     $estado = "Finalizado";
     $id_cliente = $_SESSION['id_cliente'];
+    $tipo_venta = "online";
 
     // Ruta accesible desde navegador
     $logoPath = '../IMAGENES/Logotipo_sinsombrapng_Mesa de trabajo 1-02.png';
 
     // Guardar venta en la base de datos primero para obtener ID
-    $stmt = $conn->prepare("INSERT INTO ventas (fecha, total, id_cliente, estado, detalles) VALUES (?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO ventas (tipo_venta, fecha, total, id_cliente, estado, detalles) VALUES (?, ?, ?, ?, ?, ?)");
     $estado = "solicitado";
-    $stmt->bind_param("sdiss", $fecha, $total, $id_cliente, $estado, $detallesTexto); // temporal
+    $stmt->bind_param("ssdiss",$tipo_venta, $fecha, $total, $id_cliente, $estado, $detallesTexto); // temporal
     $stmt->execute();
     $id_venta = $stmt->insert_id;
 
@@ -108,7 +109,7 @@ function finalizar()
     <head>
         <style>
             body { font-family: Arial, sans-serif; font-size: 12px; }
-            h1 { text-align: center; color: #003366; }
+            h1, h2 { text-align: center; color: #003366; }
             table { width: 100%; border-collapse: collapse; margin-top: 20px; }
             th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
             th { background-color: #f2f2f2; }
@@ -130,6 +131,8 @@ function finalizar()
         </div>
 
         <h1>Resumen: SOLICITUD DE COMPRA N° ' . $id_venta . '<br>JYS PROMOTORES DE VIAJES Y TURISMO <br> RNT: 125482</h1>
+        <h2>Fecha: ' . $fecha . '</h2>
+        <h2>Tipo de Venta: ' . $tipo_venta . '</h2>
 
         <table>
             <tr>

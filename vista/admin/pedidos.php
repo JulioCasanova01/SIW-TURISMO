@@ -50,7 +50,7 @@ include('header.php');
   include '../../conexion.php';
   include '../../modelo/pedidos_m.php';
   include '../../modelo/ventas_m.php';
-  $pedidos = obtenerPedidos($conn);
+  $pedidos = obtenerVentaOnlineConCliente($conn);
   ?>
 
   <div class="d-flex flex-column flex-lg-row">
@@ -95,10 +95,24 @@ include('header.php');
 
                 <tr>
                   <td><?= $pedido['id'] ?></td>
-                  <td><?= $pedido['id_cliente'] ?></td>
+                  <td><?= $pedido['nombre_cliente'] ?> (<?=$pedido['id_cliente'] ?>)</td>
                   <td><?= $pedido['fecha'] ?></td>
                   <td>$<?= number_format($pedido['total'], 0, ',', '.') ?></td>
-                  <td><?= htmlspecialchars($pedido['detalles']) ?></td>
+                  <td><textarea lass="overflow-auto" style="
+                        max-height: 100px;
+                        max-width: 100%;
+                        text-align: left;
+                        overflow-wrap: break-word;
+                        background-color: #f0f8ff; /* azul claro suave */
+                        padding: 8px 12px;
+                        border-radius: 10px;
+                        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        font-size: 14px;
+                        color: #333;
+                        "
+                        readonly><?= htmlspecialchars($pedido['detalles']) ?>
+                      </textarea></td>
 
                   <?php
                   $colores = [
