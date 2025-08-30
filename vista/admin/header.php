@@ -29,7 +29,7 @@ if (!isset($_SESSION['id_usuario'])) {
         }
 
         .sidebar {
-            height: 100vh;
+            /* height: 100vh; */
             background-color: #003049;
             /* azul oscuro institucional */
             color: white;

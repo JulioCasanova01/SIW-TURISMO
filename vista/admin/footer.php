@@ -1,22 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footer Responsivo</title>
-    <link rel="stylesheet" href="../../libs/bootstrap-5.3.3-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../libs/bootstrap-icons-1.11.3/a/bootstrap-icons.css">
-    <link rel="stylesheet" href="../../libs/fontawesome-free-6.7.2-web/css/all.min.css">
-    <style>
-        footer a:hover {
-            color: #f77f00;
-            text-decoration: none;
-        }
-    </style>
-</head>
-<body>
+
     <!-- Footer -->
-    <footer class="text-white mt-5" style="background-color: rgb(13, 27, 35);">
+    <footer class="text-white" style="background-color: rgb(13, 27, 35);">
         <div class="container py-4">
             <div class="row">
                 <!-- Columna 1 -->
@@ -58,5 +42,4 @@
     <script src="../../libs/SweetAlert2/sweetalert2.all.min.js"></script>
     <script src="../alertas/funcionesalert.js"></script>
     <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+

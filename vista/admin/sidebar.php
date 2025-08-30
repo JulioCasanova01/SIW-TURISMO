@@ -6,26 +6,10 @@ $CampanaAtencion = hayAtenciones($conn);
 $CampanaPedidosFisicos=hayPedidosFisicos($conn);
 $campanaAbonos = hayAbonosPendientes($conn);
 ?>
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>sidebar</title>
-    <!-- Font Awesome CDN para que funcionen los iconos -->
-    <link
-        href="../../libs/bootstrap-5.3.3-dist/css/bootstrap.min.css"
-        rel="stylesheet" />
-    <link href="../../libs/fontawesome-free-6.7.2-web/css/all.min.css" />
-    <!-- Aquí puedes agregar tus estilos CSS o enlaces a Bootstrap si usas -->
 
 
-</head>
 
-<body>
-
-    <div class="sidebar p-3 text-center d-flex flex-column flex-shrink-0 text-white overflow-auto vh-100">
+    <div class="sidebar p-3 text-center d-flex flex-column flex-shrink-0 text-white overflow-auto">
         <!-- Sidebar -->
         <nav style="min-width: 250px;">
             <!-- Logo -->
@@ -154,6 +138,3 @@ $campanaAbonos = hayAbonosPendientes($conn);
     <script src="../../libs/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../libs/SweetAlert2/sweetalert2.all.min.js"></script>
     <script src="../alertas/funcionesalert.js"></script>
-</body>
-
-</html>
