@@ -120,7 +120,7 @@ function registrar($conn, $data) {
                 <script src='../vista/alertas/funcionesalert.js'></script>
                 <body>
                         <script>
-                            informar('El Correo o el Número de Documento ya está registrado. Por favor, verifica los datos ingresados.','Ok.', '../vista/crear_cuenta.php', 'error');
+                            informar('El Correo o el Número de Documento ya está registrado. Por favor, verifica los datos ingresados.','Ok.', '../vista/general/crear_cuenta.php', 'error');
                         </script>
                 </body>";
         } else {
